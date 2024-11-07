@@ -137,6 +137,7 @@ float float_rand (float a, float b) {
 
 
 void calculateDistances(vector<vector<double>> coord, vector<vector<double>> t) {
+  cout << "tam: " << coord.size() << endl;
   for (size_t i = 0; i < coord.size(); ++i) {
     for (size_t j = 0; j < coord.size(); ++j) {
       t[i][j] = sqrt(pow(coord[i][0] - coord[j][0], 2.0) + pow(coord[i][1] - coord[j][1], 2.0));
