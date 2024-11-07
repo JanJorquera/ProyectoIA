@@ -235,7 +235,7 @@ void calcular_aptitud(individuo * temp) {
   return;
 }
 
-void generateFeasibleSequenceOfHotels(vector<string> Hoteles, vector<string> &Tour){
+void generateFeasibleSequenceOfHotels(vector<string> &Hoteles, vector<string> &Tour){
   vector<string> Trip;
   string Hinicio = "H0";
   string Htermino;
@@ -436,14 +436,13 @@ int main(int argc, char *argv[]) {
 
   //creacion de poblacion inicial aleatoria
   // inicializar_archivo_convergencia();
-  cout << "N: " << N << " HP1: " << HP1 << " D: " << D << endl;
   conjunto poblacion ((char*)"poblacion");
   // crear_poblacion_inicial(poblacion, ps);
 
 
   vector<string> Hoteles;
   vector<string> Tour;
-  for(int i=0; i< HP1; i++) {
+  for(int i=0; i < HP1; i++) {
     Hoteles.push_back("H"+to_string(i));
   }
 
