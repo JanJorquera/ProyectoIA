@@ -159,6 +159,7 @@ bool checkTripFeasibility(vector<string> Trip, int numTrip){
 
   for (int i=1; i<Trip.size(); i++){
     posFin = getPos(Trip[i]);
+    cout << "posInicio: " << posInicio << endl;
     cout << "posFin: " << posFin << endl;
     costo += t[posInicio][posFin];
     cout << "costo: " << costo << endl;
