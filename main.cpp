@@ -286,9 +286,9 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
         break;
       }
       POIpos = int_rand(HP1 - cantHotelesQuitados, set.size());
-      cout << "POIpos: " << POIpos << endl;
+      // cout << "POIpos: " << POIpos << endl;
       POI = set[POIpos];
-      cout << "set[POIpos]: " << set[POIpos] << endl;
+      // cout << "set[POIpos]: " << set[POIpos] << endl;
       set.erase(set.begin() + getPos(POI));
       // POIs.erase(set.begin() + stoi(POI));
       Trip.insert(Trip.end()-1,POI);
@@ -301,10 +301,15 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
 
     i_temp.cromosoma.push_back(Htermino);
     Hinicio = Htermino;
+    if (trip == 0){
+      for (int i=0; i<Trip.size(); i++) {
+        cout << Trip[i] << endl;
+      }
+    }
     Trip.clear();
   }
 
-  cout << "fin" << endl;
+  // cout << "fin" << endl;
 
 
   //calculo de la aptitud del individuo
