@@ -264,6 +264,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       POI = set[POIpos];
       cout << "set[POIpos]: " << set[POIpos] << endl;
       set.erase(set.begin() + getPos(POI));
+      cout << "check" << endl;
       // POIs.erase(set.begin() + stoi(POI));
       Trip.insert(Trip.end()-1,POI);
       if (checkTripFeasibility(Trip, trip)){
