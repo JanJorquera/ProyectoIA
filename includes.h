@@ -26,5 +26,5 @@ using namespace std;
 #define PBX 3
 
 #define TAM 100
-#define AMAX 1000000000
 */
+#define AMAX 1000000000

@@ -10,13 +10,14 @@ cr = 0.3				#Tasa de cruzamiento
 mr = 0.01				#Tasa de mutación
 ps = 5					#Population size
 max_evals=1e+4			#Maximo de iteraciones
+eo = 1
 semilla = 2
 
 comp:$(prog)
 
 exe:$(prog)
 	#valgrind --leak-check=full --show-reachable=yes 
-	./$(prog) $(config) $(results) $(cr) $(mr) $(ps) $(max_evals) $(semilla)
+	./$(prog) $(config) $(results) ${eo} $(cr) $(mr) $(ps) $(max_evals) $(semilla)
 
 $(prog): main.o
 	$(comp) main.o -o $(prog) $(flags)
