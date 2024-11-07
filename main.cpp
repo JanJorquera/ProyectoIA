@@ -222,7 +222,9 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   cout << "ok " << endl;
   for(int i=0; i< Tinstancia; i++) {
     if (i<HP1){
+      cout << "ja " << endl;
       set.push_back("H"+to_string(i));
+      cout << "he " << endl;
     } else {
       set.push_back(to_string(i-HP1));
     }
