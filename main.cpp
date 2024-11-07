@@ -446,10 +446,11 @@ int main(int argc, char *argv[]) {
     Hoteles.push_back("H"+to_string(i));
   }
 
+
   generateFeasibleSequenceOfHotels(Hoteles, Tour);
 
   for (int i=0; i<Tour.size(); i++) {
-    cout << Tour[i] << endl;
+    printf("Tour[%d] = %s\n",i,Tour[i]);
   }
 
   if(debug) {
