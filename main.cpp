@@ -82,8 +82,8 @@ void readConfiguration(string fileName, int &N, int &HP1, int &D, vector<double>
           lineStream >> X >> Y >> s;
           coord[count - 5][0] = X;
           coord[count - 5][1] = Y;
-          cout << "xOriginal: " << X << "yOriginal: " << Y << endl;
-          cout << "x: " << coord[count - 5][0] << "y: " << coord[count - 5][1] << endl;
+          // cout << "xOriginal: " << X << "yOriginal: " << Y << endl;
+          // cout << "x: " << coord[count - 5][0] << "y: " << coord[count - 5][1] << endl;
           S.push_back(s);
         }
       } catch (const exception& e) {
