@@ -138,7 +138,7 @@ float float_rand (float a, float b) {
 }
 
 
-void calculateDistances(vector<vector<double>> coord, vector<vector<double>> t) {
+void calculateDistances() {
   cout << "tam: " << coord.size() << endl;
   for (size_t i = 0; i < coord.size(); ++i) {
     for (size_t j = 0; j < coord.size(); ++j) {
@@ -331,7 +331,7 @@ int main(int argc, char *argv[]) {
   iteracion = -1;
   readConfiguration(archivo_configuracion, N, HP1, D, T, S, coord, t);
   Tinstancia = (D+1)+N;
-  calculateDistances(coord, t);
+  calculateDistances();
   optimo_encontrado = false;
   evaluaciones = 0;
 
