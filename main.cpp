@@ -260,6 +260,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
         break;
       }
       POIpos = int_rand(HP1 - cantHotelesQuitados, set.size());
+      cout << "POIpos: " << POIpos << endl;
       POI = set[POIpos];
       set.erase(set.begin() + getPos(POI));
       // POIs.erase(set.begin() + stoi(POI));
