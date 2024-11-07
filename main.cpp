@@ -273,6 +273,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
 
     i_temp.cromosoma.push_back(Htermino);
     Hinicio = Htermino;
+    Trip.clear();
   }
 
   cout << "fin" << endl;
