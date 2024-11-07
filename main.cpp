@@ -49,7 +49,7 @@ void readFile(string fileName, int &N, int &HP1, int &D, vector<double> T,
         while (lineStream >> value) {
           T.push_back(value);
         }
-      } else if (count >= 5 && count <= N + HP1) {
+      } else if (count >= 5 && count <= N + HP1 + 4) {
         double X, Y, s;
         lineStream >> X >> Y >> s;
         coord[count - 5].push_back(X);
