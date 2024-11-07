@@ -80,8 +80,8 @@ void readConfiguration(string fileName, int &N, int &HP1, int &D, vector<double>
         } else if (count >= 5 && count <= N + HP1 + 4) {
           double X, Y, s;
           lineStream >> X >> Y >> s;
-          coord[count - 5].push_back(X);
-          coord[count - 5].push_back(Y);
+          coord[count - 5][0] = X;
+          coord[count - 5][1] = Y;
           cout << "xOriginal: " << X << "yOriginal: " << Y << endl;
           cout << "x: " << coord[count - 5][0] << "y: " << coord[count - 5][1] << endl;
           S.push_back(s);
