@@ -1,3 +1,6 @@
+#include "includes.h"
+// #include "globales.h"
+
 void calculateDistances(vector<vector<double>> coord,
                         vector<vector<double>> t) {
   for (size_t i = 0; i < coord.size(); ++i) {
