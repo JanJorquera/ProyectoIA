@@ -219,13 +219,10 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   vector<string> POIs;
   vector<string> Trip;
 
-  cout << "ok " << endl;
   cout << "tinstancia: " << Tinstancia << endl;
   for(int i=0; i< Tinstancia; i++) {
     if (i<HP1){
-      cout << "ja " << endl;
       set.push_back("H"+to_string(i));
-      cout << "he " << endl;
     } else {
       set.push_back(to_string(i-HP1));
     }
@@ -277,6 +274,8 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     i_temp.cromosoma.push_back(Htermino);
     Hinicio = Htermino;
   }
+
+  cout << "fin" << endl;
 
 
   //calculo de la aptitud del individuo
