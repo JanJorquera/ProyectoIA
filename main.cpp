@@ -1,13 +1,3 @@
-#include <cmath>
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <vector>
-
-using namespace std;
-
 void calculateDistances(vector<vector<double>> coord,
                         vector<vector<double>> t) {
   for (size_t i = 0; i < coord.size(); ++i) {
