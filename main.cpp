@@ -164,6 +164,7 @@ bool checkTripFeasibility(vector<string> Trip, int numTrip){
       return false;
     }
     posInicio = posFin;
+    cout << "i: " << i << endl;
   }
   return true;
 }
