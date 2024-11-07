@@ -100,10 +100,16 @@ void readConfiguration(string fileName) {
     count++;
   }
 
-  for (int i=0; i<S.size(); i++){
-    cout << "S[i]: " << S[i] << endl;
+  if (debug) {
+    /*
+    for (int i=0; i<S.size(); i++){
+      cout << "S[i]: " << S[i] << endl;
+    }*/
+    for (int i=0; i<T.size(); i++){
+      cout << "T[i]: " << T[i] << endl;
+    }
   }
-
+  
   file.close();
   return;
 }
