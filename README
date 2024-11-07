@@ -1,0 +1,29 @@
+Algoritmo=Genetico /EVOLUTIVO
+Problema=TSP simetrico
+Acercamiento=Soluciones factibles
+Representacion=Permutacion de valores enteros
+Funcion_de_evaluacion=Funcion objetivo
+Elitismo=opcional
+Soluciones_iniciales=aleatoria
+Formato Input=De acuerdo a lo establecido en TSPLib
+
+Para Compilar use:
+make clean
+make 
+
+Para Ejecutar use:
+make exe
+
+Linea de ejecucion:
+./GTSP ruta_instancia/nombre_instancia archivo_resultados operador_seleccion operador_cruzamiento operador_mutacion tasa_cruzamiento tasa_mutacion tamano_poblacion maximo_evaluaciones semilla
+
+operador_seleccion:
+1: ROULETTE, 2: TOURNAMENT, 3: RANKING
+operador_mutacion:
+1: DOSOPT, 2: TRESOPT, 3: SWAP
+
+operador_cruzamiento:
+1: OX, 2: PMX, 3: PBX
+
+Ejemplo:
+./GTSP Instances/gr202.tsp results.txt 1 1 1 0.3 0.01 5 1e+4 2
