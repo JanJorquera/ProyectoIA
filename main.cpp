@@ -236,6 +236,7 @@ void calcular_aptitud(individuo * temp) {
 }
 
 void generateFeasibleSequenceOfHotels(vector<string> Hoteles, vector<string> &Tour){
+  vector<string> Trip;
   string Hinicio = "H0";
   Trip.push_back(Hinicio);
   int numHotel;
@@ -249,7 +250,7 @@ void generateFeasibleSequenceOfHotels(vector<string> Hoteles, vector<string> &To
   bool tourFound = false;
   bool tripFound;
 
-  vector<string> Trip;
+  
   while (!tourFound) {
     if (i==D){
       tourFound = true;
