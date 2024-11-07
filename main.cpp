@@ -236,15 +236,17 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     cantHotelesQuitados++;
 
     agregarPOI = true;
-    int POI;
+    int POIpos;
+    string POI;
     while (agregarPOI) {
       if (set.size() == 0){
         break;
       }
-      POI = int_rand(HP1 - cantHotelesQuitados, set.size());
+      POIpos = int_rand(HP1 - cantHotelesQuitados, set.size());
+      POI = set[POIpos];
       set.erase(set.begin() + getPos(POI));
       // POIs.erase(set.begin() + stoi(POI));
-      Trip.insert(Trip.end()-1);
+      Trip.insert(Trip.end()-1,POI);
       if (checkTripFeasibility(Trip, trip)){
         i_temp.cromosoma.push_back(POI);
       } else {
