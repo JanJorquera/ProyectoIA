@@ -447,6 +447,7 @@ int main(int argc, char *argv[]) {
   }
 
 
+  cout << "a" << endl;
   generateFeasibleSequenceOfHotels(Hoteles, Tour);
 
   for (int i=0; i<Tour.size(); i++) {
