@@ -48,7 +48,7 @@ void salir(void) {
 
 
 // Leer archivo de instancias
-void readConfiguration(string fileName, int &N, int &HP1, int &D, vector<double> T, vector<double> S, vector<vector<double>> coord, vector<vector<double>> t) {
+void readConfiguration(string fileName) {
   ifstream file(fileName);
   if (!file) {
     cerr << "Error al abrir el archivo" << endl;
@@ -329,7 +329,7 @@ int main(int argc, char *argv[]) {
 
   //lectura de instancia
   iteracion = -1;
-  readConfiguration(archivo_configuracion, N, HP1, D, T, S, coord, t);
+  readConfiguration(archivo_configuracion);
   Tinstancia = (D+1)+N;
   calculateDistances();
   optimo_encontrado = false;
