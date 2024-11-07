@@ -320,6 +320,7 @@ int main(int argc, char *argv[]) {
 
   //creacion de poblacion inicial aleatoria
   // inicializar_archivo_convergencia();
+  cout << N << HP1 << D << endl;
   conjunto poblacion ((char*)"poblacion");
   crear_poblacion_inicial(poblacion, ps);
 
