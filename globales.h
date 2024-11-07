@@ -129,8 +129,8 @@ ostream &operator<<(ostream &output, conjunto & c ) {
 
 #ifndef externo
 time_t Inicio, Fin_opt;
-char * archivo_configuracion;
-char * archivo_resultados;
+string archivo_configuracion;
+string archivo_resultados;
 
 int **distancia;
 coordenada *coordenadas;

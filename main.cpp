@@ -14,9 +14,9 @@ vector<vector<double>> coord;
 //Leer inputs por consola
 int Leer_entradas(int argc, char **argv) {
   //archivo con la instancia del problema
-  archivo_configuracion = (char *)(argv[1]);
+  archivo_configuracion = argv[1];
   //archivo donde escribir los resultados de la ejecucion
-  archivo_resultados = (char *)(argv[2]);
+  archivo_resultados = argv[2];
   
   //PARAMETROS
   eo = atoi(argv[3]); //elitism operator
@@ -283,7 +283,7 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  readConfiguration(&archivo_configuracion, N, HP1, D, T, S, coord, t);
+  readConfiguration(archivo_configuracion, N, HP1, D, T, S, coord, t);
   int Tinstancia = (D+1)+N;
   calculateDistances(coord, t);
 
