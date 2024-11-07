@@ -184,7 +184,7 @@ bool checkTripFeasibility(vector<string> Trip, int numTrip){
     // cout << "posFin: " << posFin << endl;
     costo += t[posInicio][posFin];
     // cout << "costo: " << costo << endl;
-    if (T[numTrip] > costo){
+    if (T[numTrip] < costo){
       return false;
     }
     posInicio = posFin;
