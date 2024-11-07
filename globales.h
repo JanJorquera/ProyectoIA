@@ -143,8 +143,8 @@ int semilla;
 int ps;
 float mr, cr;
 int eo;
-/* int so, co, mo, eo;
-int mutaciones, cruzamientos;*/
+/* int so, co, mo, eo; */
+int mutaciones, cruzamientos;
 
 int iteracion, max_iter, evaluaciones, maximo_evaluaciones;
 float aptitud_opt;
