@@ -235,19 +235,83 @@ void calcular_aptitud(individuo * temp) {
   return;
 }
 
+void generateFeasibleSequenceOfHotels(vector<string> Hoteles, vector<string> &Tour){
+  string Hinicio = "H0";
+  Trip.push_back(Hinicio);
+  int numHotel;
+  vector<string> HotelesDisponiblesTrip = vector<string> Hoteles;
+  vector<string> HotelesDisponiblesTour = vector<string> Hoteles;
+  
+  int i=0;
+  int cantHotelesQuitadosTour = 0;
+  int cantHotelesQuitadosTrip;
+
+  bool tourFound = false;
+  bool tripFound;
+
+  vector<string> Trip;
+  while (!tourFound) {
+    if (i==D){
+      tourFound = true;
+    } else {
+      tripFound = false;
+      HotelesDisponiblesTrip = HotelesDisponiblesTour;
+      cantHotelesQuitadosTrip = cantHotelesQuitadosTour;
+      Trip.clear();
+      Trip.push_back(Hinicio);
+      while(!tripFound){
+        if (HotelesDisponiblesTrip.size()==0){
+          i=0;
+          HotelesDisponiblesTrip = Hoteles;
+          cantHotelesQuitadosTour = 0;
+          cantHotelesQuitadosTrip = 0;
+          Htermino = "H0";
+          Tour.clear();
+          break;
+        }
+
+        if (i==D-1){
+          numHotel = 1;
+        } else {
+          numHotel = int_rand(2, (HP1 - cantHotelesQuitadosTrip));
+        }
+        
+        Htermino = "H"+to_string(numHotel);
+
+        Trip.push_back(Htermino);
+        if (!checkTripFeasibility(Trip, i)){
+          HotelesDisponiblesTrip.erase(set.begin() + numHotel);
+          cantHotelesQuitadosTrip++;
+          Trip.pop_back();
+        } else {
+          HotelesDisponiblesTour.erase(set.begin() + numHotel);
+          cantHotelesQuitadosTour++;
+          tripFound = true;
+        }
+      }
+      Hinicio = Htermino;
+      i++;
+    }
+  }
+
+}
+
 void agregar_individuo_aleatorio (conjunto & c_temp) {
   int rand;
   individuo i_temp;
   i_temp.usado = true;
 
   vector<string> set;
-  vector<string> POIs;
+  vector<string> Hoteles;
+  vector<string> HotelesAux;
   vector<string> Trip;
 
-  cout << "tinstancia: " << Tinstancia << endl;
+  // cout << "tinstancia: " << Tinstancia << endl;
   for(int i=0; i< Tinstancia; i++) {
     if (i<HP1){
       set.push_back("H"+to_string(i));
+      Hoteles.push_back("H"+to_string(i));
+      HotelesAux.push_back("H"+to_string(i));
     } else {
       set.push_back(to_string(i-HP1));
     }
@@ -267,8 +331,11 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   
   
   bool agregarPOI;
-  for (int trip=0; trip<D; trip++){
+  int trip = 0;
+  while (!solFactible) {
     Trip.push_back(Hinicio);
+
+
     if (trip==D-1){
       Htermino = "H1";
     } else {
@@ -277,6 +344,10 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     Trip.push_back(Htermino);
     set.erase(set.begin() + getPos(Htermino));
     cantHotelesQuitados++;
+
+    if (checkTripFeasibility(Trip, trip)){
+      i_temp.cromosoma.push_back(POI);
+    }
 
     agregarPOI = true;
     int POIpos;
@@ -293,7 +364,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       // POIs.erase(set.begin() + stoi(POI));
       Trip.insert(Trip.end()-1,POI);
       if (checkTripFeasibility(Trip, trip)){
-        i_temp.cromosoma.push_back(POI);
+        i_temp.cromosoma.insert(Trip.end()-1,POI);
       } else {
         agregarPOI = false;
       }
@@ -307,8 +378,8 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       }
     }
     Trip.clear();
+    trip++;
   }
-
   // cout << "fin" << endl;
 
 
@@ -364,13 +435,29 @@ int main(int argc, char *argv[]) {
   // inicializar_archivo_convergencia();
   cout << "N: " << N << " HP1: " << HP1 << " D: " << D << endl;
   conjunto poblacion ((char*)"poblacion");
-  crear_poblacion_inicial(poblacion, ps);
+  // crear_poblacion_inicial(poblacion, ps);
+
+
+  vector<string> Hoteles;
+  vector<string> Tour;
+  for(int i=0; i< HP1; i++) {
+    set.push_back("H"+to_string(i));
+    Hoteles.push_back("H"+to_string(i));
+    HotelesAux.push_back("H"+to_string(i));
+  }
+
+  generateFeasibleSequenceOfHotels(Hoteles, Tour);
+
+  for (int i=0; i<Tour.size(); i++) {
+    cout << Tour[i] << endl;
+  }
 
   if(debug) {
     cout<<poblacion;
     getchar();
   }
 
+  /*
   //contador de mutaciones
   mutaciones=0;
   //int evaluaciones_ant = 0;
@@ -386,7 +473,7 @@ int main(int argc, char *argv[]) {
       getchar();
     }
 
-    /*
+
     seleccionar_conjunto(poblacion, seleccionados, ps);
     if(debug){
       cout<<seleccionados;
@@ -418,9 +505,9 @@ int main(int argc, char *argv[]) {
     cruzados.vaciar();
     mutados.vaciar();
     guardar_optimo(poblacion);
-    */
+    
   }
-  
+  */
   salir();
 
   return 0;
