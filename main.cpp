@@ -100,11 +100,11 @@ void readConfiguration(string fileName) {
     count++;
   }
 
-  for (int i=0; i<T.size(); i++){
-    cout << "T[i]: " << T[i] << endl;
-  }
-
   if (debug) {
+    for (int i=0; i<T.size(); i++){
+      cout << "T[i]: " << T[i] << endl;
+    }
+
     for (int i=0; i<S.size(); i++){
       cout << "S[i]: " << S[i] << endl;
     }
@@ -324,6 +324,9 @@ void crear_poblacion_inicial(conjunto &poblacion, int size){
   for (int i=0; i<size; i++) {
     agregar_individuo_aleatorio(poblacion);
   }
+  cout << "Poblacion: "<< endl;
+  cout<<poblacion;
+  getchar();
   return;
 }
 
