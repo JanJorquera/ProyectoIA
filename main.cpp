@@ -218,6 +218,8 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   vector<string> set;
   vector<string> POIs;
   vector<string> Trip;
+
+  cout << "ok " << endl;
   for(int i=0; i< Tinstancia; i++) {
     if (i<HP1){
       set.push_back("H"+to_string(i));
@@ -227,7 +229,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   }
 
   for (int i=0; i<set.size(); i++){
-    cout << set[i] << endl;
+    cout << "Pos i de set: " << set[i] << endl;
   }
 
   
