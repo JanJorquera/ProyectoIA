@@ -262,6 +262,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       POIpos = int_rand(HP1 - cantHotelesQuitados, set.size());
       cout << "POIpos: " << POIpos << endl;
       POI = set[POIpos];
+      cout << "set[POIpos]: " << set[POIpos] << endl;
       set.erase(set.begin() + getPos(POI));
       // POIs.erase(set.begin() + stoi(POI));
       Trip.insert(Trip.end()-1,POI);
