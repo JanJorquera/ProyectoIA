@@ -10,6 +10,10 @@ vector<double> S;
 vector<vector<double>> t;
 vector<vector<double>> coord;
 
+static void control_c (int signo) {
+  //escribir_en_archivo_resultados(&optimo);
+  exit (1);
+}
 
 //Leer inputs por consola
 int Leer_entradas(int argc, char **argv) {
