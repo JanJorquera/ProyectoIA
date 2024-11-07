@@ -36,28 +36,31 @@ void readFile(string fileName, int &N, int &HP1, int &D, vector<double> T,
       istringstream lineStream(line);
       double value;
 
-      if (count == 1) {
-        lineStream >> N >> HP1 >> D;
-        N = N - 2;
-        HP1 = HP1 + 2;
-        coord.resize(N + HP1, vector<double>(2));
-        t.resize(N + HP1, vector<double>(N + HP1));
-      } else if (count == 2) {
-        // Pendiente
-        cout << "Pendiente" << endl;
-      } else if (count == 3) {
-        while (lineStream >> value) {
-          T.push_back(value);
+      try {
+        if (count == 1) {
+          lineStream >> N >> HP1 >> D;
+          N = N - 2;
+          HP1 = HP1 + 2;
+          coord.resize(N + HP1, vector<double>(2));
+          t.resize(N + HP1, vector<double>(N + HP1));
+        } else if (count == 2) {
+          // Pendiente
+          cout << "Pendiente" << endl;
+        } else if (count == 3) {
+          while (lineStream >> value) {
+            T.push_back(value);
+          }
+        } else if (count >= 5 && count <= N + HP1 + 4) {
+          double X, Y, s;
+          lineStream >> X >> Y >> s;
+          coord[count - 5].push_back(X);
+          coord[count - 5].push_back(Y);
+          S.push_back(s);
         }
-      } else if (count >= 5 && count <= N + HP1 + 4) {
-        double X, Y, s;
-        lineStream >> X >> Y >> s;
-        coord[count - 5].push_back(X);
-        coord[count - 5].push_back(Y);
-        cout << count << endl;
-        S.push_back(s);
+      } catch (const exception& e) {
+        cerr << "Error en formato de archivo" << endl;
       }
-
+      
     } else {
       if (count != 4) {
         cerr << "Error en formato de archivo" << endl;
