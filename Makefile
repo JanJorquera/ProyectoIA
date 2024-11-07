@@ -1,6 +1,6 @@
 flags = -Wno-deprecated -O2
 comp = g++
-prog  = OPHS.exe
+prog  = OPHS
 
 #El problema
 config = ./Instancias/100-80-12-6.ophs
