@@ -52,6 +52,7 @@ void readFile(string fileName, int &N, int &HP1, int &D, vector<double> T,
         }
       } catch (const exception& e) {
         cerr << "Error en formato de archivo" << endl;
+        exit(1);
       }
       
     } else {
@@ -75,7 +76,7 @@ int main(int argc, char *argv[]) {
   vector<vector<double>> coord;
 
   readFile(argv[1], N, HP1, D, T, S, coord, t);
-
   calculateDistances(coord, t);
+
   return 0;
 }
