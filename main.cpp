@@ -276,16 +276,13 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       POI = set[POIpos];
       cout << "set[POIpos]: " << set[POIpos] << endl;
       set.erase(set.begin() + getPos(POI));
-      cout << "check" << endl;
       // POIs.erase(set.begin() + stoi(POI));
       Trip.insert(Trip.end()-1,POI);
-      cout << "check1" << endl;
       if (checkTripFeasibility(Trip, trip)){
         i_temp.cromosoma.push_back(POI);
       } else {
         agregarPOI = false;
       }
-      cout << "check2" << endl;
     }
 
     i_temp.cromosoma.push_back(Htermino);
