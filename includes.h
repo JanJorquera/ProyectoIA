@@ -7,6 +7,10 @@
 #include <vector>
 #include <cstring>
 
+#include <sys/time.h>
+#include <sys/types.h>
+#include <signal.h>
+
 using namespace std;
 
 #define PI 3.141592654
