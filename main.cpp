@@ -220,6 +220,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   vector<string> Trip;
 
   cout << "ok " << endl;
+  cout << "tinstancia: " << Tinstancia << endl;
   for(int i=0; i< Tinstancia; i++) {
     if (i<HP1){
       cout << "ja " << endl;
