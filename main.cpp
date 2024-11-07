@@ -100,6 +100,10 @@ void readConfiguration(string fileName) {
     count++;
   }
 
+  for (int i=0; i<S.size(); i++){
+    cout << "S[i]: " << S[i] << endl;
+  }
+
   file.close();
   return;
 }
@@ -170,15 +174,15 @@ bool checkTripFeasibility(vector<string> Trip, int numTrip){
 
   for (int i=1; i<Trip.size(); i++){
     posFin = getPos(Trip[i]);
-    cout << "posInicio: " << posInicio << endl;
-    cout << "posFin: " << posFin << endl;
+    // cout << "posInicio: " << posInicio << endl;
+    // cout << "posFin: " << posFin << endl;
     costo += t[posInicio][posFin];
-    cout << "costo: " << costo << endl;
+    // cout << "costo: " << costo << endl;
     if (T[numTrip] > costo){
       return false;
     }
     posInicio = posFin;
-    cout << "i: " << i << endl;
+    // cout << "i: " << i << endl;
   }
   return true;
 }
