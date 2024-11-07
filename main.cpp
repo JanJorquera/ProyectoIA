@@ -253,10 +253,11 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     }
   }
 
-  for (int i=0; i<set.size(); i++){
-    cout << "Pos i de set: " << set[i] << endl;
+  if (debug) {
+    for (int i=0; i<set.size(); i++){
+      cout << "Pos i de set: " << set[i] << endl;
+    }
   }
-
   
   string Hinicio = "H0";
   string Htermino;
