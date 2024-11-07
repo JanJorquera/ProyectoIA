@@ -142,6 +142,11 @@ void calculateDistances(vector<vector<double>> coord, vector<vector<double>> t) 
       t[i][j] = sqrt(pow(coord[i][0] - coord[j][0], 2.0) + pow(coord[i][1] - coord[j][1], 2.0));
     }
   }
+  for (size_t i = 0; i < coord.size(); ++i) {
+    for (size_t j = 0; j < coord.size(); ++j) {
+      printf("t[%d][%d] = %.5f\n",i,j,t[i][j]);
+    }
+  }
 }
 
 
