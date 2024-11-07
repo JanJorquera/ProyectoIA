@@ -238,6 +238,7 @@ void calcular_aptitud(individuo * temp) {
 void generateFeasibleSequenceOfHotels(vector<string> Hoteles, vector<string> &Tour){
   vector<string> Trip;
   string Hinicio = "H0";
+  string Htermino;
   Trip.push_back(Hinicio);
   int numHotel;
   vector<string> HotelesDisponiblesTrip = vector<string> Hoteles;
@@ -281,11 +282,11 @@ void generateFeasibleSequenceOfHotels(vector<string> Hoteles, vector<string> &To
 
         Trip.push_back(Htermino);
         if (!checkTripFeasibility(Trip, i)){
-          HotelesDisponiblesTrip.erase(set.begin() + numHotel);
+          HotelesDisponiblesTrip.erase(HotelesDisponiblesTrip.begin() + numHotel);
           cantHotelesQuitadosTrip++;
           Trip.pop_back();
         } else {
-          HotelesDisponiblesTour.erase(set.begin() + numHotel);
+          HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
           cantHotelesQuitadosTour++;
           tripFound = true;
         }
@@ -333,6 +334,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   
   bool agregarPOI;
   int trip = 0;
+  /*
   while (!solFactible) {
     Trip.push_back(Hinicio);
 
@@ -380,7 +382,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     }
     Trip.clear();
     trip++;
-  }
+  }*/
   // cout << "fin" << endl;
 
 
