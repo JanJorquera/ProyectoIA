@@ -441,9 +441,7 @@ int main(int argc, char *argv[]) {
   vector<string> Hoteles;
   vector<string> Tour;
   for(int i=0; i< HP1; i++) {
-    set.push_back("H"+to_string(i));
     Hoteles.push_back("H"+to_string(i));
-    HotelesAux.push_back("H"+to_string(i));
   }
 
   generateFeasibleSequenceOfHotels(Hoteles, Tour);
