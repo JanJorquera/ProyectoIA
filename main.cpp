@@ -282,6 +282,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
 
 
 void crear_poblacion_inicial(conjunto &poblacion, int size){
+  cout << "size: " << size << endl;
   for (int i=0; i<size; i++) {
     agregar_individuo_aleatorio(poblacion);
   }
@@ -320,7 +321,7 @@ int main(int argc, char *argv[]) {
 
   //creacion de poblacion inicial aleatoria
   // inicializar_archivo_convergencia();
-  cout << "N: " << N << "HP1: " << HP1 << "D: " << D << endl;
+  cout << "N: " << N << " HP1: " << HP1 << " D: " << D << endl;
   conjunto poblacion ((char*)"poblacion");
   crear_poblacion_inicial(poblacion, ps);
 
