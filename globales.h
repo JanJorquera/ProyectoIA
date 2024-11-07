@@ -153,7 +153,7 @@ int evaluacion_opt;
 ofstream resultados;
 bool optimo_encontrado;
 
-char * archivo_convergencia = "convergencia.txt";
+string archivo_convergencia = "convergencia.txt";
 #endif
 
 /*
