@@ -283,7 +283,6 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         oss << numHotel;
         Htermino = "H"+oss.str();
         oss.str("");
-        cout << Htermino << endl;
 
         Trip.push_back(Htermino);
         
@@ -303,9 +302,6 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
     }
   }
   Tour.push_back(Htermino);
-  for (int i=0; i<Tour.size(); i++) {
-    printf("Tour[%d] = %s\n",i,Tour[i]);
-  }
 }
 
 void agregar_individuo_aleatorio (conjunto & c_temp) {
@@ -461,7 +457,7 @@ int main(int argc, char *argv[]) {
   generateFeasibleSequenceOfHotels(Hoteles, Tour);
 
   for (int i=0; i<Tour.size(); i++) {
-    printf("Tour[%d] = %s\n",i,Tour[i]);
+    cout << "Tour[" << i << "] = " << Tour[i] << endl;
   }
 
   if(debug) {
