@@ -351,7 +351,7 @@ individuo * ktournament (conjunto & c_temp) {
   conjunto aux ((char*)"poblacionAux");
 
   for (int i=0; i<kTournament; i++){
-    aux.conj.push_back(c_temp.conj[int_rand(0,c_temp.conj.end())]);
+    aux.conj.push_back(c_temp.conj[int_rand(0,c_temp.conj.size())]);
   }
   
   sort(aux.conj.begin(), aux.conj.end());
