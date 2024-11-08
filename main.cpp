@@ -298,7 +298,9 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
     }
   }
   Tour.push_back(Htermino);
-
+  for (int i=0; i<Tour.size(); i++) {
+    printf("Tour[%d] = %s\n",i,Tour[i]);
+  }
 }
 
 void agregar_individuo_aleatorio (conjunto & c_temp) {
