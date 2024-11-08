@@ -377,10 +377,10 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       cout << "pos: " << i + cantidadPOIsAddTour << endl;
       Trip.assign(i_temp.cromosoma.begin() + i + cantidadPOIsAddTour, i_temp.cromosoma.end());
       // cout << "aqui" << endl;
-      
+      /*
       for (int l=0; l<Trip.size(); l++){
         cout << "Trip[" << l << "]=" << Trip[l] << endl;
-      }
+      }*/
       if (checkTripFeasibility(Trip, i)){
         // cout << "adentro" << endl;
         i_temp.cromosoma.pop_back();
