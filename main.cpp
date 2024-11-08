@@ -243,9 +243,10 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
   int numHotel;
   vector<string> HotelesDisponiblesTrip(Hoteles); // Copia los elementos de 'Hoteles'
   vector<string> HotelesDisponiblesTour(Hoteles); // Copia los elementos de 'Hoteles'
-  
+  HotelesDisponiblesTour.erase(HotelesDisponiblesTrip.begin());
+
   int i=0;
-  int cantHotelesQuitadosTour = 0;
+  int cantHotelesQuitadosTour = 1;
   int cantHotelesQuitadosTrip;
 
   bool tourFound = false;
@@ -276,7 +277,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         if (i==D){
           numHotel = 1;
         } else {
-          numHotel = int_rand(2, (HP1 - cantHotelesQuitadosTrip));
+          numHotel = int_rand(1, (HP1 - cantHotelesQuitadosTrip));
         }
         
         Htermino = HotelesDisponiblesTrip[numHotel];
