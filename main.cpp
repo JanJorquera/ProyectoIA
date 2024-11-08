@@ -482,9 +482,6 @@ void crear_poblacion_inicial(conjunto &poblacion, int size){
   for (int i=0; i<size; i++) {
     agregar_individuo_aleatorio(poblacion);
   }
-  cout << "Poblacion: "<< endl;
-  cout<<poblacion;
-  getchar();
   return;
 }
 
@@ -522,6 +519,8 @@ int main(int argc, char *argv[]) {
   // inicializar_archivo_convergencia();
   conjunto poblacion ((char*)"poblacion");
   crear_poblacion_inicial(poblacion, ps);
+  cout<<poblacion;
+  getchar();
 
   if(debug) {
     cout<<poblacion;
