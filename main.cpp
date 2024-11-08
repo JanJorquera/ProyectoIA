@@ -354,6 +354,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   vector<string> Trip;
   int cantidadPOIsAddTour = 0;
   int cantidadPOIsAddTrip = 0;
+  int cantidadPOIsAddTourPastIteration = 0;
   int posPOI;
   bool isFeasibleAddPOIinTrip;
   generateFeasibleSequenceOfHotels(Hoteles, HotelesTour);
@@ -368,6 +369,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     isFeasibleAddPOIinTrip = true;
     POIsDispTrip = POIsDispTour;
     cantidadPOIsAddTrip = cantidadPOIsAddTour;
+    cantidadPOIsAddTourPastIteration = cantidadPOIsAddTourPastIteration;
     // cout << "i: " << i << endl;
     while (isFeasibleAddPOIinTrip) {
       if (POIsDispTrip.size() == 0){
@@ -376,11 +378,11 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       posPOI = int_rand(0, (N - cantidadPOIsAddTrip));
       // cout << "posPOI: "<< posPOI << endl;
       // cout << "tam: " << POIsDispTour.size() << endl;
-      cout << "POS: "<< POIsDispTour[posPOI] << endl;
+      // cout << "POS: "<< POIsDispTour[posPOI] << endl;
       i_temp.cromosoma.push_back(POIsDispTour[posPOI]);
       i_temp.cromosoma.push_back(HotelesTour[i+1]);
       cout << "pos: " << i + cantidadPOIsAddTour << endl;
-      Trip.assign(i_temp.cromosoma.begin() + i + cantidadPOIsAddTour, i_temp.cromosoma.end());
+      Trip.assign(i_temp.cromosoma.begin() + i + cantidadPOIsAddTourPastIteration, i_temp.cromosoma.end());
       // cout << "aqui" << endl;
       /*
       for (int l=0; l<Trip.size(); l++){
