@@ -300,6 +300,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
     }
   }
   Tour.push_back(Htermino);
+  printf("H0");
   for (int i=0; i<Tour.size(); i++) {
     printf("Tour[%d] = %s\n",i,Tour[i]);
   }
