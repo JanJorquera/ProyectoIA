@@ -46,15 +46,15 @@ int getPos(string vertex){
   return HP1+stoi(vertex);
 }
 
-int calculateTripCost(vector<string> trip){
-  int costo = 0;
+double calculateTripCost(vector<string> trip){
+  double costo = 0;
   for (int i=0; i<trip.size()-1; i++){
     costo += t[getPos(trip[i])][getPos(trip[i+1])];
   }
   return costo;
 }
 
-int findTrip(int numTrip){
+double findTrip(int numTrip){
   int numHotelesVistos = -1;
   vector<string> trip;
   bool flagAddtoTrip = false;
@@ -93,7 +93,7 @@ void salir(void) {
   cout << optimo.aptitud << endl;
 
   ostringstream resultadoTrip;
-  int costoTrip;
+  double costoTrip;
   for (int i=0; i<D; i++){
     costoTrip = findTrip(i);
     resultadoTrip << "Trip " << i+1 << ": " << costoTrip;
