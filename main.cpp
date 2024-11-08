@@ -267,8 +267,8 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           i=0;
           HotelesDisponiblesTrip = Hoteles;
           HotelesDisponiblesTour = Hoteles;
-          cantHotelesQuitadosTour = 0;
-          cantHotelesQuitadosTrip = 0;
+          cantHotelesQuitadosTour = 1;
+          cantHotelesQuitadosTrip = 1;
           Htermino = "H0";
           Tour.clear();
           break;
