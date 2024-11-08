@@ -338,7 +338,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   vector<string> HotelesTour;
 
   // cout << "tinstancia: " << Tinstancia << endl;
-  for(int i=0; i< Tinstancia; i++) {
+  for(int i=0; i< HP1+N; i++) {
     if (i<HP1){
       Hoteles.push_back("H"+to_string(i));
     } else {
