@@ -360,7 +360,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     POIsDispTrip = POIsDispTour;
     cantidadPOIsAddTrip = cantidadPOIsAddTour;
     while (isFeasibleAddPOIinTrip) {
-      if (POIsDispTrip.size == 0){
+      if (POIsDispTrip.size() == 0){
         break;
       }
       posPOI = int_rand(1, (N - cantidadPOIsAddTrip));
