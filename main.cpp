@@ -281,7 +281,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         }
         
         oss << numHotel;
-        Htermino = "H"+oss.str(numHotel);
+        Htermino = "H"+oss.str();
         oss.str("");
         printf("Hfin: %s", Htermino);
 
