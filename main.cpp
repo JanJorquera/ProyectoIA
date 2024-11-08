@@ -93,12 +93,10 @@ void salir(void) {
   cout << optimo.aptitud << endl;
 
   ostringstream resultadoTrip;
-  string textoString;
   int costoTrip;
   for (int i=0; i<D; i++){
     costoTrip = findTrip(i);
-    textoString = format("Trip {}: {}", i+1, costoTrip);
-    resultadoTrip << textoString;
+    resultadoTrip << "Trip " << i+1 << ": " << costoTrip;
     if (i != D - 1) {
       resultadoTrip << " - ";
     }
