@@ -251,7 +251,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
   bool tourFound = false;
   bool tripFound;
 
-  ostringstream oss;
+  std::ostringstream oss;
   while (!tourFound) {
     if (i==D){
       tourFound = true;
@@ -468,13 +468,6 @@ int main(int argc, char *argv[]) {
     cout<<poblacion;
     getchar();
   }
-
-  int numHotel = 5; // Ejemplo con un número conocido
-  std::ostringstream oss;
-  oss << numHotel; // Convierte numHotel a string
-
-  std::string Htermino = "H" + oss.str();
-  std::cout << "Htermino: " << Htermino << std::endl;  // Debería mostrar "H5"
   
   return 0;
 
