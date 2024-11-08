@@ -10,14 +10,16 @@ cr = 0.3				#Tasa de cruzamiento
 mr = 0.01				#Tasa de mutación
 ps = 5					#Population size
 max_evals=1e+4			#Maximo de iteraciones
-eo = 1
+eo = 1					#Se aplica o no elitismo
+so = 1					#Operador de selección
 semilla = 2
+kTournament = 2			#Tamaño para k tournament
 
 comp:$(prog)
 
 exe:$(prog)
 	#valgrind --leak-check=full --show-reachable=yes 
-	./$(prog) $(config) $(results) ${eo} $(cr) $(mr) $(ps) $(max_evals) $(semilla)
+	./$(prog) $(config) $(results) ${so} ${eo} $(cr) $(mr) $(ps) $(max_evals) $(semilla) ${kTournament}
 
 $(prog): main.o
 	$(comp) main.o -o $(prog) $(flags)

@@ -23,19 +23,29 @@ int Leer_entradas(int argc, char **argv) {
   archivo_resultados = argv[2];
   
   //PARAMETROS
-  eo = atoi(argv[3]); //elitism operator
-  cr = atof(argv[4]); //crossover rate
-  mr = atof(argv[5]); //mutation rate
-  ps = atoi(argv[6]); //population size
+  so = atoi(argv[3]); //selection operator 
+  eo = atoi(argv[4]); //elitism operator
+  cr = atof(argv[5]); //crossover rate
+  mr = atof(argv[6]); //mutation rate
+  ps = atoi(argv[7]); //population size
   if(debug) {
-    printf("eo: %d, mr: %.2f, cr: %.2f, ps: %d\n", eo, mr, cr, ps);
+    printf("so: %d, eo: %d, mr: %.2f, cr: %.2f, ps: %d\n", so, eo, mr, cr, ps);
     //getchar();
   }
   //BUDGET
-  max_iter = (int)(atof(argv[7]));
+  max_iter = (int)(atof(argv[8]));
   maximo_evaluaciones = max_iter;
   //SEMILLA
-  semilla = atoi (argv[8]);
+  semilla = atoi (argv[9]);
+  //KTOURNAMENT
+  if (s0 == 2){
+    try {
+      kTournament = atoi (argv[10]);
+    } catch (const exception& e) {
+      cerr << "Error en tamaño de torneo" << endl;
+      exit(1);
+    }
+  }
   return 1;
 }
 
@@ -261,25 +271,21 @@ void guardar_optimo_encontrado (int aptitud_optimo, individuo temp) {
   return;
 }
 
-void guardar_optimo(conjunto & c_temp)
-{
+void guardar_optimo(conjunto & c_temp) {
   sort(c_temp.conj.begin(), c_temp.conj.end());
-  if(c_temp.conj.front().aptitud > optimo.aptitud)
-    {
-      optimo = c_temp.conj.front();
-      iteracion_opt = iteracion;
-      evaluacion_opt = evaluaciones;
-      Fin_opt = time(NULL);
-      //cout<<iteracion<<" "<< optimo.aptitud<<endl;
-    }
+  if(c_temp.conj.back().aptitud > optimo.aptitud){
+    optimo = c_temp.conj.front();
+    iteracion_opt = iteracion;
+    evaluacion_opt = evaluaciones;
+    Fin_opt = time(NULL);
+    //cout<<iteracion<<" "<< optimo.aptitud<<endl;
+  }
   //Si se cumplen XX evaluaciones sin cambio se acaba
-  if((evaluaciones - evaluacion_opt)>1000000)
-  {
+  if((evaluaciones - evaluacion_opt)>1000000){
   	salir();
   }
   return;
 }
-
 
 void calcular_aptitud(individuo * temp) {
   //Reevaluar solo los individuos con cambios
@@ -308,6 +314,64 @@ void calcular_aptitud(individuo * temp) {
     salir();
   }
   return;
+}
+
+//Seleccion de individuos//
+individuo * roulette_wheel (conjunto & c_temp) {
+  int i = 0;
+  float rand;
+  float acumulado = 0.00, suma = 0.00;
+  individuo * i_temp;
+
+  for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
+    suma += p->aptitud;
+    i++;
+  }
+
+  //numero aleatorio para la ruleta
+  rand = float_rand(0.00, suma);
+  i=0;
+  
+  //busqueda del individuo en la ruleta
+  for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
+    acumulado += p->aptitud;
+    i++;
+    if (acumulado > rand){
+      i_temp = &(*p);
+      return i_temp;
+	  }
+  }
+  //en caso de ser el ultimo individuo de la poblacion
+  i_temp = (&(c_temp.conj.back()));
+  return i_temp;
+}
+
+individuo * ktournament (conjunto & c_temp) {
+  individuo * i_temp;
+  conjunto aux ((char*)"poblacionAux");
+
+  for (int i=0; i<kTournament; i++){
+    aux.conj.push_back(c_temp.conj[rand_int(0,c_temp.conj.end())]);
+  }
+  
+  sort(aux.conj.begin(), aux.conj.end());
+  i_temp = &(aux.conj.back());
+  return i_temp;
+}
+
+individuo * seleccionar_individuo (conjunto & c_temp) {
+  individuo * i_temp;
+  switch(so) {
+    case ROULETTE:
+      i_temp = roulette_wheel(c_temp);
+      return i_temp;
+    case TOURNAMENT:
+      i_temp = ktournament(c_temp);
+      return i_temp;
+    default:
+      cout<<"ERROR: No se reconoce tipo de seleccion"<<endl;
+      salir();
+   }
 }
 
 void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<string> &Tour){
@@ -599,7 +663,6 @@ int main(int argc, char *argv[]) {
     getchar();
   }
 
-  salir();
   //contador de mutaciones
   mutaciones=0;
   //int evaluaciones_ant = 0;
@@ -615,14 +678,14 @@ int main(int argc, char *argv[]) {
       getchar();
     }
 
-    /*
+    
     seleccionar_conjunto(poblacion, seleccionados, ps);
     if(debug){
       cout<<seleccionados;
       getchar();
     }
 
-    
+    /*
     cruzar_conjunto(seleccionados, cruzados, cr);
     if(debug) {
       cout<<"POBLACION CRUZADA"<<endl;

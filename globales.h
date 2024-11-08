@@ -142,7 +142,7 @@ int semilla;
 
 int ps;
 float mr, cr;
-int eo;
+int so, eo, kTournament;
 /* int so, co, mo, eo; */
 int mutaciones, cruzamientos;
 

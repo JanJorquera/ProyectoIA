@@ -18,10 +18,13 @@ using namespace std;
 /*
 #define GEO 1
 #define EUC 2
+*/
 
 #define ROULETTE 1
 #define TOURNAMENT 2
+/*
 #define RANKING 3
+
 
 #define DOSOPT 1
 #define TRESOPT 2
