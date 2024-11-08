@@ -378,6 +378,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       } else {
         cantidadPOIsAddTrip++;
       }
+      cout << "aqui tal vez" << endl;
       POIsDispTrip.erase(POIsDispTrip.begin() + posPOI);
     } 
     i_temp.cromosoma.push_back(HotelesTour[i+1]);
