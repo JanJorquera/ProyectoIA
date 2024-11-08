@@ -365,7 +365,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   }
   */
   // cout << "despues" << endl;
-  for (int i=0; i<1; i++){
+  for (int i=0; i<D; i++){
     isFeasibleAddPOIinTrip = true;
     POIsDispTrip = POIsDispTour;
     cantidadPOIsAddTrip = cantidadPOIsAddTour;
