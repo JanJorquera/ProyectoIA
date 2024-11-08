@@ -261,6 +261,7 @@ void generateFeasibleSequenceOfHotels(vector<string> &Hoteles, vector<string> &T
       cantHotelesQuitadosTrip = cantHotelesQuitadosTour;
       Trip.clear();
       Trip.push_back(Hinicio);
+      Tour.push_back(Hinicio);
       while(!tripFound){
         if (HotelesDisponiblesTrip.size()==0){
           i=0;
@@ -296,6 +297,7 @@ void generateFeasibleSequenceOfHotels(vector<string> &Hoteles, vector<string> &T
       i++;
     }
   }
+  Tour.push_back(Htermino);
 
 }
 
