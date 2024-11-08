@@ -376,8 +376,9 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       i_temp.cromosoma.push_back(HotelesTour[i+1]);
       Trip.assign(i_temp.cromosoma.begin() + i + cantidadPOIsAddTour, i_temp.cromosoma.end());
       // cout << "aqui" << endl;
+      
       for (int l=0; l<Trip.size(); l++){
-        // cout << "Trip[" << l << "]=" << Trip[l] << endl;
+        cout << "Trip[" << l << "]=" << Trip[l] << endl;
       }
       if (checkTripFeasibility(Trip, i)){
         // cout << "adentro" << endl;
@@ -385,12 +386,10 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
         // cout << "aca" << endl;
         POIsDispTour.erase(POIsDispTour.begin() + posPOI);
         // cout << "por aca" << endl;
-        cantidadPOIsAddTrip++;
         cantidadPOIsAddTour++;
-      } else {
-        cantidadPOIsAddTrip++;
-      }
+      } 
       // cout << "aqui tal vez" << endl;
+      cantidadPOIsAddTrip++;
       POIsDispTrip.erase(POIsDispTrip.begin() + posPOI);
     } 
     i_temp.cromosoma.push_back(HotelesTour[i+1]);
