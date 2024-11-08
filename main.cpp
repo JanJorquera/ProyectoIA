@@ -360,6 +360,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     isFeasibleAddPOIinTrip = true;
     POIsDispTrip = POIsDispTour;
     cantidadPOIsAddTrip = cantidadPOIsAddTour;
+    cout << "i: " << i << endl;
     while (isFeasibleAddPOIinTrip) {
       if (POIsDispTrip.size() == 0){
         break;
