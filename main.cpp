@@ -348,13 +348,14 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   }
 
   vector<string> Tour;
-  vector<int> TripAux;
+  vector<string> Trip;
   int cantidadPOIsAddTour = 0;
   int cantidadPOIsAddTrip = 0;
   int posPOI;
+  bool isFeasibleAddPOIinTrip;
   generateFeasibleSequenceOfHotels(Hoteles, HotelesTour);
   for (int i=0; i<D; i++){
-    i_temp.push_back(HotelesTour[i]);
+    i_temp.cromosoma.push_back(HotelesTour[i]);
     isFeasibleAddPOIinTrip = true;
     POIsDispTrip = POIsDispTour;
     cantidadPOIsAddTrip = cantidadPOIsAddTour;
@@ -362,7 +363,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       if (POIsDispTrip.size == 0){
         break;
       }
-      posPOI = int_rand(1, (N - cantPOIsAddTrip));
+      posPOI = int_rand(1, (N - cantidadPOIsAddTrip));
       i_temp.cromosoma.push_back(POIsDispTour[posPOI]);
       i_temp.cromosoma.push_back(HotelesTour[i+1]);
       Trip.assign(i_temp.cromosoma.begin() + i + cantidadPOIsAddTour, i_temp.cromosoma.end());
