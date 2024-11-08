@@ -285,8 +285,6 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         
         if (i==D-1){
           numHotel = 0;
-          cout << "Hotel final" << HotelesDisponiblesTrip[numHotel] << endl;
-          
         } else {
           numHotel = int_rand(1, (HP1 - cantHotelesQuitadosTrip));
         }
@@ -316,9 +314,6 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
           cantHotelesQuitadosTour++;
           Tour.push_back(Htermino);
-          for (int k=0; k<Tour.size(); k++){
-            cout << "Tour[" << k << "]" << Tour[k] << endl;
-          }
           tripFound = true;
           flagAvoid = false;
         }
