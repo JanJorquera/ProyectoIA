@@ -325,7 +325,6 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
       }
     }
   }
-  // Tour.push_back(Htermino);
 }
 
 void agregar_individuo_aleatorio (conjunto & c_temp) {
@@ -333,19 +332,18 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   individuo i_temp;
   i_temp.usado = true;
 
-  vector<string> set;
   vector<string> Hoteles;
-  vector<string> HotelesAux;
-  vector<string> Trip;
+  vector<string> POIsDispTour;
+  vector<string> POIsDispTrip;
+  vector<string> HotelesTour;
 
   // cout << "tinstancia: " << Tinstancia << endl;
   for(int i=0; i< Tinstancia; i++) {
     if (i<HP1){
-      set.push_back("H"+to_string(i));
       Hoteles.push_back("H"+to_string(i));
-      HotelesAux.push_back("H"+to_string(i));
     } else {
-      set.push_back(to_string(i-HP1));
+      POIsDispTour.push_back(to_string(i-HP1));
+      POIsDispTrip.push_back(to_string(i-HP1));
     }
   }
 
@@ -354,7 +352,40 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       cout << "Pos i de set: " << set[i] << endl;
     }
   }
+
+  vector<string> Tour;
+  vector<int> TripAux;
+  int cantidadPOIsAddTour = 0;
+  int cantidadPOIsAddTrip = 0;
+  int posPOI;
+  generateFeasibleSequenceOfHotels(Hoteles, HotelesTour);
+  for (int i=0; i<D; i++){
+    i_temp.push_back(HotelesTour[i]);
+    isFeasibleAddPOIinTrip = true;
+    POIsDispTrip = POIsDispTour;
+    cantidadPOIsAddTrip = cantidadPOIsAddTour;
+    while (isFeasibleAddPOIinTrip) {
+      if (POIsDispTrip.size == 0){
+        break;
+      }
+      posPOI = int_rand(1, (N - cantPOIsAddTrip));
+      i_temp.cromosoma.push_back(POIsDispTour[posPOI]);
+      i_temp.cromosoma.push_back(HotelesTour[i+1]);
+      Trip.assign(i_temp.cromosoma.begin() + i + cantidadPOIsAddTour, i_temp.cromosoma.end());
+      if (checkTripFeasibility(Trip, i)){
+        i_temp.cromosoma.pop_back();
+        POIsDispTour.erase(POIsDispTour.begin() + posPOI);
+        cantidadPOIsAddTrip++;
+        cantidadPOIsAddTour++;
+      } else {
+        cantidadPOIsAddTrip++;
+      }
+      POIsDispTrip.erase(POIsDispTrip.begin() + posPOI);
+    } 
+    i_temp.push_back(HotelesTour[i+1]);
+  }
   
+  /*
   string Hinicio = "H0";
   string Htermino;
   set.erase(set.begin() + 0);
@@ -364,7 +395,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   
   bool agregarPOI;
   int trip = 0;
-  /*
+
   while (!solFactible) {
     Trip.push_back(Hinicio);
 
@@ -467,20 +498,7 @@ int main(int argc, char *argv[]) {
   //creacion de poblacion inicial aleatoria
   // inicializar_archivo_convergencia();
   conjunto poblacion ((char*)"poblacion");
-  // crear_poblacion_inicial(poblacion, ps);
-
-
-  vector<string> Hoteles;
-  vector<string> Tour;
-  for(int i=0; i < HP1; i++) {
-    Hoteles.push_back("H"+to_string(i));
-  }
-
-  generateFeasibleSequenceOfHotels(Hoteles, Tour);
-
-  for (int i=0; i<Tour.size(); i++) {
-    cout << "Tour[" << i << "] = " << Tour[i] << endl;
-  }
+  crear_poblacion_inicial(poblacion, ps);
 
   if(debug) {
     cout<<poblacion;
