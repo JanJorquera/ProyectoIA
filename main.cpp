@@ -39,7 +39,14 @@ int Leer_entradas(int argc, char **argv) {
   return 1;
 }
 
-int calculateTripCost(string<vector> trip){
+int getPos(string vertex){
+  if (vertex.find("H") == 0) {
+    return stoi(vertex.substr(1));
+  }
+  return HP1+stoi(vertex);
+}
+
+int calculateTripCost(vector<string> trip){
   int costo = 0;
   for (int i=0; i<trip.size()-1; i++){
     costo += t[getPos(trip[i])][getPos(trip[i+1])];
@@ -51,7 +58,7 @@ int findTrip(int numTrip){
   int numHotelesVistos = -1;
   vector<string> trip;
   bool flagAddtoTrip = false;
-  for (int i=0; i<optimo.cromosoma.size()){
+  for (int i=0; i<optimo.cromosoma.size(); i++){
     if (optimo.cromosoma[i].find("H") == 0){
       if (flagAddtoTrip){
         trip.push_back(optimo.cromosoma[i]);
@@ -220,14 +227,6 @@ void calculateDistances() {
       }
     }
   }
-}
-
-
-int getPos(string vertex){
-  if (vertex.find("H") == 0) {
-    return stoi(vertex.substr(1));
-  }
-  return HP1+stoi(vertex);
 }
 
 bool checkTripFeasibility(vector<string> Trip, int numTrip){
