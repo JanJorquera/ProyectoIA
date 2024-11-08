@@ -251,7 +251,7 @@ void generateFeasibleSequenceOfHotels(vector<string> &Hoteles, vector<string> &T
   bool tourFound = false;
   bool tripFound;
 
-  
+  cout << "b" << endl;
   while (!tourFound) {
     if (i==D){
       tourFound = true;
@@ -265,6 +265,7 @@ void generateFeasibleSequenceOfHotels(vector<string> &Hoteles, vector<string> &T
         if (HotelesDisponiblesTrip.size()==0){
           i=0;
           HotelesDisponiblesTrip = Hoteles;
+          HotelesDisponiblesTour = Hoteles;
           cantHotelesQuitadosTour = 0;
           cantHotelesQuitadosTrip = 0;
           Htermino = "H0";
