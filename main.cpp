@@ -38,7 +38,7 @@ int Leer_entradas(int argc, char **argv) {
   //SEMILLA
   semilla = atoi (argv[9]);
   //KTOURNAMENT
-  if (s0 == 2){
+  if (so == 2){
     try {
       kTournament = atoi (argv[10]);
     } catch (const exception& e) {
@@ -351,7 +351,7 @@ individuo * ktournament (conjunto & c_temp) {
   conjunto aux ((char*)"poblacionAux");
 
   for (int i=0; i<kTournament; i++){
-    aux.conj.push_back(c_temp.conj[rand_int(0,c_temp.conj.end())]);
+    aux.conj.push_back(c_temp.conj[int_rand(0,c_temp.conj.end())]);
   }
   
   sort(aux.conj.begin(), aux.conj.end());
@@ -372,6 +372,16 @@ individuo * seleccionar_individuo (conjunto & c_temp) {
       cout<<"ERROR: No se reconoce tipo de seleccion"<<endl;
       salir();
    }
+}
+
+void seleccionar_conjunto(conjunto & in, conjunto & out, int n) {
+  individuo * p_i_temp;
+  for(int i=0; i<n; i++){
+    individuo i_temp;
+    p_i_temp = seleccionar_individuo(in);
+    i_temp = *p_i_temp;
+    out.conj.push_back(i_temp);
+  }
 }
 
 void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<string> &Tour){
