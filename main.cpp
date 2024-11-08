@@ -379,6 +379,8 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     } 
     i_temp.cromosoma.push_back(HotelesTour[i+1]);
   }
+
+  cout << "asdas" << endl;
   
   /*
   string Hinicio = "H0";
@@ -450,7 +452,6 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
 
 
 void crear_poblacion_inicial(conjunto &poblacion, int size){
-  cout << "size: " << size << endl;
   for (int i=0; i<size; i++) {
     agregar_individuo_aleatorio(poblacion);
   }
