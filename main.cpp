@@ -256,6 +256,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
 
   bool tourFound = false;
   bool tripFound;
+  bool flagAvoid = false;
 
   while (!tourFound) {
     if (i==D+1){
@@ -266,7 +267,6 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
       cantHotelesQuitadosTrip = cantHotelesQuitadosTour;
       Trip.clear();
       Trip.push_back(Hinicio);
-      Tour.push_back(Hinicio);
       while(!tripFound){
         if (HotelesDisponiblesTrip.size()==0){
           i=iI;
@@ -274,11 +274,12 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           HotelesDisponiblesTour = Hoteles;
           cantHotelesQuitadosTour = cantHotelesQuitadosTourI;
           cantHotelesQuitadosTrip = cantHotelesQuitadosTripI;
-          Htermino = "H0";
+          Hinicio = "H0";
           Tour.clear();
+          flagAvoid = true;
           break;
         }
-
+        
         if (i==D){
           numHotel = 0;
         } else {
@@ -296,12 +297,16 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         } else {
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
           cantHotelesQuitadosTour++;
+          Tour.push_back(Htermino);
           tripFound = true;
+          flagAvoid = false;
         }
 
       }
-      Hinicio = Htermino;
-      i++;
+      if (!flagAvoid){
+        Hinicio = Htermino;
+        i++;
+      }
     }
   }
   // Tour.push_back(Htermino);
