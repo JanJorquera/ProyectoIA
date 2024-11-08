@@ -367,6 +367,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       }
       posPOI = int_rand(0, (N - cantidadPOIsAddTrip));
       cout << "posPOI: "<< posPOI << endl;
+      cout << "tam: " << POIsDispTour.size() << endl;
       cout << "POS: "<< POIsDispTour[posPOI] << endl;
       i_temp.cromosoma.push_back(POIsDispTour[posPOI]);
       i_temp.cromosoma.push_back(HotelesTour[i+1]);
