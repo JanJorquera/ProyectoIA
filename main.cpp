@@ -243,7 +243,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
   int numHotel;
   vector<string> HotelesDisponiblesTrip(Hoteles); // Copia los elementos de 'Hoteles'
   vector<string> HotelesDisponiblesTour(Hoteles); // Copia los elementos de 'Hoteles'
-  HotelesDisponiblesTour.erase(HotelesDisponiblesTrip.begin());
+  HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin());
 
   int i=0;
   int cantHotelesQuitadosTour = 1;
