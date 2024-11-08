@@ -283,7 +283,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         oss << numHotel;
         Htermino = "H"+oss.str();
         oss.str("");
-        cout << oss << endl;
+        cout << Htermino << endl;
 
         Trip.push_back(Htermino);
         
