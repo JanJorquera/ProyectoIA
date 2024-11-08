@@ -395,7 +395,10 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
         POIsDispTour.erase(POIsDispTour.begin() + posPOI);
         // cout << "por aca" << endl;
         cantidadPOIsAddTour++;
-      } 
+      } else {
+        i_temp.cromosoma.pop_back();
+        i_temp.cromosoma.pop_back();
+      }
       // cout << "aqui tal vez" << endl;
       cantidadPOIsAddTrip++;
       POIsDispTrip.erase(POIsDispTrip.begin() + posPOI);
