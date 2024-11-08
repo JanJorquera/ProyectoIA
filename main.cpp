@@ -443,6 +443,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
 
 
   //calculo de la aptitud del individuo
+  cout << "hola que tal" << endl;
   calcular_aptitud(&i_temp);
   cout << "jajaja" << endl;
   c_temp.conj.push_back(i_temp);
