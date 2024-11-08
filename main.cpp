@@ -307,7 +307,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         }
 
       }
-      if (flagAvoid){
+      if (!flagAvoid){
         Hinicio = Htermino;
         i++;
       }
