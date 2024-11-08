@@ -283,7 +283,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         Htermino = "H"+to_string(numHotel);
 
         Trip.push_back(Htermino);
-        /*
+        
         if (!checkTripFeasibility(Trip, i)){
           HotelesDisponiblesTrip.erase(HotelesDisponiblesTrip.begin() + numHotel);
           cantHotelesQuitadosTrip++;
@@ -292,24 +292,8 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
           cantHotelesQuitadosTour++;
           tripFound = true;
-        }*/
-
-        if (!checkTripFeasibility(Trip, i)) {
-          auto it = find(HotelesDisponiblesTrip.begin(), HotelesDisponiblesTrip.end(), Htermino);
-          if (it != HotelesDisponiblesTrip.end()) {
-              HotelesDisponiblesTrip.erase(it);
-              cantHotelesQuitadosTrip++;
-          }
-          Trip.pop_back();
-        } else {
-            auto itTour = find(HotelesDisponiblesTour.begin(), HotelesDisponiblesTour.end(), Htermino);
-            if (itTour != HotelesDisponiblesTour.end()) {
-                HotelesDisponiblesTour.erase(itTour);
-                cantHotelesQuitadosTour++;
-            }
-            tripFound = true;
         }
-        
+
       }
       Hinicio = Htermino;
       i++;
