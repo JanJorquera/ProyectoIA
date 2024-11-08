@@ -357,9 +357,9 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   int posPOI;
   bool isFeasibleAddPOIinTrip;
   generateFeasibleSequenceOfHotels(Hoteles, HotelesTour);
+  i_temp.cromosoma.push_back(HotelesTour[0]);
   // cout << "despues" << endl;
   for (int i=0; i<D; i++){
-    i_temp.cromosoma.push_back(HotelesTour[i]);
     isFeasibleAddPOIinTrip = true;
     POIsDispTrip = POIsDispTour;
     cantidadPOIsAddTrip = cantidadPOIsAddTour;
@@ -517,8 +517,6 @@ int main(int argc, char *argv[]) {
     cout<<poblacion;
     getchar();
   }
-  
-  return 0;
 
   /*
   //contador de mutaciones
