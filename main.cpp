@@ -204,7 +204,6 @@ void guardar_optimo_encontrado (int aptitud_optimo, individuo temp) {
   {
       cout<<endl<<"Aptitud: "<<aptitud_optimo;
   }
-  salir();
   return;
 }
 
