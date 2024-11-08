@@ -329,6 +329,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
 void agregar_individuo_aleatorio (conjunto & c_temp) {
   int rand;
   individuo i_temp;
+  i_temp.cromosoma.clear();
   i_temp.usado = true;
 
   vector<string> Hoteles;
@@ -379,8 +380,6 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     i_temp.cromosoma.push_back(HotelesTour[i+1]);
   }
 
-  cout << "asdas" << endl;
-  
   /*
   string Hinicio = "H0";
   string Htermino;
@@ -445,7 +444,6 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
 
   //calculo de la aptitud del individuo
   calcular_aptitud(&i_temp);
-  cout << "baabbaba" << endl;
   c_temp.conj.push_back(i_temp);
   cout << "ddddddd" << endl;
   return;
