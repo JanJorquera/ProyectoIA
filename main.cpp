@@ -469,6 +469,15 @@ int main(int argc, char *argv[]) {
     getchar();
   }
 
+  int numHotel = 5; // Ejemplo con un número conocido
+  std::ostringstream oss;
+  oss << numHotel; // Convierte numHotel a string
+
+  std::string Htermino = "H" + oss.str();
+  std::cout << "Htermino: " << Htermino << std::endl;  // Debería mostrar "H5"
+  
+  return 0;
+
   /*
   //contador de mutaciones
   mutaciones=0;
