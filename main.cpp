@@ -299,6 +299,9 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
           cantHotelesQuitadosTour++;
           Tour.push_back(Htermino);
+          for (int k=0; k<Tour.size(); k++){
+            cout << "Tour[" << k << "]" << Tour[k] << endl;
+          }
           tripFound = true;
           flagAvoid = false;
         }
