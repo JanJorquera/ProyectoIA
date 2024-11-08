@@ -347,12 +347,6 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     }
   }
 
-  if (debug) {
-    for (int i=0; i<set.size(); i++){
-      cout << "Pos i de set: " << set[i] << endl;
-    }
-  }
-
   vector<string> Tour;
   vector<int> TripAux;
   int cantidadPOIsAddTour = 0;
@@ -382,7 +376,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       }
       POIsDispTrip.erase(POIsDispTrip.begin() + posPOI);
     } 
-    i_temp.push_back(HotelesTour[i+1]);
+    i_temp.cromosoma.push_back(HotelesTour[i+1]);
   }
   
   /*
