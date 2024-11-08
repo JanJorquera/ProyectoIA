@@ -235,7 +235,7 @@ void calcular_aptitud(individuo * temp) {
   return;
 }
 
-void generateFeasibleSequenceOfHotels(vector<string> &Hoteles, vector<string> &Tour){
+void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<string> &Tour){
   vector<string> Trip;
   string Hinicio = "H0";
   string Htermino;
