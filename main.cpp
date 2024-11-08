@@ -39,9 +39,66 @@ int Leer_entradas(int argc, char **argv) {
   return 1;
 }
 
+int calculateTripCost(string<vector> trip){
+  int costo = 0;
+  for (int i=0; i<trip.size()-1; i++){
+    costo += t[getPos(trip[i])][getPos(trip[i+1])];
+  }
+  return costo;
+}
+
+int findTrip(int numTrip){
+  int numHotelesVistos = -1;
+  vector<string> trip;
+  bool flagAddtoTrip = false;
+  for (int i=0; i<optimo.cromosoma.size()){
+    if (optimo.cromosoma[i].find("H") == 0){
+      if (flagAddtoTrip){
+        trip.push_back(optimo.cromosoma[i]);
+        break;
+      }
+      numHotelesVistos++;
+      if (numHotelesVistos == numTrip){
+        flagAddtoTrip = true;
+      }
+    }
+    if (flagAddtoTrip){
+      trip.push_back(optimo.cromosoma[i]);
+    }
+  }
+
+  return calculateTripCost(trip);
+}
+
 void salir(void) {
   // escribir_en_archivo_resultados(&optimo);
   //salida sin error
+  ostringstream resultado;
+  for (size_t i = 0; i < optimo.cromosoma.size(); ++i) {
+    resultado << optimo.cromosoma[i];
+    // Agrega el separador después de cada elemento, excepto el último
+    if (i != optimo.cromosoma.size() - 1) {
+      resultado << " - ";
+    }
+  }
+  
+  cout << resultado.str() << endl;
+  cout << optimo.aptitud << endl;
+
+  ostringstream resultadoTrip;
+  string textoString;
+  int costoTrip;
+  for (int i=0; i<D; i++){
+    costoTrip = findTrip(i);
+    textoString = format("Trip {}: {}", i+1, costoTrip);
+    resultadoTrip << textoString;
+    if (i != D - 1) {
+      resultadoTrip << " - ";
+    }
+  }
+
+  cout << resultadoTrip.str() << endl;
+
   exit(0);
 }
 
@@ -195,7 +252,7 @@ bool checkTripFeasibility(vector<string> Trip, int numTrip){
 
 void guardar_optimo_encontrado (int aptitud_optimo, individuo temp) {
   //recuerda el optimo encontrado
-  optimo_global = temp;
+  optimo = temp;
   iteracion_opt = iteracion;
   evaluacion_opt = evaluaciones;
   optimo_encontrado = true;
@@ -203,6 +260,25 @@ void guardar_optimo_encontrado (int aptitud_optimo, individuo temp) {
   if(debug)
   {
       cout<<endl<<"Aptitud: "<<aptitud_optimo;
+  }
+  return;
+}
+
+void guardar_optimo(conjunto & c_temp)
+{
+  sort(c_temp.conj.begin(), c_temp.conj.end());
+  if(c_temp.conj.front().aptitud > optimo.aptitud)
+    {
+      optimo = c_temp.conj.front();
+      iteracion_opt = iteracion;
+      evaluacion_opt = evaluaciones;
+      Fin_opt = time(NULL);
+      //cout<<iteracion<<" "<< optimo.aptitud<<endl;
+    }
+  //Si se cumplen XX evaluaciones sin cambio se acaba
+  if((evaluaciones - evaluacion_opt)>1000000)
+  {
+  	salir();
   }
   return;
 }
@@ -224,7 +300,7 @@ void calcular_aptitud(individuo * temp) {
   
   temp->aptitud = apt;
 
-  if (optimo_global.aptitud == AMAX || apt >= optimo_global.aptitud) {
+  if (optimo.aptitud == AMAX || apt > optimo.aptitud) {
     guardar_optimo_encontrado(apt, *temp);
   }
 
@@ -520,15 +596,13 @@ int main(int argc, char *argv[]) {
   // inicializar_archivo_convergencia();
   conjunto poblacion ((char*)"poblacion");
   crear_poblacion_inicial(poblacion, ps);
-  cout<<poblacion;
-  getchar();
 
   if(debug) {
     cout<<poblacion;
     getchar();
   }
 
-  /*
+  salir();
   //contador de mutaciones
   mutaciones=0;
   //int evaluaciones_ant = 0;
@@ -551,6 +625,7 @@ int main(int argc, char *argv[]) {
       getchar();
     }
 
+    /*
     cruzar_conjunto(seleccionados, cruzados, cr);
     if(debug) {
       cout<<"POBLACION CRUZADA"<<endl;
@@ -563,7 +638,7 @@ int main(int argc, char *argv[]) {
       cout<<"POBLACION MUTADA"<<endl;
       cout<<mutados;
       getchar();
-    }
+    }*/
 
     if(eo==1){
       mutados.conj.front() = *&(poblacion.conj.front());
@@ -578,7 +653,7 @@ int main(int argc, char *argv[]) {
     guardar_optimo(poblacion);
     
   }
-  */
+
   salir();
 
   return 0;
