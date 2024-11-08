@@ -253,7 +253,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
 
   std::ostringstream oss;
   while (!tourFound) {
-    if (i==D){
+    if (i==D+1){
       tourFound = true;
     } else {
       tripFound = false;
@@ -274,7 +274,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           break;
         }
 
-        if (i==D-1){
+        if (i==D){
           numHotel = 1;
         } else {
           numHotel = int_rand(2, (HP1 - cantHotelesQuitadosTrip));
