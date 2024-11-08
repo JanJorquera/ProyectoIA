@@ -216,6 +216,9 @@ void calcular_aptitud(individuo * temp) {
   float apt=0;
   //calcular el costo del tour
   for(int i=0; i<(Tinstancia-1); i++){
+    if (temp->cromosoma[i+1] == "") {
+      break;
+    }
     apt += t[getPos(temp->cromosoma[i])][getPos(temp->cromosoma[i+1])];
   }
   
@@ -354,40 +357,40 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   int posPOI;
   bool isFeasibleAddPOIinTrip;
   generateFeasibleSequenceOfHotels(Hoteles, HotelesTour);
-  cout << "despues" << endl;
+  // cout << "despues" << endl;
   for (int i=0; i<D; i++){
     i_temp.cromosoma.push_back(HotelesTour[i]);
     isFeasibleAddPOIinTrip = true;
     POIsDispTrip = POIsDispTour;
     cantidadPOIsAddTrip = cantidadPOIsAddTour;
-    cout << "i: " << i << endl;
+    // cout << "i: " << i << endl;
     while (isFeasibleAddPOIinTrip) {
       if (POIsDispTrip.size() == 0){
         break;
       }
       posPOI = int_rand(0, (N - cantidadPOIsAddTrip));
-      cout << "posPOI: "<< posPOI << endl;
-      cout << "tam: " << POIsDispTour.size() << endl;
-      cout << "POS: "<< POIsDispTour[posPOI] << endl;
+      // cout << "posPOI: "<< posPOI << endl;
+      // cout << "tam: " << POIsDispTour.size() << endl;
+      // cout << "POS: "<< POIsDispTour[posPOI] << endl;
       i_temp.cromosoma.push_back(POIsDispTour[posPOI]);
       i_temp.cromosoma.push_back(HotelesTour[i+1]);
       Trip.assign(i_temp.cromosoma.begin() + i + cantidadPOIsAddTour, i_temp.cromosoma.end());
-      cout << "aqui" << endl;
+      // cout << "aqui" << endl;
       for (int l=0; l<Trip.size(); l++){
-        cout << "Trip[" << l << "]=" << Trip[l] << endl;
+        // cout << "Trip[" << l << "]=" << Trip[l] << endl;
       }
       if (checkTripFeasibility(Trip, i)){
-        cout << "adentro" << endl;
+        // cout << "adentro" << endl;
         i_temp.cromosoma.pop_back();
-        cout << "aca" << endl;
+        // cout << "aca" << endl;
         POIsDispTour.erase(POIsDispTour.begin() + posPOI);
-        cout << "por aca" << endl;
+        // cout << "por aca" << endl;
         cantidadPOIsAddTrip++;
         cantidadPOIsAddTour++;
       } else {
         cantidadPOIsAddTrip++;
       }
-      cout << "aqui tal vez" << endl;
+      // cout << "aqui tal vez" << endl;
       POIsDispTrip.erase(POIsDispTrip.begin() + posPOI);
     } 
     i_temp.cromosoma.push_back(HotelesTour[i+1]);
@@ -456,11 +459,11 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
 
 
   //calculo de la aptitud del individuo
-  cout << "hola que tal" << endl;
+  // cout << "hola que tal" << endl;
   calcular_aptitud(&i_temp);
-  cout << "jajaja" << endl;
+  // cout << "jajaja" << endl;
   c_temp.conj.push_back(i_temp);
-  cout << "ddddddd" << endl;
+  // cout << "ddddddd" << endl;
   return;
 }
 
@@ -494,7 +497,7 @@ int main(int argc, char *argv[]) {
   //lectura de instancia
   iteracion = -1;
   readConfiguration(archivo_configuracion);
-  Tinstancia = HP1+N;
+  Tinstancia = (D+1)+N;                       //Tamaño de cromosomas
   calculateDistances();
   optimo_encontrado = false;
   evaluaciones = 0;
