@@ -228,7 +228,7 @@ void calculateDistances() {
 }
 
 bool checkTripFeasibility(vector<string> Trip, int numTrip){
-  int costo = 0;
+  double costo = 0;
   int posInicio = getPos(Trip[0]);
   int posFin;
 
