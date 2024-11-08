@@ -347,6 +347,10 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     }
   }
 
+  for (int l=0; l<POIsDispTour.size(); l++){
+    cout << "POIs [" << l << "]=" << POIsDispTour[l] << endl;
+  }
+
   vector<string> Tour;
   vector<string> Trip;
   int cantidadPOIsAddTour = 0;
