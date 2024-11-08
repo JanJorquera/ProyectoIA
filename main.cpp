@@ -279,7 +279,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         } else {
           numHotel = int_rand(2, (HP1 - cantHotelesQuitadosTrip));
         }
-        
+        printf("n: %d",numHotel);
         Htermino = "H"+to_string(numHotel);
         printf("Hfin: %s", Htermino);
 
