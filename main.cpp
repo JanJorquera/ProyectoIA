@@ -284,6 +284,8 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         
         if (i==D){
           numHotel = 0;
+          cout << "Hotel final" << HotelesDisponiblesTrip[numHotel] << endl;
+          
         } else {
           numHotel = int_rand(1, (HP1 - cantHotelesQuitadosTrip));
         }
