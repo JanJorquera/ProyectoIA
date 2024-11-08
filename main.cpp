@@ -275,7 +275,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         }
 
         if (i==D){
-          numHotel = 1;
+          numHotel = 0;
         } else {
           numHotel = int_rand(1, (HP1 - cantHotelesQuitadosTrip));
         }
@@ -299,7 +299,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
       i++;
     }
   }
-  Tour.push_back(Htermino);
+  // Tour.push_back(Htermino);
 }
 
 void agregar_individuo_aleatorio (conjunto & c_temp) {
@@ -450,8 +450,6 @@ int main(int argc, char *argv[]) {
     Hoteles.push_back("H"+to_string(i));
   }
 
-
-  cout << "a" << endl;
   generateFeasibleSequenceOfHotels(Hoteles, Tour);
 
   for (int i=0; i<Tour.size(); i++) {
