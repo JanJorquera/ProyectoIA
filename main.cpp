@@ -615,14 +615,14 @@ int main(int argc, char *argv[]) {
       getchar();
     }
 
-
+    /*
     seleccionar_conjunto(poblacion, seleccionados, ps);
     if(debug){
       cout<<seleccionados;
       getchar();
     }
 
-    /*
+    
     cruzar_conjunto(seleccionados, cruzados, cr);
     if(debug) {
       cout<<"POBLACION CRUZADA"<<endl;
