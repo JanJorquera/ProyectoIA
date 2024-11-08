@@ -494,7 +494,7 @@ int main(int argc, char *argv[]) {
   //lectura de instancia
   iteracion = -1;
   readConfiguration(archivo_configuracion);
-  Tinstancia = (D+1)+N;
+  Tinstancia = HP1+N;
   calculateDistances();
   optimo_encontrado = false;
   evaluaciones = 0;
