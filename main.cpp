@@ -245,6 +245,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
   string Hinicio = "H0";
   string Htermino;
   Trip.push_back(Hinicio);
+  Tour.push_back(Hinicio);
   int numHotel;
   vector<string> HotelesDisponiblesTrip(Hoteles); // Copia los elementos de 'Hoteles'
   vector<string> HotelesDisponiblesTour(Hoteles); // Copia los elementos de 'Hoteles'
