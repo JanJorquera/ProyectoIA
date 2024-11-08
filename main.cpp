@@ -446,7 +446,9 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
 
   //calculo de la aptitud del individuo
   calcular_aptitud(&i_temp);
+  cout << "baabbaba" << endl;
   c_temp.conj.push_back(i_temp);
+  cout << "ddddddd" << endl;
   return;
 }
 
