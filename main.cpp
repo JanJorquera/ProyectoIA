@@ -236,6 +236,11 @@ void calcular_aptitud(individuo * temp) {
 }
 
 void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<string> &Tour){
+  // Constantes para setear valor en caso de reset.
+  const int iI = 0;
+  const int cantHotelesQuitadosTourI = 1;
+  const int cantHotelesQuitadosTripI = 1;
+
   vector<string> Trip;
   string Hinicio = "H0";
   string Htermino;
@@ -245,9 +250,9 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
   vector<string> HotelesDisponiblesTour(Hoteles); // Copia los elementos de 'Hoteles'
   HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin());
 
-  int i=0;
-  int cantHotelesQuitadosTour = 1;
-  int cantHotelesQuitadosTrip;
+  int i=iI;
+  int cantHotelesQuitadosTour = cantHotelesQuitadosTourI;
+  int cantHotelesQuitadosTrip = cantHotelesQuitadosTripI;
 
   bool tourFound = false;
   bool tripFound;
@@ -264,11 +269,11 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
       Tour.push_back(Hinicio);
       while(!tripFound){
         if (HotelesDisponiblesTrip.size()==0){
-          i=0;
+          i=iI;
           HotelesDisponiblesTrip = Hoteles;
           HotelesDisponiblesTour = Hoteles;
-          cantHotelesQuitadosTour = 1;
-          cantHotelesQuitadosTrip = 1;
+          cantHotelesQuitadosTour = cantHotelesQuitadosTourI;
+          cantHotelesQuitadosTrip = cantHotelesQuitadosTripI;
           Htermino = "H0";
           Tour.clear();
           break;
