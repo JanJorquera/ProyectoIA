@@ -320,14 +320,18 @@ individuo * roulette_wheel (conjunto & c_temp) {
   float acumulado = 0.00, suma = 0.00;
   individuo * i_temp;
 
+  cout << "aqui" << endl;
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
     suma += p->aptitud;
     i++;
   }
 
+  cout << "por aca" << endl;
   //numero aleatorio para la ruleta
   rand = float_rand(0.00, suma);
   i=0;
+
+  cout << "aca" << endl;
   
   //busqueda del individuo en la ruleta
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
@@ -338,6 +342,8 @@ individuo * roulette_wheel (conjunto & c_temp) {
       return i_temp;
 	  }
   }
+
+  cout << "quizas aca" << endl;
   //en caso de ser el ultimo individuo de la poblacion
   i_temp = (&(c_temp.conj.back()));
   return i_temp;
