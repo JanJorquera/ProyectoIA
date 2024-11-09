@@ -467,7 +467,7 @@ void replaceHotel(individuo *hijo){
       }
     }
 
-    string<vector> listaPoisDisponible;
+    vector<string> listaPoisDisponible;
     for (int i=0; i<tripPrevHotel.size(); i++){
       if (tripPrevHotel.find("H") != 0){
         auto it = find(listaPois.begin(), listaPois.end(), tripPrevHotel[i]);
