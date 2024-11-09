@@ -469,7 +469,7 @@ void replaceHotel(individuo *hijo){
 
     vector<string> listaPoisDisponible;
     for (int i=0; i<tripPrevHotel.size(); i++){
-      if (tripPrevHotel.find("H") != 0){
+      if (tripPrevHotel[i].find("H") != 0){
         auto it = find(listaPois.begin(), listaPois.end(), tripPrevHotel[i]);
         if (it != listaPois.end()){
           listaPoisDisponible.push_back(tripPrevHotel[i]);
@@ -478,7 +478,7 @@ void replaceHotel(individuo *hijo){
     }
 
     for (int i=0; i<tripPostHotel.size(); i++){
-      if (tripPostHotel.find("H") != 0){
+      if (tripPostHotel[i].find("H") != 0){
         it = find(listaPois.begin(), listaPois.end(), tripPostHotel[i]);
         if (it != listaPois.end()){
           listaPoisDisponible.push_back(tripPostHotel[i]);
