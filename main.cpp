@@ -497,13 +497,13 @@ void replaceHotel(individuo *hijo){
     // bool isFeasibleAddPOIinTrip2;
     bool isFeasibleAddPoiInBothTrips = true;
     int posPOItoAdd;
+    string POItoAdd;
     vector<string> tripAuxiliary;
     while (isFeasibleAddPoiInBothTrips){
       numRand = float_rand(0.00,1.00);
       posPOItoAdd = int_rand(0,listaPoisDisponible.size());
       POItoAdd = listaPoisDisponible[posPOItoAdd];
       
-      wasNotAddedPoiInOtherTrip = true;
       if (numRand <= 0.5){
         //Intento de insercion en el primer trip
         if (listaPoisDisponible.size() == 0){
