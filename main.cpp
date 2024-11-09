@@ -624,7 +624,7 @@ void InsertOrDeletePOI(individuo *hijo){
 
     numHotelesVistos = -1;
     flagTripFound = false;
-    for (int j=0; j<hijo->cromosoma.size(); j++){
+    for (int i=0; i<hijo->cromosoma.size(); i++){
       if (hijo->cromosoma[i].find("H") == 0){
         if (flagTripFound){
           posNewCost = tripCost[posTrip] + (t[getPos(hijo->cromosoma[i-1])][getPos(to_string(pos))] + t[getPos(to_string(pos))][getPos(hijo->cromosoma[i])]) - (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])]);
