@@ -723,16 +723,15 @@ int main(int argc, char *argv[]) {
     if(eo==1){
       mutados.conj.front() = *&(poblacion.conj.front());
     }
-    */
+    
     poblacion.vaciar();
     poblacion = mutados;
     strcpy(poblacion.name, "poblacion");
     seleccionados.vaciar();
     cruzados.vaciar();
-    mutados.vaciar();
+    mutados.vaciar();*/
     
     guardar_optimo(poblacion);
-    
   }
 
   salir();
