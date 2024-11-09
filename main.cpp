@@ -385,13 +385,9 @@ void seleccionar_conjunto(conjunto & in, conjunto & out, int n) {
   individuo * p_i_temp;
   for(int i=0; i<n; i++){
     individuo i_temp;
-    cout << "i: " << i << endl;
     p_i_temp = seleccionar_individuo(in);
-    cout << "paso1 en i: " << i << endl;
     i_temp = *p_i_temp;
-    cout << "paso2 en i: " << i << endl;
     out.conj.push_back(i_temp);
-    cout << "paso3 en i: " << i << endl;
   }
 }
 
