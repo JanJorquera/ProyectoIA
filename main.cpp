@@ -728,18 +728,18 @@ int main(int argc, char *argv[]) {
       cout<<mutados;
       getchar();
     }*/
-
+    cout << "aca quizas, no se????" << endl;
     if(eo==1){
       mutados.conj.front() = *&(poblacion.conj.front());
     }
-
+    cout << "aca quizas????" << endl;
     poblacion.vaciar();
     poblacion = mutados;
     strcpy(poblacion.name, "poblacion");
     seleccionados.vaciar();
     cruzados.vaciar();
     mutados.vaciar();
-    cout << "aca quizas????" << endl;
+    
     guardar_optimo(poblacion);
     
   }
