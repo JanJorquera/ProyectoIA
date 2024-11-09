@@ -333,7 +333,7 @@ individuo * roulette_wheel (conjunto & c_temp) {
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
     acumulado += p->aptitud;
     i++;
-    if (acumulado > rand){
+    if (acumulado < rand){
       i_temp = &(*p);
       cout << "quizas aca" << endl;
       return i_temp;
