@@ -569,7 +569,7 @@ void replaceHotel(individuo *hijo){
           }
         }
       }
-      listaPoisDisponible.erase(listaPoisDisponible.begin()+POItoAdd);
+      listaPoisDisponible.erase(listaPoisDisponible.begin()+posPOItoAdd);
     }
   }
   return;
