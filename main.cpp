@@ -317,7 +317,7 @@ void calcular_aptitud(individuo * temp) {
 individuo * roulette_wheel (conjunto & c_temp) {
   int i = 0;
   float rand;
-  float acumulado = 0.00, suma = 0.00;
+  float suma = 0.00;
   individuo * i_temp;
 
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
@@ -326,18 +326,26 @@ individuo * roulette_wheel (conjunto & c_temp) {
   }
 
   //numero aleatorio para la ruleta
-  rand = float_rand(0.00, suma);
+  rand = float_rand(0.00, 1.00);
+  vector<float> rangeProbabilities;
   i=0;
 
-  //busqueda del individuo en la ruleta
+  rangeProbabilities.push_back(0);
+  float limInferior = 0.0;
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
-    acumulado += p->aptitud;
-    i++;
-    if (acumulado < rand){
+    rangeProbabilities.push_back(limiteInferior + (p->aptitud/suma));
+    limiteInferior = limiteInferior + (p->aptitud/suma);
+  }
+
+  //busqueda del individuo en la ruleta
+  i = 0;
+  for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
+    if (rangeProbabilities[i] <= rand && rand <= rangeProbabilities[i+1]){
       i_temp = &(*p);
       cout << "quizas aca" << endl;
       return i_temp;
 	  }
+    i++;
   }
 
   //en caso de ser el ultimo individuo de la poblacion
