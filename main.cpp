@@ -739,6 +739,7 @@ int main(int argc, char *argv[]) {
     seleccionados.vaciar();
     cruzados.vaciar();
     mutados.vaciar();
+    cout << "aca quizas????" << endl;
     guardar_optimo(poblacion);
     
   }
