@@ -675,6 +675,37 @@ void mutar_conjunto(conjunto & in, conjunto & out, float mr) {
 }
 
 
+void cruzar_conjunto(conjunto & in, conjunto & out, int n){
+  /*
+  individuo * padre1;
+  individuo * padre2;
+  individuo hijo1, hijo2;
+  for (vector<individuo>::iterator p = in.conj.begin (); p != in.conj.end (); p++)
+    {
+      padre1 = &(*p);
+      p++;
+      if(p==in.conj.end ())
+      {
+	hijo1=*padre1;
+	out.conj.push_back(hijo1);
+	if(out.conj.size() == ps)
+	  {
+	    return;
+	  }
+      }
+      else{
+	padre2 = &(*p);
+	cruzar_individuos(padre1, padre2, &hijo1, &hijo2);
+	out.conj.push_back(hijo1);
+	out.conj.push_back(hijo2);
+       }
+    }
+  */
+ out = in;
+ return;
+}
+
+
 void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<string> &Tour){
   // Constantes para setear valor en caso de reset.
   const int iI = 0;
@@ -986,7 +1017,7 @@ int main(int argc, char *argv[]) {
       getchar();
     }
 
-    
+
     cruzar_conjunto(seleccionados, cruzados, cr);
     if(debug) {
       cout<<"POBLACION CRUZADA"<<endl;
