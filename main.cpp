@@ -342,6 +342,7 @@ individuo * roulette_wheel (conjunto & c_temp) {
 
   //en caso de ser el ultimo individuo de la poblacion
   i_temp = (&(c_temp.conj.back()));
+  cout << "quizas aca" << endl;
   return i_temp;
 }
 
