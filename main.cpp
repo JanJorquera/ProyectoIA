@@ -596,7 +596,7 @@ void InsertOrDeletePOI(individuo *hijo){
 
   int numHotelesVistos = -1;
   vector<double> tripCost;
-  for (int j=0; j<hijo->cromosoma.size(); j++){
+  for (int i=0; i<hijo->cromosoma.size(); i++){
     if (hijo->cromosoma[i].find("H") == 0){
       numHotelesVistos++;
       tripCost.push_back(0.00);
@@ -610,8 +610,9 @@ void InsertOrDeletePOI(individuo *hijo){
   }
 
   double posNewCost;
-  bool isPOIinserted = false;
   int auxTrip;
+  bool isPOIinserted = false;
+  bool flagTripFound;
   for (int i=0; i<D; i++){
     if (isPOIinserted){
       break;
