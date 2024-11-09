@@ -496,7 +496,7 @@ void replaceHotel(individuo *hijo){
     // bool isFeasibleAddPOIinTrip1;
     // bool isFeasibleAddPOIinTrip2;
     bool isFeasibleAddPoiInBothTrips = true;
-    int posPOItoAdd;
+    int posPOItoAdd, posPOI;
     string POItoAdd;
     vector<string> tripAuxiliary;
     while (isFeasibleAddPoiInBothTrips){
