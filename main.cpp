@@ -564,6 +564,7 @@ void replaceHotel(individuo *hijo){
       }
       listaPoisDisponible.erase(listaPoisDisponible.begin()+posPOItoAdd);
     }
+    cout << "Nunca sales de aqui" << endl;
   }
   return;
 }
@@ -650,8 +651,8 @@ void InsertOrDeletePOI(individuo *hijo){
 
 void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
   *hijo = *padre;
-  // replaceHotel(hijo);
-  // InsertOrDeletePOI(hijo);
+  replaceHotel(hijo);
+  InsertOrDeletePOI(hijo);
   return;
 }
 
