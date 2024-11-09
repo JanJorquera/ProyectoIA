@@ -337,6 +337,7 @@ individuo * roulette_wheel (conjunto & c_temp) {
     limInferior = limInferior + (p->aptitud/suma);
   }
 
+  cout << "Llegada previa " << endl;
   //busqueda del individuo en la ruleta
   i = 0;
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
