@@ -330,6 +330,8 @@ individuo * roulette_wheel (conjunto & c_temp) {
   vector<float> rangeProbabilities;
   i=0;
 
+  cout << "Llegada preprevia " << endl;
+
   rangeProbabilities.push_back(0);
   float limInferior = 0.0;
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
