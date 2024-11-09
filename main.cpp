@@ -333,8 +333,8 @@ individuo * roulette_wheel (conjunto & c_temp) {
   rangeProbabilities.push_back(0);
   float limInferior = 0.0;
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
-    rangeProbabilities.push_back(limiteInferior + (p->aptitud/suma));
-    limiteInferior = limiteInferior + (p->aptitud/suma);
+    rangeProbabilities.push_back(limInferior + (p->aptitud/suma));
+    limInferior = limInferior + (p->aptitud/suma);
   }
 
   //busqueda del individuo en la ruleta
