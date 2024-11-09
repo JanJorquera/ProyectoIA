@@ -658,9 +658,7 @@ void InsertOrDeletePOI(individuo *hijo){
 void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
   *hijo = *padre;
   replaceHotel(hijo);
-  if (float_rand(0.00,1.00) <= mr){
-    InsertOrDeletePOI(hijo);
-  }
+  InsertOrDeletePOI(hijo);
   return;
 }
 
