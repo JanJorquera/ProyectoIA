@@ -320,6 +320,7 @@ individuo * roulette_wheel (conjunto & c_temp) {
   float suma = 0.00;
   individuo * i_temp;
 
+  cout << "Llegada prepreprevia " << endl;
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
     suma += p->aptitud;
     i++;
