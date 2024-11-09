@@ -142,9 +142,6 @@ void readConfiguration(string fileName) {
           HP1 = HP1 + 2;
           coord.resize(N + HP1, vector<double>(2));
           t.resize(N + HP1, vector<double>(N + HP1));
-        } else if (count == 2) {
-          // Pendiente
-          cout << "Pendiente" << endl;
         } else if (count == 3) {
           while (lineStream >> value) {
             T.push_back(value);
@@ -371,6 +368,7 @@ individuo * seleccionar_individuo (conjunto & c_temp) {
     default:
       cout<<"ERROR: No se reconoce tipo de seleccion"<<endl;
       salir();
+      return nullptr;
    }
 }
 
