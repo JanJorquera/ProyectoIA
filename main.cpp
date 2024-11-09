@@ -580,8 +580,8 @@ void InsertOrDeletePOI(individuo *hijo){
   int pos = int_rand(0,N);
   for (int i=0; i<hijo->cromosoma.size(); i++){
     //Si esta en el tour, se elimina
-    if (hijo->cromosa[i] == to_string(pos)){
-      hijo->cromosa.erase(hijo->cromosa.begin() + i);
+    if (hijo->cromosoma[i] == to_string(pos)){
+      hijo->cromosoma.erase(hijo->cromosoma.begin() + i);
       return;
     }
   }
