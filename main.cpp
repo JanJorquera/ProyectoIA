@@ -486,8 +486,8 @@ void replaceHotel(individuo *hijo){
       }
     }
 
-    string<vector> tripPrev;
-    string<vector> tripPost;
+    vector<string> tripPrev;
+    vector<string> tripPost;
 
     tripPrev.push_back(tripPrevHotel.back());
     tripPost.push_back(tripPostHotel.front());
