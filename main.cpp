@@ -341,8 +341,9 @@ individuo * roulette_wheel (conjunto & c_temp) {
   i = 0;
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
     if (rangeProbabilities[i] <= rand && rand <= rangeProbabilities[i+1]){
+      cout << "quizas aca1" << endl;
       i_temp = &(*p);
-      cout << "quizas aca" << endl;
+      cout << "quizas aca2" << endl;
       return i_temp;
 	  }
     i++;
@@ -350,7 +351,6 @@ individuo * roulette_wheel (conjunto & c_temp) {
 
   //en caso de ser el ultimo individuo de la poblacion
   i_temp = (&(c_temp.conj.back()));
-  cout << "quizas aca" << endl;
   return i_temp;
 }
 
