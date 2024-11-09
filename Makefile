@@ -19,7 +19,7 @@ comp:$(prog)
 
 exe:$(prog)
 	#valgrind --leak-check=full --show-reachable=yes 
-	./$(prog) $(config) $(results) ${so} ${eo} $(cr) $(mr) $(ps) $(max_evals) $(semilla) #${kTournament}
+	./$(prog) $(config) $(results) ${so} ${eo} $(cr) $(mr) $(ps) $(max_evals) $(semilla)
 
 $(prog): main.o
 	$(comp) main.o -o $(prog) $(flags)
