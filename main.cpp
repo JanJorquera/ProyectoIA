@@ -391,6 +391,292 @@ void seleccionar_conjunto(conjunto & in, conjunto & out, int n) {
   }
 }
 
+
+
+//Mutación
+void replaceHotel(individuo *hijo){
+  
+  vector<string> listaHotelesTour;
+  vector<string> listaPois;
+  int pos = int_rand(1,D);
+  for (int i=0; i<hijo->cromosoma.size(); i++){
+    if (hijo->cromosoma[i].find("H") == 0){
+      listaHotelesTour.push_back(hijo->cromosoma[i]);
+    } else {
+      listaPois.push_back(hijo->cromosoma[i]);
+    }
+  }
+
+  auto it;
+  ostringstream aux;
+  vector<string> listaHotelesD;
+  vector<string> listaHotelesDAux;
+  for (int i=0; i<HP1; i++){
+    aux << "H" << i;
+    it = find(listaHotelesTour.begin(), listaHotelesTour.end(), aux.str());
+    if (it != listaHotelesTour.end()){
+      listaHotelesD.push_back();
+      listaHotelesDAux.push_back();
+    }
+    aux.clear();
+  }
+
+  int posHotel;
+  bool flagHotelSwap = false;
+  int posHoteltobeReplaced;
+  vector<string> tripPrevHotel;
+  vector<string> tripPostHotel;
+  for (int i=1; i<listaHotelesTour.size()-1; i++){
+    if (flagHotelSwap){
+      break;
+    }
+    listaHotelesDAux = listaHotelesD;
+    sizeAux = listaHotelesDAux.size();
+    for (size_t j=0; j<sizeAux; j++){
+      posHotel = int_rand(0,listaHotelesDAux.size());
+      if (t[getPos(listaHotelesTour[i-1])][getPos(listaHotelesDAux[posHotel])] <= T[i-1] && t[getPos(listaHotelesDAux[posHotel])][getPos(listaHotelesTour[i+1])] <= T[i]){
+        flagHotelSwap = true;
+        posHoteltobeReplaced = i;
+        break;
+      }
+      listaHotelesDAux.erase(listaHotelesDAux.begin()+posHotel);
+    }
+  }
+
+  if (flagHotelSwap){
+    int numHotelesVistos = -1;
+    bool flagInsertPrevTrip = true;
+    bool flagInsertPostTrip = true;
+    
+    for (int i=0; i<hijo->cromosoma.size(); i++){
+      if (hijo->cromosoma[i].find("H") == 0){
+        numHotelesVistos++;
+        if (numHotelesVistos+1 == posHoteltobeReplaced){
+          tripPrevHotel.push_back(hijo->cromosoma[i]);
+          flagInsertPrevTrip = false;
+        }
+        if (numHotelesVistos-1 == posHoteltobeReplaced){
+          tripPostHotel.push_back(hijo->cromosoma[i]);
+          flagInsertPostTrip = false;
+        }
+      }
+      if (flagInsertPrevTrip){
+        tripPrevHotel.push_back(hijo->cromosoma[i]);
+      }
+      if (flagInsertPostTrip){
+        tripPostHotel.push_back(hijo->cromosoma[i]);
+      }
+    }
+
+    string<vector> listaPoisDisponible;
+    for (int i=0; i<tripPrevHotel.size(); i++){
+      if (tripPrevHotel.find("H") != 0){
+        it = find(listaPois.begin(), listaPois.end(), tripPrevHotel[i]);
+        if (it != listaPois.end()){
+          listaPoisDisponible.push_back(tripPrevHotel[i]);
+        }
+      }
+    }
+
+    for (int i=0; i<tripPostHotel.size(); i++){
+      if (tripPostHotel.find("H") != 0){
+        it = find(listaPois.begin(), listaPois.end(), tripPostHotel[i]);
+        if (it != listaPois.end()){
+          listaPoisDisponible.push_back(tripPostHotel[i]);
+        }
+      }
+    }
+
+    string<vector> tripPrev;
+    string<vector> tripPost;
+
+    tripPrev.push_back(tripPrevHotel.back());
+    tripPost.push_back(tripPostHotel.front());
+
+    float numRand;
+    // bool isFeasibleAddPOIinTrip1;
+    // bool isFeasibleAddPOIinTrip2;
+    bool isFeasibleAddPoiInBothTrips = true;
+    
+    string<vector> tripAuxiliary;
+    while (isFeasibleAddPoiInBothTrips){
+      numRand = float_rand(0.00,1.00);
+      posPOItoAdd = int_rand(0,listaPoisDisponible.size());
+      POItoAdd = listaPoisDisponible[posPOItoAdd];
+      
+      wasNotAddedPoiInOtherTrip = true;
+      if (numRand <= 0.5){
+        //Intento de insercion en el primer trip
+        if (listaPoisDisponible.size() == 0){
+          break;
+        }
+
+        tripAuxiliary = tripPrevHotel;
+        posPOI = int_rand(1, tripAuxiliary.size());
+        tripAuxiliary.insert(tripAuxiliary.begin() + posPOI, POItoAdd);
+        tripAuxiliary.push_back(listaHotelesDAux[posHotel]);
+        if (checkTripFeasibility(tripAuxiliary, posHoteltobeReplaced-1)){
+          tripAuxiliary.pop_back();
+          tripPrevHotel = tripAuxiliary;
+        } else {
+          tripAuxiliary.pop_back();
+          tripAuxiliary.erase(tripAuxiliary.begin()+posPOI);
+          tripPrevHotel = tripAuxiliary;
+
+          //Probar añadir en el segundo trip
+          tripAuxiliary = tripPostHotel;
+          posPOI = int_rand(1, tripAuxiliary.size());
+          tripAuxiliary.insert(tripAuxiliary.begin() + posPOI, POItoAdd);
+          tripAuxiliary.push_back(listaHotelesDAux[posHotel]);
+          if (checkTripFeasibility(tripAuxiliary, posHoteltobeReplaced-1)){
+            tripAuxiliary.pop_back();
+            tripPostHotel = tripAuxiliary;
+          } else {
+            tripAuxiliary.pop_back();
+            tripAuxiliary.erase(tripAuxiliary.begin()+posPOI);
+            tripPostHotel = tripAuxiliary;
+          }
+        }
+      } else {
+        //Intento de insercion en el primer trip
+        if (listaPoisDisponible.size() == 0){
+          break;
+        }
+
+        tripAuxiliary = tripPostHotel;
+        posPOI = int_rand(1, tripAuxiliary.size());
+        tripAuxiliary.insert(tripAuxiliary.begin() + posPOI, POItoAdd);
+        tripAuxiliary.push_back(listaHotelesDAux[posHotel]);
+        if (checkTripFeasibility(tripAuxiliary, posHoteltobeReplaced-1)){
+          tripAuxiliary.pop_back();
+          tripPostHotel = tripAuxiliary;
+        } else {
+          tripAuxiliary.pop_back();
+          tripAuxiliary.erase(tripAuxiliary.begin()+posPOI);
+          tripPostHotel = tripAuxiliary;
+
+          //Probar añadir en el segundo trip
+          tripAuxiliary = tripPrevHotel;
+          posPOI = int_rand(1, tripAuxiliary.size());
+          tripAuxiliary.insert(tripAuxiliary.begin() + posPOI, POItoAdd);
+          tripAuxiliary.push_back(listaHotelesDAux[posHotel]);
+          if (checkTripFeasibility(tripAuxiliary, posHoteltobeReplaced-1)){
+            tripAuxiliary.pop_back();
+            tripPrevHotel = tripAuxiliary;
+          } else {
+            tripAuxiliary.pop_back();
+            tripAuxiliary.erase(tripAuxiliary.begin()+posPOI);
+            tripPrevHotel = tripAuxiliary;
+          }
+        }
+      }
+      listaPoisDisponible.erase(listaPoisDisponible.begin()+POItoAdd);
+    }
+  }
+  return;
+}
+
+void InsertOrDeletePOI(individuo *hijo){
+  //Seleccionar un POI aleatorio
+  int pos = int_rand(0,N);
+  for (int i=0; i<hijo->cromosoma.size(); i++){
+    //Si esta en el tour, se elimina
+    if (hijo->cromosa[i] == to_string(pos)){
+      hijo->cromosa.erase(hijo->cromosa.begin() + i);
+      return;
+    }
+  }
+
+  //Si no esta, se añade en el primer trip aleatorio cuya incorporación resulte en un trip factible. Si dicho trip no existe, simplemente no se muta
+  vector<int> trips;
+  int posTrip;
+  int cantTripsChequeados = 0;
+  for (int i=0; i<D; i++){
+    trips.push_back(i);
+  }
+
+  int numHotelesVistos = -1;
+  vector<double> tripCost;
+  for (int j=0; j<hijo->cromosoma.size(); j++){
+    if (hijo->cromosoma[i].find("H") == 0){
+      numHotelesVistos++;
+      tripCost.push_back(0.00);
+    } else {
+      if (hijo->cromosoma[i+1].find("H") == 0){
+        tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i])][getPos(hijo->cromosoma[i+1])];
+      } else {
+        tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
+      }
+    }
+  }
+
+  double posNewCost;
+  bool isPOIinserted = false;
+  int auxTrip;
+  for (int i=0; i<D; i++){
+    if (isPOIinserted){
+      break;
+    }
+
+    auxTrip = int_rand(0,N-cantTripsChequeados);
+    posTrip = trips[auxTrip];
+    trips.erase(trips.begin()+auxTrip);
+
+    numHotelesVistos = -1;
+    flagTripFound = false;
+    for (int j=0; j<hijo->cromosoma.size(); j++){
+      if (hijo->cromosoma[i].find("H") == 0){
+        if (flagTripFound){
+          posNewCost = tripCost[posTrip] + (t[getPos(hijo->cromosoma[i-1])][getPos(to_string(pos))] + t[getPos(to_string(pos))][getPos(hijo->cromosoma[i])]) - (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])]);
+          if (posNewCost <= T[posTrip]){
+            hijo->cromosoma.insert(hijo->cromosoma.begin() + i, to_string(pos));
+            isPOIinserted = true;
+          }
+          break;
+        }
+
+        numHotelesVistos++;
+        if (numHotelesVistos == posTrip){
+          flagTripFound = true;
+          cantTripsChequeados++;
+        }
+      } else {
+        if (flagTripFound){
+          posNewCost = tripCost[posTrip] + (t[getPos(hijo->cromosoma[i-1])][getPos(to_string(pos))] + t[getPos(to_string(pos))][getPos(hijo->cromosoma[i])]) - (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])]);
+          if (posNewCost <= T[posTrip]){
+            hijo->cromosoma.insert(hijo->cromosoma.begin() + i, to_string(pos));
+            isPOIinserted = true;
+            break;
+          }
+        }
+      }
+    }
+  }
+  return;
+}
+
+void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
+  *hijo = *padre;
+  replaceHotel(hijo);
+  if (float_rand(0.00,1.00) <= mr){
+    InsertOrDeletePOI(hijo);
+  }
+  return;
+}
+
+void mutar_conjunto(conjunto & in, conjunto & out, float mr) {
+  individuo * p_seleccionado;
+  for (vector<individuo>::iterator p = in.conj.begin (); p != in.conj.end (); p++){
+    individuo mutado;
+    p_seleccionado = &*p;
+    mutar_individuo(p_seleccionado, &mutado, mr);
+    calcular_aptitud(&mutado);
+    out.conj.push_back(mutado);
+  }
+  return;
+}
+
+
 void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<string> &Tour){
   // Constantes para setear valor en caso de reset.
   const int iI = 0;
@@ -702,7 +988,7 @@ int main(int argc, char *argv[]) {
       getchar();
     }
 
-    /*
+    
     cruzar_conjunto(seleccionados, cruzados, cr);
     if(debug) {
       cout<<"POBLACION CRUZADA"<<endl;
@@ -725,7 +1011,7 @@ int main(int argc, char *argv[]) {
     strcpy(poblacion.name, "poblacion");
     seleccionados.vaciar();
     cruzados.vaciar();
-    mutados.vaciar();*/
+    mutados.vaciar();
     
     guardar_optimo(poblacion);
   }

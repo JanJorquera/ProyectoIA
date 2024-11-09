@@ -52,6 +52,8 @@
         "xmemory": "cpp",
         "xstddef": "cpp",
         "xtr1common": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "map": "cpp",
+        "ratio": "cpp"
     }
 }
