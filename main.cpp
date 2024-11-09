@@ -415,8 +415,8 @@ void replaceHotel(individuo *hijo){
     aux << "H" << i;
     auto it = find(listaHotelesTour.begin(), listaHotelesTour.end(), aux.str());
     if (it != listaHotelesTour.end()){
-      listaHotelesD.push_back();
-      listaHotelesDAux.push_back();
+      listaHotelesD.push_back(aux.str());
+      listaHotelesDAux.push_back(aux.str());
     }
     aux.clear();
   }
