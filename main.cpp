@@ -339,11 +339,11 @@ individuo * roulette_wheel (conjunto & c_temp) {
     i++;
     if (acumulado > rand){
       i_temp = &(*p);
+      cout << "quizas aca" << endl;
       return i_temp;
 	  }
   }
 
-  cout << "quizas aca" << endl;
   //en caso de ser el ultimo individuo de la poblacion
   i_temp = (&(c_temp.conj.back()));
   return i_temp;
