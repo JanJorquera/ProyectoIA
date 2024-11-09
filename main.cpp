@@ -320,7 +320,6 @@ individuo * roulette_wheel (conjunto & c_temp) {
   float suma = 0.00;
   individuo * i_temp;
 
-  cout << "Llegada prepreprevia " << endl;
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
     suma += p->aptitud;
     i++;
@@ -331,8 +330,6 @@ individuo * roulette_wheel (conjunto & c_temp) {
   vector<float> rangeProbabilities;
   i=0;
 
-  cout << "Llegada preprevia " << endl;
-
   rangeProbabilities.push_back(0);
   float limInferior = 0.0;
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
@@ -340,23 +337,18 @@ individuo * roulette_wheel (conjunto & c_temp) {
     limInferior = limInferior + (p->aptitud/suma);
   }
 
-  cout << "Llegada previa " << endl;
   //busqueda del individuo en la ruleta
   i = 0;
   for (vector<individuo>::iterator p = c_temp.conj.begin (); p != c_temp.conj.end (); p++){
     if (rangeProbabilities[i] <= rand && rand <= rangeProbabilities[i+1]){
-      cout << "quizas aca1" << endl;
       i_temp = &(*p);
-      cout << "quizas aca2" << endl;
       return i_temp;
 	  }
     i++;
   }
 
-  cout << "quizas aca1" << endl;
   //en caso de ser el ultimo individuo de la poblacion
   i_temp = (&(c_temp.conj.back()));
-  cout << "quizas aca2" << endl;
   return i_temp;
 }
 
@@ -727,12 +719,11 @@ int main(int argc, char *argv[]) {
       cout<<"POBLACION MUTADA"<<endl;
       cout<<mutados;
       getchar();
-    }*/
-    cout << "aca quizas, no se????" << endl;
+    }
     if(eo==1){
       mutados.conj.front() = *&(poblacion.conj.front());
     }
-    cout << "aca quizas????" << endl;
+    */
     poblacion.vaciar();
     poblacion = mutados;
     strcpy(poblacion.name, "poblacion");
