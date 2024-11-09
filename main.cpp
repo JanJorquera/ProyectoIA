@@ -395,7 +395,6 @@ void seleccionar_conjunto(conjunto & in, conjunto & out, int n) {
 
 //Mutación
 void replaceHotel(individuo *hijo){
-  
   vector<string> listaHotelesTour;
   vector<string> listaPois;
   int pos = int_rand(1,D);
@@ -652,7 +651,7 @@ void InsertOrDeletePOI(individuo *hijo){
 void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
   *hijo = *padre;
   // replaceHotel(hijo);
-  InsertOrDeletePOI(hijo);
+  // InsertOrDeletePOI(hijo);
   return;
 }
 
