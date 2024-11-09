@@ -421,9 +421,8 @@ void replaceHotel(individuo *hijo){
     aux.clear();
   }
 
-  int posHotel;
+  int posHotel, sizeAux, posHoteltobeReplaced;
   bool flagHotelSwap = false;
-  int posHoteltobeReplaced;
   vector<string> tripPrevHotel;
   vector<string> tripPostHotel;
   for (int i=1; i<listaHotelesTour.size()-1; i++){
