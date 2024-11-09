@@ -613,12 +613,12 @@ void InsertOrDeletePOI(individuo *hijo){
   int auxTrip;
   bool isPOIinserted = false;
   bool flagTripFound;
-  for (int i=0; i<D; i++){
+  for (int j=0; j<D; j++){
     if (isPOIinserted){
       break;
     }
 
-    auxTrip = int_rand(0,N-cantTripsChequeados);
+    auxTrip = int_rand(0,D-cantTripsChequeados);
     posTrip = trips[auxTrip];
     trips.erase(trips.begin()+auxTrip);
 
