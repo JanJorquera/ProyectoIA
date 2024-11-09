@@ -493,23 +493,21 @@ void replaceHotel(individuo *hijo){
     tripPost.push_back(tripPostHotel.front());
 
     float numRand;
-    // bool isFeasibleAddPOIinTrip1;
-    // bool isFeasibleAddPOIinTrip2;
     bool isFeasibleAddPoiInBothTrips = true;
     int posPOItoAdd, posPOI;
     string POItoAdd;
     vector<string> tripAuxiliary;
     while (isFeasibleAddPoiInBothTrips){
+      if (listaPoisDisponible.size() == 0){
+        break;
+      }
+
       numRand = float_rand(0.00,1.00);
       posPOItoAdd = int_rand(0,listaPoisDisponible.size());
       POItoAdd = listaPoisDisponible[posPOItoAdd];
       
       if (numRand <= 0.5){
         //Intento de insercion en el primer trip
-        if (listaPoisDisponible.size() == 0){
-          break;
-        }
-
         tripAuxiliary = tripPrevHotel;
         posPOI = int_rand(1, tripAuxiliary.size());
         tripAuxiliary.insert(tripAuxiliary.begin() + posPOI, POItoAdd);
@@ -537,11 +535,7 @@ void replaceHotel(individuo *hijo){
           }
         }
       } else {
-        //Intento de insercion en el primer trip
-        if (listaPoisDisponible.size() == 0){
-          break;
-        }
-
+        //Intento de insercion en el segundo trip
         tripAuxiliary = tripPostHotel;
         posPOI = int_rand(1, tripAuxiliary.size());
         tripAuxiliary.insert(tripAuxiliary.begin() + posPOI, POItoAdd);
@@ -554,7 +548,7 @@ void replaceHotel(individuo *hijo){
           tripAuxiliary.erase(tripAuxiliary.begin()+posPOI);
           tripPostHotel = tripAuxiliary;
 
-          //Probar añadir en el segundo trip
+          //Probar añadir en el primer trip
           tripAuxiliary = tripPrevHotel;
           posPOI = int_rand(1, tripAuxiliary.size());
           tripAuxiliary.insert(tripAuxiliary.begin() + posPOI, POItoAdd);
