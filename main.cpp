@@ -407,13 +407,13 @@ void replaceHotel(individuo *hijo){
     }
   }
 
-  auto it;
+  
   ostringstream aux;
   vector<string> listaHotelesD;
   vector<string> listaHotelesDAux;
   for (int i=0; i<HP1; i++){
     aux << "H" << i;
-    it = find(listaHotelesTour.begin(), listaHotelesTour.end(), aux.str());
+    auto it = find(listaHotelesTour.begin(), listaHotelesTour.end(), aux.str());
     if (it != listaHotelesTour.end()){
       listaHotelesD.push_back();
       listaHotelesDAux.push_back();
@@ -471,7 +471,7 @@ void replaceHotel(individuo *hijo){
     string<vector> listaPoisDisponible;
     for (int i=0; i<tripPrevHotel.size(); i++){
       if (tripPrevHotel.find("H") != 0){
-        it = find(listaPois.begin(), listaPois.end(), tripPrevHotel[i]);
+        auto it = find(listaPois.begin(), listaPois.end(), tripPrevHotel[i]);
         if (it != listaPois.end()){
           listaPoisDisponible.push_back(tripPrevHotel[i]);
         }
