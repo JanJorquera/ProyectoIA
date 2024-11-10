@@ -406,6 +406,10 @@ void replaceHotel(individuo *hijo){
     }
   }
 
+  for (int i=0; i<listaHotelesTour.size(); i++){
+    cout << "listaHoteles[" << i << "]: " << listaHotelesTour[i] << endl;
+  }
+
   ostringstream aux;
   vector<string> listaHotelesD;
   vector<string> listaHotelesDAux;
@@ -430,7 +434,7 @@ void replaceHotel(individuo *hijo){
     }
     listaHotelesDAux = listaHotelesD;
     sizeAux = listaHotelesDAux.size();
-    cout << "sizeAux: " << sizeAux << endl;
+    // cout << "sizeAux: " << sizeAux << endl;
     for (size_t j=0; j<sizeAux; j++){
       // cout << "j: " << j << endl;
       posHotel = int_rand(0,listaHotelesDAux.size());
