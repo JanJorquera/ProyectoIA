@@ -1,7 +1,7 @@
 #include "includes.h"
 #include "globales.h"
 
-bool debug = false;
+bool debug = true;
 
 // Parámetros del problema
 int N, HP1, D;
