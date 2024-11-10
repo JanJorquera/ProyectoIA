@@ -1008,7 +1008,7 @@ int main(int argc, char *argv[]) {
   cout << "tam: " << coord.size() << endl;
   for (size_t i = 0; i < coord.size(); ++i) {
     for (size_t j = 0; j < coord.size(); ++j) {
-      if (t[i][j] == 0){
+      if (t[i][j] == 0 && i!=j){
         printf("t[%d][%d] = %.5f\n",i,j,t[i][j]);
       }
     }
