@@ -662,6 +662,11 @@ void InsertOrDeletePOI(individuo *hijo){
 
 void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
   *hijo = *padre;
+  cout << "tamaño: " << hijo->cromosoma.size() << endl;
+  for (int i=0; i<hijo->cromosoma.size(); i++){
+    cout << "hijo->cromosoma[" << i << "]: " << hijo->cromosoma[i] << endl;
+  }
+
   replaceHotel(hijo);
   InsertOrDeletePOI(hijo);
   return;
