@@ -604,20 +604,9 @@ void InsertOrDeletePOI(individuo *hijo){
 
   int numHotelesVistos = -1;
   vector<double> tripCost;
-  for (int i=0; i<hijo->cromosoma.size()-1; i++){
+  for (int i=0; i<hijo->cromosoma.size(); i++){
     if (hijo->cromosoma[i].find("H") == 0){
-      numHotelesVistos++;
-      tripCost.push_back(0.00);
-    } else {
-      if (hijo->cromosoma[i+1].find("H") == 0){
-        tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i])][getPos(hijo->cromosoma[i+1])];
-        if (t[getPos(hijo->cromosoma[i])][getPos(hijo->cromosoma[i+1])] == 0){
-          cout << "Desde " << hijo->cromosoma[i] << " a " << hijo->cromosoma[i+1] << endl;
-          cout << "Pues va desde: " << coord[getPos(hijo->cromosoma[i])][0] << "," << coord[getPos(hijo->cromosoma[i])][1] << " a " << coord[getPos(hijo->cromosoma[i+1])][0] << "," << coord[getPos(hijo->cromosoma[i+1])][1] << endl;
-          cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i]) << " y del 2 " << getPos(hijo->cromosoma[i+1]) << endl;
-          getchar();
-        }
-      } else {
+      if (numHotelesVistos != -1){
         tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
         if (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])] == 0){
           cout << "Desde " << hijo->cromosoma[i-1] << " a " << hijo->cromosoma[i] << endl;
@@ -625,6 +614,18 @@ void InsertOrDeletePOI(individuo *hijo){
           cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i-1]) << " y del 2 " << getPos(hijo->cromosoma[i]) << endl;
           getchar();
         }
+      }
+      if (i!=hijo->cromosoma.size()-1){
+        numHotelesVistos++;
+        tripCost.push_back(0.00);
+      }
+    } else {
+      tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
+      if (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])] == 0){
+        cout << "Desde " << hijo->cromosoma[i-1] << " a " << hijo->cromosoma[i] << endl;
+        cout << "Pues va desde: " << coord[getPos(hijo->cromosoma[i-1])][0] << "," << coord[getPos(hijo->cromosoma[i-1])][1] << " a " << coord[getPos(hijo->cromosoma[i])][0] << "," << coord[getPos(hijo->cromosoma[i])][1] << endl;
+        cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i-1]) << " y del 2 " << getPos(hijo->cromosoma[i]) << endl;
+        getchar();
       }
     }
   }
