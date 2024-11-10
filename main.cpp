@@ -398,6 +398,8 @@ void replaceHotel(individuo *hijo){
   vector<string> listaHotelesTour;
   vector<string> listaPois;
   int pos = int_rand(1,D);
+
+  cout << "tamaño hijo: " << hijo->cromosoma.size() << endl; 
   for (int i=0; i<hijo->cromosoma.size(); i++){
     if (hijo->cromosoma[i].find("H") == 0){
       listaHotelesTour.push_back(hijo->cromosoma[i]);
