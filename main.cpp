@@ -30,7 +30,7 @@ int Leer_entradas(int argc, char **argv) {
   ps = atoi(argv[7]); //population size
   if(debug) {
     printf("so: %d, eo: %d, mr: %.2f, cr: %.2f, ps: %d\n", so, eo, mr, cr, ps);
-    //getchar();
+    getchar();
   }
   //BUDGET
   max_iter = (int)(atof(argv[8]));
@@ -177,6 +177,7 @@ void readConfiguration(string fileName) {
     for (int i=0; i<S.size(); i++){
       cout << "S[i]: " << S[i] << endl;
     }
+    getchar();
   }
   
   file.close();
@@ -231,6 +232,7 @@ void calculateDistances() {
         printf("t[%d][%d] = %.5f\n",i,j,t[i][j]);
       }
     }
+    getchar();
   }
 }
 
@@ -264,6 +266,7 @@ void guardar_optimo_encontrado (int aptitud_optimo, individuo temp) {
   if(debug)
   {
       cout<<endl<<"Aptitud: "<<aptitud_optimo;
+      getchar();
   }
   return;
 }
@@ -353,30 +356,13 @@ individuo * roulette_wheel (conjunto & c_temp) {
 }
 
 individuo * ktournament (conjunto & c_temp) {
-  individuo * i_temp = nullptr;;
-  /*
-  conjunto aux ((char*)"poblacionAux");
-
-  for (int i=0; i<kTournament; i++){
-    aux.conj.push_back(c_temp.conj[int_rand(0,c_temp.conj.size())]);
-  }
-
-  sort(aux.conj.begin(), aux.conj.end());
-  i_temp = &(aux.conj.back());
-  */
-
+  individuo * i_temp = nullptr;
   for (int i = 0; i < kTournament; i++) {
     individuo* current = &c_temp.conj[int_rand(0, c_temp.conj.size())];
     if (!i_temp || current->aptitud > i_temp->aptitud) {
       i_temp = current;
     }
   }
-
-  /*
-  cout << "a ver: " << i_temp->cromosoma.size() << endl;
-  for (int i=0; i<i_temp->cromosoma.size(); i++){
-    cout << "pos" << i << ": " << i_temp->cromosoma[i] << endl;
-  }*/
   return i_temp;
 }
 
@@ -388,7 +374,6 @@ individuo * seleccionar_individuo (conjunto & c_temp) {
       return i_temp;
     case TOURNAMENT:
       i_temp = ktournament(c_temp);
-      cout << "a ver: " << i_temp->cromosoma.size() << endl;
       return i_temp;
     default:
       cout<<"ERROR: No se reconoce tipo de seleccion"<<endl;
@@ -1037,17 +1022,11 @@ int main(int argc, char *argv[]) {
       getchar();
     }
     
-    cout<<poblacion;
-    getchar();
-    
     seleccionar_conjunto(poblacion, seleccionados, ps);
     if(debug){
       cout<<seleccionados;
       getchar();
     }
-
-    cout<<seleccionados;
-    getchar();
 
     cruzar_conjunto(seleccionados, cruzados, cr);
     if(debug) {
