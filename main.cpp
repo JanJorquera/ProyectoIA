@@ -692,7 +692,7 @@ void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
     cout << "hijo->cromosoma[" << i << "]: " << hijo->cromosoma[i] << endl;
   }*/
 
-  replaceHotel(hijo);
+  //replaceHotel(hijo);
   InsertOrDeletePOI(hijo);
   return;
 }
