@@ -400,7 +400,7 @@ void replaceHotel(individuo *hijo){
   vector<string> listaPois;
   int pos = int_rand(1,D);
 
-  cout << "tamaño hijo: " << hijo->cromosoma.size() << endl; 
+  // cout << "tamaño hijo: " << hijo->cromosoma.size() << endl; 
   for (int i=0; i<hijo->cromosoma.size(); i++){
     if (hijo->cromosoma[i].find("H") == 0){
       listaHotelesTour.push_back(hijo->cromosoma[i]);
@@ -409,10 +409,12 @@ void replaceHotel(individuo *hijo){
     }
   }
 
+  /*
   cout << "tamaño: " << listaHotelesTour.size() << endl;
   for (int i=0; i<listaHotelesTour.size(); i++){
     cout << "listaHoteles[" << i << "]: " << listaHotelesTour[i] << endl;
   }
+  */
 
   ostringstream aux;
   vector<string> listaHotelesD;
@@ -451,7 +453,7 @@ void replaceHotel(individuo *hijo){
     }
   }
 
-  cout << "Llegas aqui3?" << endl;
+  // cout << "Llegas aqui3?" << endl;
   if (flagHotelSwap){
     int numHotelesVistos = -1;
     bool flagInsertPrevTrip = true;
@@ -575,9 +577,9 @@ void replaceHotel(individuo *hijo){
       }
       listaPoisDisponible.erase(listaPoisDisponible.begin()+posPOItoAdd);
     }
-    cout << "Nunca sales de aqui" << endl;
+    // cout << "Nunca sales de aqui" << endl;
   }
-  cout << "Nunca sales de aqui1" << endl;
+  // cout << "Nunca sales de aqui1" << endl;
   return;
 }
 
