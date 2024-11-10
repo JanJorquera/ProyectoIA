@@ -566,6 +566,7 @@ void replaceHotel(individuo *hijo){
     }
     cout << "Nunca sales de aqui" << endl;
   }
+  cout << "Nunca sales de aqui1" << endl;
   return;
 }
 
