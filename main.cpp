@@ -817,15 +817,15 @@ void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
     cout << "hijo->cromosoma[" << i << "]: " << hijo->cromosoma[i] << endl;
   }*/
 
+  /*
   replaceHotel(hijo);
   InsertOrDeletePOI(hijo);
+  */
 
-  /*
   if (float_rand(0.00,1.00) <= mr){
     replaceHotel(hijo);
     InsertOrDeletePOI(hijo);
   }
-  */
   return;
 }
 
