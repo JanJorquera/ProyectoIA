@@ -1020,7 +1020,9 @@ int main(int argc, char *argv[]) {
       cout<<poblacion;
       getchar();
     }
-
+    
+    cout<<poblacion;
+    getchar();
     
     seleccionar_conjunto(poblacion, seleccionados, ps);
     if(debug){
