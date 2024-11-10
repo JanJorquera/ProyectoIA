@@ -10,6 +10,7 @@ vector<double> T;
 vector<double> S;
 vector<vector<double>> t;
 vector<vector<double>> coord;
+double tMax;
 
 static void control_c (int signo) {
   //escribir_en_archivo_resultados(&optimo);
@@ -143,6 +144,8 @@ void readConfiguration(string fileName) {
           HP1 = HP1 + 2;
           coord.resize(N + HP1, vector<double>(2));
           t.resize(N + HP1, vector<double>(N + HP1));
+        } else if (count == 2) {
+          lineStream >> Tmax;
         } else if (count == 3) {
           while (lineStream >> value) {
             T.push_back(value);
@@ -689,8 +692,8 @@ void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
     cout << "hijo->cromosoma[" << i << "]: " << hijo->cromosoma[i] << endl;
   }*/
 
-  //replaceHotel(hijo);
-  //InsertOrDeletePOI(hijo);
+  replaceHotel(hijo);
+  InsertOrDeletePOI(hijo);
   return;
 }
 
