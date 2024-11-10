@@ -834,8 +834,11 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
       }
     }
   }
-  cout << auxiliaryString.str();
-  cout << "----------------------------------------------" << endl;
+  //cout << auxiliaryString.str();
+  //cout << "----------------------------------------------" << endl;
+  for (int l=0; l<HotelesTour.size(); l++){
+    cout << "H[" << l << "]=" << HotelesTour[l] << endl;
+  }
   getchar();
 }
 
