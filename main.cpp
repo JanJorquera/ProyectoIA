@@ -749,8 +749,8 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
   Trip.push_back(Hinicio);
   Tour.push_back(Hinicio);
   int numHotel;
-  vector<string> HotelesDisponiblesTrip(Hoteles); // Copia los elementos de 'Hoteles'
-  vector<string> HotelesDisponiblesTour(Hoteles); // Copia los elementos de 'Hoteles'
+  vector<string> HotelesDisponiblesTrip(Hoteles); // Copia los elementos de Hoteles
+  vector<string> HotelesDisponiblesTour(Hoteles); // Copia los elementos de Hoteles
   HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin());
 
   int i=iI;
@@ -782,6 +782,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           Tour.clear();
           Tour.push_back(Hinicio);
           flagAvoid = true;
+          cout << "----------------------------------------------" << endl;
           break;
         }
         
@@ -807,6 +808,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
             Tour.clear();
             Tour.push_back(Hinicio);
             flagAvoid = true;
+            cout << "----------------------------------------------" << endl;
             break;
           }
           HotelesDisponiblesTrip.erase(HotelesDisponiblesTrip.begin() + numHotel);
@@ -814,6 +816,11 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           Trip.pop_back();
         } else {
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
+          cout << "numHotel: " << numHotel << endl;
+          cout << "Htermino: " << HotelesDisponiblesTour[numHotel] << endl;
+          for (int k=0; k<HotelesDisponiblesTour.size(); k++){
+            cout << "HotelesDisponiblesTour[" << k << "]:" << numHotel << endl;
+          }
           cantHotelesQuitadosTour++;
           Tour.push_back(Htermino);
           tripFound = true;
@@ -858,10 +865,6 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   int posPOI;
   bool isFeasibleAddPOIinTrip;
   generateFeasibleSequenceOfHotels(Hoteles, HotelesTour);
-  for (int i=0; i<HotelesTour.size(); i++){
-    cout << "H[" << i << "]: " << HotelesTour[i] << endl;
-  }
-  getchar();
   i_temp.cromosoma.push_back(HotelesTour[0]);
   /*
   for (int l=0; l<HotelesTour.size(); l++){
