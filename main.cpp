@@ -617,6 +617,11 @@ void InsertOrDeletePOI(individuo *hijo){
     }
   }
 
+  for (int i=0; i<tripCost.size(); i++){
+    cout << "Costo de momento del trip: " <<tripCost.size() << endl;
+  }
+  getchar();
+
   double posNewCost;
   int auxTrip;
   bool isPOIinserted = false;
