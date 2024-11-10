@@ -816,7 +816,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           Trip.pop_back();
         } else {
           auxiliaryString << "numHotel: " << numHotel << endl;
-          auxiliaryString << "Htermino: " << HotelesDisponiblesTour[numHotel] << endl;
+          auxiliaryString << "Htermino: " << Htermino << endl;
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
           /*
           for (int k=0; k<HotelesDisponiblesTour.size(); k++){
