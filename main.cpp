@@ -378,6 +378,7 @@ individuo * seleccionar_individuo (conjunto & c_temp) {
       return i_temp;
     case TOURNAMENT:
       i_temp = ktournament(c_temp);
+      cout << "a ver: " << i_temp->cromosoma.size() << endl;
       return i_temp;
     default:
       cout<<"ERROR: No se reconoce tipo de seleccion"<<endl;
