@@ -614,12 +614,11 @@ void InsertOrDeletePOI(individuo *hijo){
       } else {
         tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
       }
-      cout << "Trip cost " << tripCost[numHotelesVistos] << endl;
     }
   }
 
   for (int i=0; i<tripCost.size(); i++){
-    cout << "Costo de momento del trip: " <<tripCost.size() << endl;
+    cout << "Costo de momento del trip: " << tripCost[i] << endl;
   }
   getchar();
 
