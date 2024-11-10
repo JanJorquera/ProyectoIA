@@ -613,7 +613,7 @@ void InsertOrDeletePOI(individuo *hijo){
         tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i])][getPos(hijo->cromosoma[i+1])];
         if (t[getPos(hijo->cromosoma[i])][getPos(hijo->cromosoma[i+1])] == 0){
           cout << "Desde " << hijo->cromosoma[i] << " a " << hijo->cromosoma[i+1] << endl;
-          cout << "Pues va desde: " << coord[i] << " a " << coord[i+1] << endl;
+          cout << "Pues va desde: " << coord[i][0] << "," << coord[i][1] << " a " << coord[i+1][0] << "," << coord[i+1][1] << endl;
           cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i]) << " y del 2 " << getPos(hijo->cromosoma[i+1]) << endl;
           getchar();
         }
@@ -621,7 +621,7 @@ void InsertOrDeletePOI(individuo *hijo){
         tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
         if (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])] == 0){
           cout << "Desde " << hijo->cromosoma[i-1] << " a " << hijo->cromosoma[i] << endl;
-          cout << "Pues va desde: " << coord[i-1] << " a " << coord[i] << endl;
+          cout << "Pues va desde: " << coord[i-1][0] << "," << coord[i-1][1] << " a " << coord[i][0] << "," << coord[i][1] << endl;
           cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i-1]) << " y del 2 " << getPos(hijo->cromosoma[i]) << endl;
           getchar();
         }
