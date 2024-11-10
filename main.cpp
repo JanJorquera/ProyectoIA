@@ -1036,6 +1036,10 @@ int main(int argc, char *argv[]) {
       getchar();
     }
 
+    cout<<"POBLACION CRUZADA"<<endl;
+    cout<<cruzados;
+    getchar();
+
     mutar_conjunto(cruzados, mutados, mr);
     if(debug){
       cout<<"POBLACION MUTADA"<<endl;
