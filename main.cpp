@@ -1,7 +1,7 @@
 #include "includes.h"
 #include "globales.h"
 
-bool debug = true;
+bool debug = false;
 bool debugGenerateFeasibleSequences = false;
 
 // Parámetros del problema
@@ -1073,6 +1073,7 @@ int main(int argc, char *argv[]) {
   crear_poblacion_inicial(poblacion, ps);
 
   if(debug) {
+    cout<<"POBLACION INICIAL"<<endl;
     cout<<poblacion;
     getchar();
   }
@@ -1094,6 +1095,7 @@ int main(int argc, char *argv[]) {
     
     seleccionar_conjunto(poblacion, seleccionados, ps);
     if(debug){
+      cout<<"POBLACION SELECCIONADA"<<endl;
       cout<<seleccionados;
       getchar();
     }
