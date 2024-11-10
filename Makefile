@@ -3,17 +3,17 @@ comp = g++
 prog  = OPHS
 
 #El problema
-config = ./Instancias/100-80-12-6.ophs
+config = ./Instancias/100-240-15-10.ophs
 results = results.txt
 
 cr = 0.3				#Tasa de cruzamiento
 mr = 0.01				#Tasa de mutación
-ps = 5					#Population size
+ps = 50					#Population size
 max_evals=1e+4			#Maximo de iteraciones
 eo = 1					#Se aplica o no elitismo
 so = 2					#Operador de selección
 semilla = 2
-kTournament = 2			#Parametro condicional: Tamaño para k tournament
+kTournament = 5			#Parametro condicional: Tamaño para k tournament
 
 comp:$(prog)
 
