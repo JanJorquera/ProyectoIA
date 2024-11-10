@@ -363,9 +363,9 @@ individuo * ktournament (conjunto & c_temp) {
   sort(aux.conj.begin(), aux.conj.end());
   i_temp = &(aux.conj.back());
   
-  cout << "a ver: " << i_temp.cromosoma.size() << endl;
-  for (int i=0; i<i_temp.cromosoma.size(); i++){
-    cout << "pos" << i << ": " << i_temp.cromosoma[i] << endl;
+  cout << "a ver: " << i_temp->cromosoma.size() << endl;
+  for (int i=0; i<i_temp->cromosoma.size(); i++){
+    cout << "pos" << i << ": " << i_temp->cromosoma[i] << endl;
   }
   return i_temp;
 }
