@@ -760,7 +760,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
   bool tourFound = false;
   bool tripFound;
   bool flagAvoid = false;
-
+  ostringstream auxiliaryString;
   while (!tourFound) {
     if (i==D){
       tourFound = true;
@@ -782,6 +782,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           Tour.clear();
           Tour.push_back(Hinicio);
           flagAvoid = true;
+          auxiliaryString.clear()
           cout << "----------------------------------------------" << endl;
           break;
         }
@@ -808,6 +809,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
             Tour.clear();
             Tour.push_back(Hinicio);
             flagAvoid = true;
+            auxiliaryString.clear()
             cout << "----------------------------------------------" << endl;
             break;
           }
@@ -815,11 +817,11 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           cantHotelesQuitadosTrip++;
           Trip.pop_back();
         } else {
-          cout << "numHotel: " << numHotel << endl;
-          cout << "Htermino: " << HotelesDisponiblesTour[numHotel] << endl;
+          auxiliaryString << "numHotel: " << numHotel << endl;
+          auxiliaryString << "Htermino: " << HotelesDisponiblesTour[numHotel] << endl;
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
           for (int k=0; k<HotelesDisponiblesTour.size(); k++){
-            cout << "HotelesDisponiblesTour[" << k << "]:" << HotelesDisponiblesTour[k] << endl;
+            auxiliaryString << "HotelesDisponiblesTour[" << k << "]:" << HotelesDisponiblesTour[k] << endl;
           }
           cantHotelesQuitadosTour++;
           Tour.push_back(Htermino);
@@ -834,6 +836,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
       }
     }
   }
+  cout << auxiliaryString.str()
   cout << "----------------------------------------------" << endl;
 }
 
