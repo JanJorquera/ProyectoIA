@@ -611,8 +611,16 @@ void InsertOrDeletePOI(individuo *hijo){
     } else {
       if (hijo->cromosoma[i+1].find("H") == 0){
         tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i])][getPos(hijo->cromosoma[i+1])];
+        if (t[getPos(hijo->cromosoma[i])][getPos(hijo->cromosoma[i+1])]){
+          cout << "Desde " << hijo->cromosoma[i] << " a " << hijo->cromosoma[i+1] << endl;
+          getchar();
+        }
       } else {
         tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
+        if (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])]){
+          cout << "Desde " << hijo->cromosoma[i-1] << " a " << hijo->cromosoma[i] << endl;
+          getchar();
+        }
       }
     }
   }
