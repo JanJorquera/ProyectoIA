@@ -859,7 +859,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   bool isFeasibleAddPOIinTrip;
   generateFeasibleSequenceOfHotels(Hoteles, HotelesTour);
   for (int i=0; i<HotelesTour.size(); i++){
-    cout << "H[" << i << "]: " HotelesTour[i] << endl;
+    cout << "H[" << i << "]: " << HotelesTour[i] << endl;
   }
   getchar();
   i_temp.cromosoma.push_back(HotelesTour[0]);
