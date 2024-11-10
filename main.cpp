@@ -630,6 +630,17 @@ void InsertOrDeletePOI(individuo *hijo){
   for (int i=0; i<tripCost.size(); i++){
     cout << "Costo de momento del trip: " << tripCost[i] << endl;
   }
+
+  ostringstream resultado;
+  for (size_t i = 0; i < hijo->cromosoma.size(); ++i) {
+    resultado << hijo->cromosoma[i];
+    // Agrega el separador después de cada elemento, excepto el último
+    if (i != hijo->cromosoma.size() - 1) {
+      resultado << " - ";
+    }
+  }
+  
+  cout << resultado.str() << endl;
   getchar();
 
   double posNewCost;
