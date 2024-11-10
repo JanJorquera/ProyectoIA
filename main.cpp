@@ -815,6 +815,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           cantHotelesQuitadosTrip++;
           Trip.pop_back();
         } else {
+          auxiliaryString << i << endl;
           auxiliaryString << "numHotel: " << numHotel << endl;
           auxiliaryString << "Htermino: " << Htermino << endl;
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
@@ -825,10 +826,10 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           Tour.push_back(Htermino);
           tripFound = true;
           flagAvoid = false;
-          auxiliaryString << "-------------------------------------------" << endl;
           for (int l=0; l<Tour.size(); l++){
             auxiliaryString << "Tour[" << l << "]=" << Tour[l] << endl;
           }
+          auxiliaryString << "-------------------------------------------" << endl;
         }
 
       }
