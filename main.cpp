@@ -66,14 +66,14 @@ double calculateTripCost(vector<string> trip){
   return costo;
 }
 
-double findTrip(int numTrip){
+double findTrip(int numTrip, individuo &individuoPoblacion){
   int numHotelesVistos = -1;
   vector<string> trip;
   bool flagAddtoTrip = false;
-  for (int i=0; i<optimo.cromosoma.size(); i++){
-    if (optimo.cromosoma[i].find("H") == 0){
+  for (int i=0; i<individuoPoblacion.cromosoma.size(); i++){
+    if (individuoPoblacion.cromosoma[i].find("H") == 0){
       if (flagAddtoTrip){
-        trip.push_back(optimo.cromosoma[i]);
+        trip.push_back(individuoPoblacion.cromosoma[i]);
         break;
       }
       numHotelesVistos++;
@@ -82,7 +82,7 @@ double findTrip(int numTrip){
       }
     }
     if (flagAddtoTrip){
-      trip.push_back(optimo.cromosoma[i]);
+      trip.push_back(individuoPoblacion.cromosoma[i]);
     }
   }
 
@@ -107,7 +107,7 @@ void salir(void) {
   ostringstream resultadoTrip;
   double costoTrip;
   for (int i=0; i<D; i++){
-    costoTrip = findTrip(i);
+    costoTrip = findTrip(i, optimo);
     resultadoTrip << "Trip " << i+1 << ": " << costoTrip;
     if (i != D - 1) {
       resultadoTrip << " - ";
@@ -588,6 +588,131 @@ void replaceHotel(individuo *hijo){
 }
 
 void InsertOrDeletePOI(individuo *hijo){
+  auto calculateProbability = [](double ratio) {
+    return exp(-10.00 * (1 - ratio));
+  };
+
+  double Ttotal = 0;
+  for (int i=0; i<D; i++){
+    Ttotal += findTrip(i,*(hijo));
+  }
+
+  vector<string> listaPois;
+  for (int i=0; i<hijo->cromosoma.size(); i++){
+    if (hijo->cromosoma[i].find("H") != 0){
+      listaPois.push_back(hijo->cromosoma[i]);
+    }
+  }
+
+  //Alta probabilidad de eliminar cuando se consume casi todo el presupuesto total, la cual decrece rápidamente para fomentar inserciones y aspirar a mejoras.
+  if (float_rand(0.00,1.00) <= calculateProbability(Ttotal/Tmax)){
+    //Caso eliminación
+    int pos = stoi(listaPois[int_rand(0,static_cast<int>(listaPois.size()))]);
+    for (int i=0; i<hijo->cromosoma.size(); i++){
+      if (hijo->cromosoma[i] == to_string(pos)){
+        hijo->cromosoma.erase(hijo->cromosoma.begin() + i);
+        return;
+      }
+    }
+  } else {
+    //Caso inserción
+    vector<string> listAuxiliaryPois;
+    for (int i=0; i<N; i++){
+      auto it = find(listaPois.begin(), listaPois.end(), to_string(i));
+      if (it == listaPois.end()){
+        //Agregar a lista auxiliar solo aquellos POIs no visitados
+        listAuxiliaryPois.push_back(to_string(i));
+      }
+    }
+
+    int pos = stoi(listAuxiliaryPois[int_rand(0,static_cast<int>(listAuxiliaryPois.size()))]);
+
+    vector<int> trips;
+    int posTrip;
+    int cantTripsChequeados = 0;
+    for (int i=0; i<D; i++){
+      trips.push_back(i);
+    }
+
+    int numHotelesVistos = -1;
+    vector<double> tripCost;
+    for (int i=0; i<hijo->cromosoma.size(); i++){
+      if (hijo->cromosoma[i].find("H") == 0){
+        if (numHotelesVistos != -1){
+          tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
+          if (debug){
+            if (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])] == 0){
+              cout << "Desde " << hijo->cromosoma[i-1] << " a " << hijo->cromosoma[i] << endl;
+              cout << "Pues va desde: " << coord[getPos(hijo->cromosoma[i-1])][0] << "," << coord[getPos(hijo->cromosoma[i-1])][1] << " a " << coord[getPos(hijo->cromosoma[i])][0] << "," << coord[getPos(hijo->cromosoma[i])][1] << endl;
+              cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i-1]) << " y del 2 " << getPos(hijo->cromosoma[i]) << endl;
+              getchar();
+            }
+          }
+        }
+        if (i!=hijo->cromosoma.size()-1){
+          numHotelesVistos++;
+          tripCost.push_back(0.00);
+        }
+      } else {
+        tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
+        if (debug){
+          if (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])] == 0){
+            cout << "Desde " << hijo->cromosoma[i-1] << " a " << hijo->cromosoma[i] << endl;
+            cout << "Pues va desde: " << coord[getPos(hijo->cromosoma[i-1])][0] << "," << coord[getPos(hijo->cromosoma[i-1])][1] << " a " << coord[getPos(hijo->cromosoma[i])][0] << "," << coord[getPos(hijo->cromosoma[i])][1] << endl;
+            cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i-1]) << " y del 2 " << getPos(hijo->cromosoma[i]) << endl;
+            getchar();
+          }
+        }
+      }
+    }
+
+    double posNewCost;
+    int auxTrip;
+    bool isPOIinserted = false;
+    bool flagTripFound;
+    for (int j=0; j<D; j++){
+      if (isPOIinserted){
+        break;
+      }
+
+      auxTrip = int_rand(0,D-cantTripsChequeados);
+      posTrip = trips[auxTrip];
+      trips.erase(trips.begin()+auxTrip);
+
+      numHotelesVistos = -1;
+      flagTripFound = false;
+      for (int i=0; i<hijo->cromosoma.size(); i++){
+        if (hijo->cromosoma[i].find("H") == 0){
+          if (flagTripFound){
+            posNewCost = tripCost[posTrip] + (t[getPos(hijo->cromosoma[i-1])][getPos(to_string(pos))] + t[getPos(to_string(pos))][getPos(hijo->cromosoma[i])]) - (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])]);
+            if (posNewCost <= T[posTrip]){
+              hijo->cromosoma.insert(hijo->cromosoma.begin() + i, to_string(pos));
+              isPOIinserted = true;
+            }
+            break;
+          }
+
+          numHotelesVistos++;
+          if (numHotelesVistos == posTrip){
+            flagTripFound = true;
+            cantTripsChequeados++;
+          }
+        } else {
+          if (flagTripFound){
+            posNewCost = tripCost[posTrip] + (t[getPos(hijo->cromosoma[i-1])][getPos(to_string(pos))] + t[getPos(to_string(pos))][getPos(hijo->cromosoma[i])]) - (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])]);
+            if (posNewCost <= T[posTrip]){
+              hijo->cromosoma.insert(hijo->cromosoma.begin() + i, to_string(pos));
+              isPOIinserted = true;
+              break;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  /*
   //Seleccionar un POI aleatorio
   int pos = int_rand(0,N);
   for (int i=0; i<hijo->cromosoma.size(); i++){
@@ -680,7 +805,7 @@ void InsertOrDeletePOI(individuo *hijo){
         }
       }
     }
-  }
+  }*/
   return;
 }
 
@@ -692,8 +817,15 @@ void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
     cout << "hijo->cromosoma[" << i << "]: " << hijo->cromosoma[i] << endl;
   }*/
 
-  //replaceHotel(hijo);
+  replaceHotel(hijo);
   InsertOrDeletePOI(hijo);
+
+  /*
+  if (float_rand(0.00,1.00) <= mr){
+    replaceHotel(hijo);
+    InsertOrDeletePOI(hijo);
+  }
+  */
   return;
 }
 
