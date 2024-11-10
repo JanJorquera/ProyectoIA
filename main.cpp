@@ -1,7 +1,8 @@
 #include "includes.h"
 #include "globales.h"
 
-bool debug = false;
+bool debug = true;
+bool debugGenerateFeasibleSequences = false;
 
 // Parámetros del problema
 int N, HP1, D;
@@ -815,26 +816,36 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           cantHotelesQuitadosTrip++;
           Trip.pop_back();
         } else {
-          auxiliaryString << i << endl;
-          auxiliaryString << "numHotel: " << numHotel << endl;
-          auxiliaryString << "Htermino: " << Htermino << endl;
-          auxiliaryString << "Previo a eliminación" << endl;
-          for (int k=0; k<HotelesDisponiblesTour.size(); k++){
-            auxiliaryString << "HotelesDisponiblesTour[" << k << "]:" << HotelesDisponiblesTour[k] << endl;
+          if (debugGenerateFeasibleSequences) {
+            auxiliaryString << i << endl;
+            auxiliaryString << "numHotel: " << numHotel << endl;
+            auxiliaryString << "Htermino: " << Htermino << endl;
+            auxiliaryString << "Previo a eliminación" << endl;
+            for (int k=0; k<HotelesDisponiblesTour.size(); k++){
+              auxiliaryString << "HotelesDisponiblesTour[" << k << "]:" << HotelesDisponiblesTour[k] << endl;
+            }
           }
-          HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
-          auxiliaryString << "Post a eliminación" << endl;
-          for (int k=0; k<HotelesDisponiblesTour.size(); k++){
-            auxiliaryString << "HotelesDisponiblesTour[" << k << "]:" << HotelesDisponiblesTour[k] << endl;
+          
+          HotelesDisponiblesTour.erase(remove(HotelesDisponiblesTour.begin(), HotelesDisponiblesTour.end(), Htermino), HotelesDisponiblesTour.end());
+          
+          if (debugGenerateFeasibleSequences){
+            auxiliaryString << "Post a eliminación" << endl;
+            for (int k=0; k<HotelesDisponiblesTour.size(); k++){
+              auxiliaryString << "HotelesDisponiblesTour[" << k << "]:" << HotelesDisponiblesTour[k] << endl;
+            }
           }
+          
           cantHotelesQuitadosTour++;
           Tour.push_back(Htermino);
           tripFound = true;
           flagAvoid = false;
-          for (int l=0; l<Tour.size(); l++){
-            auxiliaryString << "Tour[" << l << "]=" << Tour[l] << endl;
+
+          if (debugGenerateFeasibleSequences) {
+            for (int l=0; l<Tour.size(); l++){
+              auxiliaryString << "Tour[" << l << "]=" << Tour[l] << endl;
+            }
+            auxiliaryString << "-------------------------------------------" << endl;
           }
-          auxiliaryString << "-------------------------------------------" << endl;
         }
 
       }
@@ -844,23 +855,26 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
       }
     }
   }
-  cout << auxiliaryString.str();
-  cout << "----------------------------------------------" << endl;
 
-  for (int l=0; l<HotelesDisponiblesTour.size(); l++){
-    cout << "H[" << l << "]=" << HotelesDisponiblesTour[l] << endl;
-  }
+  if (debugGenerateFeasibleSequences){
+    cout << auxiliaryString.str();
+    cout << "----------------------------------------------" << endl;
 
-  /*
-  cout << "-------------------------------------------" << endl;
-  for (int l=0; l<Tour.size(); l++){
-    cout << "Tour[" << l << "]=" << Tour[l] << endl;
+    for (int l=0; l<HotelesDisponiblesTour.size(); l++){
+      cout << "H[" << l << "]=" << HotelesDisponiblesTour[l] << endl;
+    }
+
+    /*
+    cout << "-------------------------------------------" << endl;
+    for (int l=0; l<Tour.size(); l++){
+      cout << "Tour[" << l << "]=" << Tour[l] << endl;
+    }
+    */
+    cout << "Fin sequencia de hoteles" << endl;
+    cout << "-------------------------------------------" << endl;
+    cout << endl;
+    getchar();
   }
-  */
-  cout << "Fin sequencia de hoteles" << endl;
-  cout << "-------------------------------------------" << endl;
-  cout << endl;
-  getchar();
 }
 
 void agregar_individuo_aleatorio (conjunto & c_temp) {
