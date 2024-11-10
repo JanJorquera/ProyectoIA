@@ -620,7 +620,7 @@ void InsertOrDeletePOI(individuo *hijo){
         tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
         if (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])]){
           cout << "Desde " << hijo->cromosoma[i-1] << " a " << hijo->cromosoma[i] << endl;
-          cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i]) << " y del 2 " << getPos(hijo->cromosoma[i+1]) << endl;
+          cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i-1]) << " y del 2 " << getPos(hijo->cromosoma[i]) << endl;
           getchar();
         }
       }
