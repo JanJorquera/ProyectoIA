@@ -406,6 +406,7 @@ void replaceHotel(individuo *hijo){
     }
   }
 
+  cout << "tamaño: " << listaHotelesTour.size() << endl;
   for (int i=0; i<listaHotelesTour.size(); i++){
     cout << "listaHoteles[" << i << "]: " << listaHotelesTour[i] << endl;
   }
