@@ -783,7 +783,6 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           Tour.push_back(Hinicio);
           flagAvoid = true;
           auxiliaryString.clear();
-          cout << "----------------------------------------------" << endl;
           break;
         }
         
@@ -810,7 +809,6 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
             Tour.push_back(Hinicio);
             flagAvoid = true;
             auxiliaryString.clear();
-            cout << "----------------------------------------------" << endl;
             break;
           }
           HotelesDisponiblesTrip.erase(HotelesDisponiblesTrip.begin() + numHotel);
