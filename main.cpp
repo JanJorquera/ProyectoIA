@@ -672,7 +672,7 @@ void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
   }*/
 
   replaceHotel(hijo);
-  InsertOrDeletePOI(hijo);
+  //InsertOrDeletePOI(hijo);
   return;
 }
 
