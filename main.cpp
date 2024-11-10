@@ -818,11 +818,9 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           auxiliaryString << "numHotel: " << numHotel << endl;
           auxiliaryString << "Htermino: " << Htermino << endl;
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
-          /*
           for (int k=0; k<HotelesDisponiblesTour.size(); k++){
             auxiliaryString << "HotelesDisponiblesTour[" << k << "]:" << HotelesDisponiblesTour[k] << endl;
           }
-          */
           cantHotelesQuitadosTour++;
           Tour.push_back(Htermino);
           tripFound = true;
@@ -847,12 +845,15 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
     cout << "H[" << l << "]=" << HotelesDisponiblesTour[l] << endl;
   }
 
+  /*
   cout << "-------------------------------------------" << endl;
   for (int l=0; l<Tour.size(); l++){
     cout << "Tour[" << l << "]=" << Tour[l] << endl;
   }
-
+  */
+  cout << "Fin sequencia de hoteles" << endl;
   cout << "-------------------------------------------" << endl;
+  cout << endl;
   getchar();
 }
 
