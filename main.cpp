@@ -406,8 +406,6 @@ void replaceHotel(individuo *hijo){
     }
   }
 
-  cout << "Llegas aqui1?" << endl;
-
   ostringstream aux;
   vector<string> listaHotelesD;
   vector<string> listaHotelesDAux;
@@ -421,10 +419,9 @@ void replaceHotel(individuo *hijo){
     aux.clear();
   }
 
-  cout << "Llegas aqui2?" << endl;
-
-  int posHotel, sizeAux, posHoteltobeReplaced;
+  int posHotel, posHoteltobeReplaced;
   bool flagHotelSwap = false;
+  size_t sizeAux;
   vector<string> tripPrevHotel;
   vector<string> tripPostHotel;
   for (int i=1; i<listaHotelesTour.size()-1; i++){
