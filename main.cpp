@@ -818,13 +818,19 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           auxiliaryString << "numHotel: " << numHotel << endl;
           auxiliaryString << "Htermino: " << HotelesDisponiblesTour[numHotel] << endl;
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
+          /*
           for (int k=0; k<HotelesDisponiblesTour.size(); k++){
             auxiliaryString << "HotelesDisponiblesTour[" << k << "]:" << HotelesDisponiblesTour[k] << endl;
           }
+          */
           cantHotelesQuitadosTour++;
           Tour.push_back(Htermino);
           tripFound = true;
           flagAvoid = false;
+          auxiliaryString << "-------------------------------------------" << endl;
+          for (int l=0; l<Tour.size(); l++){
+            auxiliaryString << "Tour[" << l << "]=" << Tour[l] << endl;
+          }
         }
 
       }
@@ -836,7 +842,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
   }
   cout << auxiliaryString.str();
   cout << "----------------------------------------------" << endl;
-  
+
   for (int l=0; l<HotelesDisponiblesTour.size(); l++){
     cout << "H[" << l << "]=" << HotelesDisponiblesTour[l] << endl;
   }
@@ -881,10 +887,12 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   generateFeasibleSequenceOfHotels(Hoteles, HotelesTour);
   i_temp.cromosoma.push_back(HotelesTour[0]);
 
+  /*
   for (int l=0; l<HotelesTour.size(); l++){
     cout << "H[" << l << "]=" << HotelesTour[l] << endl;
   }
   getchar();
+  */
 
   // cout << "despues" << endl;
   for (int i=0; i<D; i++){
