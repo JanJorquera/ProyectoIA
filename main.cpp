@@ -782,7 +782,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           Tour.clear();
           Tour.push_back(Hinicio);
           flagAvoid = true;
-          auxiliaryString.clear()
+          auxiliaryString.clear();
           cout << "----------------------------------------------" << endl;
           break;
         }
@@ -809,7 +809,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
             Tour.clear();
             Tour.push_back(Hinicio);
             flagAvoid = true;
-            auxiliaryString.clear()
+            auxiliaryString.clear();
             cout << "----------------------------------------------" << endl;
             break;
           }
@@ -836,7 +836,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
       }
     }
   }
-  cout << auxiliaryString.str()
+  cout << auxiliaryString.str();
   cout << "----------------------------------------------" << endl;
 }
 
