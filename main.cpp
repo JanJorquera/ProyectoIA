@@ -430,8 +430,9 @@ void replaceHotel(individuo *hijo){
     }
     listaHotelesDAux = listaHotelesD;
     sizeAux = listaHotelesDAux.size();
+    cout << "sizeAux: " << sizeAux << endl;
     for (size_t j=0; j<sizeAux; j++){
-      cout << "j: " << j << endl;
+      // cout << "j: " << j << endl;
       posHotel = int_rand(0,listaHotelesDAux.size());
       if (t[getPos(listaHotelesTour[i-1])][getPos(listaHotelesDAux[posHotel])] <= T[i-1] && t[getPos(listaHotelesDAux[posHotel])][getPos(listaHotelesTour[i+1])] <= T[i]){
         flagHotelSwap = true;
