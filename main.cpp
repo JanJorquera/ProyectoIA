@@ -834,6 +834,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
       }
     }
   }
+  cout << "----------------------------------------------" << endl;
 }
 
 void agregar_individuo_aleatorio (conjunto & c_temp) {
