@@ -10,7 +10,7 @@ vector<double> T;
 vector<double> S;
 vector<vector<double>> t;
 vector<vector<double>> coord;
-double tMax;
+double Tmax;
 
 static void control_c (int signo) {
   //escribir_en_archivo_resultados(&optimo);
