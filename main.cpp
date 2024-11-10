@@ -782,7 +782,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           Tour.clear();
           Tour.push_back(Hinicio);
           flagAvoid = true;
-          auxiliaryString.clear();
+          auxiliaryString.str("");
           break;
         }
         
@@ -808,7 +808,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
             Tour.clear();
             Tour.push_back(Hinicio);
             flagAvoid = true;
-            auxiliaryString.clear();
+            auxiliaryString.str("");
             break;
           }
           HotelesDisponiblesTrip.erase(HotelesDisponiblesTrip.begin() + numHotel);
