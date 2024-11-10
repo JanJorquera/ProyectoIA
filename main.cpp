@@ -818,7 +818,12 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           auxiliaryString << i << endl;
           auxiliaryString << "numHotel: " << numHotel << endl;
           auxiliaryString << "Htermino: " << Htermino << endl;
+          auxiliaryString << "Previo a eliminación" << endl;
+          for (int k=0; k<HotelesDisponiblesTour.size(); k++){
+            auxiliaryString << "HotelesDisponiblesTour[" << k << "]:" << HotelesDisponiblesTour[k] << endl;
+          }
           HotelesDisponiblesTour.erase(HotelesDisponiblesTour.begin() + numHotel);
+          auxiliaryString << "Post a eliminación" << endl;
           for (int k=0; k<HotelesDisponiblesTour.size(); k++){
             auxiliaryString << "HotelesDisponiblesTour[" << k << "]:" << HotelesDisponiblesTour[k] << endl;
           }
