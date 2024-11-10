@@ -604,7 +604,7 @@ void InsertOrDeletePOI(individuo *hijo){
 
   int numHotelesVistos = -1;
   vector<double> tripCost;
-  for (int i=0; i<hijo->cromosoma.size(); i++){
+  for (int i=0; i<hijo->cromosoma.size()-1; i++){
     if (hijo->cromosoma[i].find("H") == 0){
       numHotelesVistos++;
       tripCost.push_back(0.00);
