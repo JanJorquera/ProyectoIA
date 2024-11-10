@@ -229,7 +229,7 @@ void calculateDistances() {
     cout << "tam: " << coord.size() << endl;
     for (size_t i = 0; i < coord.size(); ++i) {
       for (size_t j = 0; j < coord.size(); ++j) {
-        printf("t[%d][%d] = %.5f\n",i,j,t[i][j]);
+        cout << "t[" << i << "][" << j << "] = " << t[i][j] << endl;
       }
     }
     getchar();
@@ -836,9 +836,16 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
   }
   //cout << auxiliaryString.str();
   //cout << "----------------------------------------------" << endl;
-  for (int l=0; l<HotelesTour.size(); l++){
-    cout << "H[" << l << "]=" << HotelesTour[l] << endl;
+  for (int l=0; l<HotelesDisponiblesTour.size(); l++){
+    cout << "H[" << l << "]=" << HotelesDisponiblesTour[l] << endl;
   }
+
+  cout << "-------------------------------------------" << endl;
+  for (int l=0; l<Tour.size(); l++){
+    cout << "Tour[" << l << "]=" << Tour[l] << endl;
+  }
+
+  cout << "-------------------------------------------" << endl;
   getchar();
 }
 
