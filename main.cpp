@@ -353,20 +353,30 @@ individuo * roulette_wheel (conjunto & c_temp) {
 }
 
 individuo * ktournament (conjunto & c_temp) {
-  individuo * i_temp;
+  individuo * i_temp = nullptr;;
+  /*
   conjunto aux ((char*)"poblacionAux");
 
   for (int i=0; i<kTournament; i++){
     aux.conj.push_back(c_temp.conj[int_rand(0,c_temp.conj.size())]);
   }
-  
+
   sort(aux.conj.begin(), aux.conj.end());
   i_temp = &(aux.conj.back());
-  
+  */
+
+  for (int i = 0; i < kTournament; i++) {
+    individuo* current = &c_temp.conj[int_rand(0, c_temp.conj.size())];
+    if (!i_temp || current->aptitud > i_temp->aptitud) {
+      i_temp = current;
+    }
+  }
+
+  /*
   cout << "a ver: " << i_temp->cromosoma.size() << endl;
   for (int i=0; i<i_temp->cromosoma.size(); i++){
     cout << "pos" << i << ": " << i_temp->cromosoma[i] << endl;
-  }
+  }*/
   return i_temp;
 }
 
