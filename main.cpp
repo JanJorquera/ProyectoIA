@@ -457,7 +457,6 @@ void replaceHotel(individuo *hijo){
     }
   }
 
-  // cout << "Llegas aqui3?" << endl;
   if (flagHotelSwap){
     int numHotelesVistos = -1;
     bool flagInsertPrevTrip = true;
@@ -581,9 +580,7 @@ void replaceHotel(individuo *hijo){
       }
       listaPoisDisponible.erase(listaPoisDisponible.begin()+posPOItoAdd);
     }
-    // cout << "Nunca sales de aqui" << endl;
   }
-  // cout << "Nunca sales de aqui1" << endl;
   return;
 }
 
@@ -1050,7 +1047,6 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
   getchar();
   */
 
-  // cout << "despues" << endl;
   for (int i=0; i<D; i++){
     isFeasibleAddPOIinTrip = true;
     POIsDispTrip = POIsDispTour;
@@ -1069,24 +1065,19 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
       i_temp.cromosoma.push_back(HotelesTour[i+1]);
       // cout << "pos: " << i + cantidadPOIsAddTour << endl;
       Trip.assign(i_temp.cromosoma.begin() + i + cantidadPOIsAddTourPastIteration, i_temp.cromosoma.end());
-      // cout << "aqui" << endl;
       /*
       for (int l=0; l<Trip.size(); l++){
         cout << "Trip[" << l << "]=" << Trip[l] << endl;
       }
       */
       if (checkTripFeasibility(Trip, i)){
-        // cout << "adentro" << endl;
         i_temp.cromosoma.pop_back();
-        // cout << "aca" << endl;
         POIsDispTour.erase(POIsDispTour.begin() + posPOI);
-        // cout << "por aca" << endl;
         cantidadPOIsAddTour++;
       } else {
         i_temp.cromosoma.pop_back();
         i_temp.cromosoma.pop_back();
       }
-      // cout << "aqui tal vez" << endl;
       cantidadPOIsAddTrip++;
       POIsDispTrip.erase(POIsDispTrip.begin() + posPOI);
     } 
@@ -1152,15 +1143,10 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     Trip.clear();
     trip++;
   }*/
-  // cout << "fin" << endl;
-
 
   //calculo de la aptitud del individuo
-  // cout << "hola que tal" << endl;
   calcular_aptitud(&i_temp);
-  // cout << "jajaja" << endl;
   c_temp.conj.push_back(i_temp);
-  // cout << "ddddddd" << endl;
   return;
 }
 
