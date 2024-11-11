@@ -302,7 +302,7 @@ void calcular_aptitud(individuo * temp) {
     if (temp->cromosoma[i+1] == "") {
       break;
     }
-    apt += t[getPos(temp->cromosoma[i])][getPos(temp->cromosoma[i+1])];
+    apt += S[getPos(temp->cromosoma[i])];
   }
   
   temp->aptitud = apt;
