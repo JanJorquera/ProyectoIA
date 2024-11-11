@@ -299,7 +299,7 @@ void calcular_aptitud(individuo * temp) {
   float apt=0;
   //calcular el costo del tour
   for(int i=0; i<(Tinstancia-1); i++){
-    if (temp->cromosoma[i+1] == "") {
+    if (temp->cromosoma[i] == "") {
       break;
     }
     apt += S[getPos(temp->cromosoma[i])];
