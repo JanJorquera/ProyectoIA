@@ -12,7 +12,7 @@ ps = 50					#Population size
 max_evals=1e+4			#Maximo de iteraciones
 eo = 1					#Se aplica o no elitismo
 so = 2					#Operador de selección
-semilla = 2
+semilla = 2				#Manejar aleatoriedad
 kTournament = 5			#Parametro condicional: Tamaño para k tournament
 
 comp:$(prog)
