@@ -910,6 +910,36 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   }
 
   if posHP1 != -1 {
+    int numHotelesVistos = -1;
+    for (size_t i=0; i<padre1->cromosoma.size(); i++){
+      if numHotelesVistos == posHP1 {
+        break;
+      }
+
+      if (individual->cromosoma[i].find("H") == 0){
+        numHotelesVistos++;
+      }
+      
+      hijo1->cromosoma.push_back(padre1->cromosoma[i]);
+    }
+
+
+    vector<string> tourFin;
+    for (size_t i=0; i<padre1->cromosoma.size(); i++){
+      if numHotelesVistos == posHP1 {
+        break;
+      }
+
+      if (individual->cromosoma[i].find("H") == 0){
+        numHotelesVistos++;
+      }
+      
+      hijo1->cromosoma.push_back(padre1->cromosoma[i]);
+    }
+
+
+    //Añadir al final el resto del tour del otro padre
+    hijo1->cromosoma.insert(hijo1->cromosoma.end(), tourFin.begin()+1, tourFin.end());
 
     //Borrar POIs duplicados
     vector<string> tourAux;
@@ -918,7 +948,8 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
         tourAux.push_back(hijo1->cromosoma[i]);
       }
     }
-    hijo1->cromosoma = tourAux
+    hijo1->cromosoma = tourAux;
+    cruzamientos++;
   }
 }
 
@@ -1288,6 +1319,7 @@ int main(int argc, char *argv[]) {
 
   //contador de mutaciones
   mutaciones=0;
+  cruzamientos=0;
   //int evaluaciones_ant = 0;
   //int prom_it;
   for (iteracion = 0; iteracion < max_iter; iteracion++) {
