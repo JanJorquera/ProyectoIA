@@ -608,6 +608,7 @@ void InsertOrDeletePOI(individuo *hijo){
     for (int i=0; i<hijo->cromosoma.size(); i++){
       if (hijo->cromosoma[i] == to_string(pos)){
         hijo->cromosoma.erase(hijo->cromosoma.begin() + i);
+        mutaciones++;
         return;
       }
     }
@@ -685,6 +686,7 @@ void InsertOrDeletePOI(individuo *hijo){
             if (posNewCost <= T[posTrip]){
               hijo->cromosoma.insert(hijo->cromosoma.begin() + i, to_string(pos));
               isPOIinserted = true;
+              mutaciones++;
             }
             break;
           }
@@ -700,6 +702,7 @@ void InsertOrDeletePOI(individuo *hijo){
             if (posNewCost <= T[posTrip]){
               hijo->cromosoma.insert(hijo->cromosoma.begin() + i, to_string(pos));
               isPOIinserted = true;
+              mutaciones++;
               break;
             }
           }
@@ -838,34 +841,118 @@ void mutar_conjunto(conjunto & in, conjunto & out, float mr) {
   return;
 }
 
+vector<string> getListaHoteles(individuo * individual){
+  vector<string> listaHoteles;
+  for (int i=0; i<individual->cromosoma){
+    if (individual->cromosoma[i].find("H") == 0){
+      listaHoteles.push_back(individual->cromosoma[i]);
+    }
+  }
+  return listaHoteles;
+}
+
+bool checkRepeatedHotels(vector<string> listaHotelesP1, vector<string> listaHotelesP2){
+  unordered_set<string> conjunto(listaHotelesP2.begin(), listaHotelesP2.end());
+
+  for (const string& elemento : listaHotelesP1) {
+      if (conjunto.find(elemento) != conjunto.end()) {
+          std::cout << elemento << " está en ambos vectores.\n";
+          return true;
+      }
+  }
+  return false;
+}
+
+void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
+  vector<string> listaHotelesP1 = getListaHoteles(padre1);
+  vector<string> listaHotelesP2 = getListaHoteles(padre2);
+  vector<string> listaHotelesP1Aux1(padre1);
+  vector<string> listaHotelesP2Aux1(padre2);
+  vector<string> tripAuxiliar;
+
+  listaHotelesP1Aux1.erase(listaHotelesP1Aux1.begin());
+  listaHotelesP2Aux1.erase(listaHotelesP2Aux1.begin());
+  listaHotelesP1Aux1.erase(listaHotelesP1Aux1.end() - 1);
+  listaHotelesP2Aux1.erase(listaHotelesP2Aux1.end() - 1);
+
+  vector<string> listaHotelesP1Aux2(listaHotelesP1Aux1);
+  vector<string> listaHotelesP2Aux2(listaHotelesP2Aux1);
+
+  if listaHotelesP1.size()<=3{
+    return;
+  }
+
+  int posHP1 = -1;
+  int posHP2 = -1;
+  for (size_t i=1; i<listaHotelesP1.size()-2; i++){
+    //Padre 1 forma la primera parte del tour del futuro hijo, padre 2 termina el tour
+    tripAuxiliar.push_back(listaHotelesP1[i]);
+    tripAuxiliar.push_back(listaHotelesP2[i+1]);
+    if posHP1 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux1, listaHotelesP2Aux1){
+      posHP1 = static_cast<int>(i);
+    }
+    listaHotelesP1Aux1.erase(listaHotelesP1Aux1.begin());
+    listaHotelesP2Aux1.erase(listaHotelesP2Aux1.end() - 1);
+
+    tripAuxiliar.clear();
+
+
+    //Padre 2 forma la primera parte del tour del futuro hijo, padre 1 termina el tour
+    tripAuxiliar.push_back(listaHotelesP2[i]);
+    tripAuxiliar.push_back(listaHotelesP1[i+1]);
+    if posHP2 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux2, listaHotelesP2Aux2){
+      posHP2 = static_cast<int>(i);
+    }
+    listaHotelesP2Aux2.erase(listaHotelesP2Aux2.begin());
+    listaHotelesP1Aux2.erase(listaHotelesP1Aux2.end() - 1);
+
+    tripAuxiliar.clear();
+  }
+
+  if posHP1 != -1 {
+
+    //Borrar POIs duplicados
+    vector<string> tourAux;
+    for (size_t i=0; i<hijo1->cromosoma.size(); i++){
+      if (find(tourAux.begin(), tourAux.end(), hijo1->cromosoma[i]) == tourAux.end()) {
+        tourAux.push_back(hijo1->cromosoma[i]);
+      }
+    }
+    hijo1->cromosoma = tourAux
+  }
+}
+
+void cruzar_individuos(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
+  if(float_rand(0.00, 1.00)<cr){
+    onepointcrossover(padre1,padre2,hijo1,hijo2);
+  } else {
+    *hijo1 = *padre1;
+    *hijo2 = *padre2;
+  }
+}
 
 void cruzar_conjunto(conjunto & in, conjunto & out, int n){
-  /*
   individuo * padre1;
   individuo * padre2;
   individuo hijo1, hijo2;
-  for (vector<individuo>::iterator p = in.conj.begin (); p != in.conj.end (); p++)
-    {
-      padre1 = &(*p);
-      p++;
-      if(p==in.conj.end ())
-      {
-	hijo1=*padre1;
-	out.conj.push_back(hijo1);
-	if(out.conj.size() == ps)
-	  {
-	    return;
-	  }
+  for (vector<individuo>::iterator p = in.conj.begin (); p != in.conj.end (); p++){
+    padre1 = &(*p);
+    p++;
+    if(p==in.conj.end ()){
+      hijo1=*padre1;
+      out.conj.push_back(hijo1);
+      if(out.conj.size() == ps) {
+          return;
       }
-      else{
-	padre2 = &(*p);
-	cruzar_individuos(padre1, padre2, &hijo1, &hijo2);
-	out.conj.push_back(hijo1);
-	out.conj.push_back(hijo2);
-       }
+    } else{
+      padre2 = &(*p);
+      cruzar_individuos(padre1, padre2, &hijo1, &hijo2);
+      out.conj.push_back(hijo1);
+      out.conj.push_back(hijo2);
     }
-  */
- out = in;
+  }
+
+ //out = in;
  return;
 }
 
