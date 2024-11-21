@@ -847,7 +847,7 @@ vector<string> getListaHoteles(individuo * individual){
   for (int i=0; i<individual->cromosoma.size(); i++){
     if (individual->cromosoma[i].find("H") == 0){
       listaHoteles.push_back(individual->cromosoma[i]);
-      cout << "hotel1 iesimo" << listaHoteles[countDebug++] << endl;
+      // cout << "hotel1 iesimo" << listaHoteles[countDebug++] << endl;
     }
   }
   return listaHoteles;
@@ -883,9 +883,14 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     return;
   }
 
-  for (size_t i=0; i<listaHotelesP1.size()-1; i++){
+  for (size_t i=0; i<listaHotelesP1.size(); i++){
     cout << "hotel1 iesimo" << listaHotelesP1[i] << endl;
-    cout << "hotel2 iesimo" << listaHotelesP2[i] << endl;
+  }
+
+  cout << "--------------------------------" << endl;
+
+  for (size_t i=0; i<listaHotelesP2.size(); i++){
+    cout << "hotel1 iesimo" << listaHotelesP2[i] << endl;
   }
 
   getchar();
