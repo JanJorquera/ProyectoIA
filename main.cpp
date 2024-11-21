@@ -922,7 +922,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 
     int numHotelesVistos = -1;
     for (size_t i=0; i<padre1->cromosoma.size(); i++){
-      if numHotelesVistos == posHP1 {
+      if (numHotelesVistos == posHP1) {
         break;
       }
 
@@ -938,7 +938,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 
     vector<string> tourFin;
     bool flagAdd = false;
-    numHotelesVistos = -1
+    numHotelesVistos = -1;
     for (size_t i=0; i<padre2->cromosoma.size(); i++){
       if (padre2->cromosoma[i].find("H") == 0){
         numHotelesVistos++;
@@ -946,14 +946,14 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
           flagAdd = true;
         }
       } else {
-        if !flagAdd {
+        if (!flagAdd) {
           if (find(listaPOIsDispPadres.begin(), listaPOIsDispPadres.end(), padre2->cromosoma[i]) == listaPOIsDispPadres.end()) {
             listaPOIsDispPadres.push_back(padre2->cromosoma[i]);
             listaPOIsDisp.erase(remove(listaPOIsDisp.begin(), listaPOIsDisp.end(), padre2->cromosoma[i]), listaPOIsDisp.end());
           }
         }
       }
-      if flagAdd {
+      if (flagAdd) {
         tourFin.push_back(padre2->cromosoma[i]);
         listaPOIsDisp.erase(remove(listaPOIsDisp.begin(), listaPOIsDisp.end(), padre2->cromosoma[i]), listaPOIsDisp.end());
       }
