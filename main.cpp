@@ -1,7 +1,7 @@
 #include "includes.h"
 #include "globales.h"
 
-bool debug = false;
+bool debug = true;
 bool debugGenerateFeasibleSequences = false;
 
 // Parámetros del problema
@@ -909,6 +909,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     tripAuxiliar.clear();
   }
 
+  //Cruzamiento factible
   if posHP1 != -1 {
     vector<string> listaPOIsDisp;
     vector<string> listaPOIsDispPadres;
