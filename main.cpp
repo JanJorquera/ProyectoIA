@@ -864,7 +864,7 @@ bool checkRepeatedHotels(vector<string> listaHotelesP1, vector<string> listaHote
   return false;
 }
 
-void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int posHP1){
+void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int posHP1, vector<string> listaHotelesP1, vector<string> listaHotelesP2){
   hijo1->cromosoma.clear();
   vector<string> listaPOIsDisp;
   vector<string> listaPOIsDispPadres;
@@ -1062,7 +1062,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 
   //Cruzamiento factible
   if (posHP1 != -1) {
-    doCrossover(padre1, padre2, hijo1, posHP1);
+    doCrossover(padre1, padre2, hijo1, posHP1, listaHotelesP1, listaHotelesP2);
     cruzamientos++;
   } else {
     *hijo1 = *padre1;
@@ -1070,7 +1070,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 
   //Cruzamiento factible
   if (posHP2 != -1) {
-    doCrossover(padre2, padre1, hijo2, posHP2);
+    doCrossover(padre2, padre1, hijo2, posHP2, listaHotelesP2, listaHotelesP1);
     cruzamientos++;
   } else {
     *hijo2 = *padre2;
