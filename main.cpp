@@ -1,7 +1,7 @@
 #include "includes.h"
 #include "globales.h"
 
-bool debug = false;
+bool debug = true;
 bool debugGenerateFeasibleSequences = false;
 
 // Parámetros del problema
@@ -899,10 +899,11 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   int posHP1 = -1;
   int posHP2 = -1;
 
-  // cout << "Comenzamos" << endl;
+  /*
+  cout << "Comenzamos" << endl;
   cout << "tam: " << listaHotelesP1.size() << endl;
 
-  /*
+  
   for (size_t i=0; i<listaHotelesP1.size(); i++){
     cout << "hotel1 iesimo" << listaHotelesP1[i] << endl;
   }
@@ -945,11 +946,13 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     }
   }
 
+  /*
   if (posHP1!=-1){
     cout << "Cruzamiento comienza" << endl;
   } else {
     cout << "No entra al cruzamiento" << endl;
   }
+  */
 
   //Cruzamiento factible
   if (posHP1 != -1) {
@@ -1031,16 +1034,20 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     //Añadir al final el trip (POIs de dicho trip)
     hijo1->cromosoma.insert(hijo1->cromosoma.end(), TripCrossPoint.begin()+1, TripCrossPoint.end()-1);
 
+    /*
     for (size_t i=0; i<tourFin.size(); i++){
       cout << "tourFin[" << i << "]= " << tourFin[i] << endl;
     }
+    */
 
     //Añadir al final el resto del tour del otro padre
     hijo1->cromosoma.insert(hijo1->cromosoma.end(), tourFin.begin(), tourFin.end());
 
+    /*
     for (size_t i=0; i<hijo1->cromosoma.size(); i++){
       cout << "hijo1->cromosoma[" << i << "]= " << hijo1->cromosoma[i] << endl;
     }
+    */
 
     /*
     //Borrar POIs duplicados
@@ -1064,11 +1071,13 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     *hijo2 = *padre2;
   }
 
+  /*
   if (posHP1!=-1){
     cout << "Cruzamiento superado" << endl;
   } else {
     cout << "Nunca entra al final" << endl;
   }
+  */
 }
 
 void cruzar_individuos(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
