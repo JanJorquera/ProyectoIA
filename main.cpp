@@ -883,6 +883,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     return;
   }
 
+  /*
   for (size_t i=0; i<listaHotelesP1.size(); i++){
     cout << "hotel1 iesimo" << listaHotelesP1[i] << endl;
   }
@@ -892,8 +893,8 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   for (size_t i=0; i<listaHotelesP2.size(); i++){
     cout << "hotel1 iesimo" << listaHotelesP2[i] << endl;
   }
-
   getchar();
+  */
 
   int posHP1 = -1;
   int posHP2 = -1;
@@ -920,6 +921,10 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     listaHotelesP1Aux2.erase(listaHotelesP1Aux2.end() - 1);
 
     tripAuxiliar.clear();
+
+    if (posHP1 != -1 && posHP2 != -1) {
+      break;
+    }
   }
 
   if (posHP1!=-1){
