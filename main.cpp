@@ -864,6 +864,112 @@ bool checkRepeatedHotels(vector<string> listaHotelesP1, vector<string> listaHote
   return false;
 }
 
+void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int posHP1){
+  hijo1->cromosoma.clear();
+  vector<string> listaPOIsDisp;
+  vector<string> listaPOIsDispPadres;
+  for (int i=0; i<N; i++){
+    listaPOIsDisp.push_back(to_string(i));
+  }
+
+  int numHotelesVistos = -1;
+  for (size_t i=0; i<padre1->cromosoma.size(); i++){
+    if (numHotelesVistos == posHP1) {
+      break;
+    }
+
+    if (padre1->cromosoma[i].find("H") == 0){
+      numHotelesVistos++;
+    } else {
+      listaPOIsDisp.erase(remove(listaPOIsDisp.begin(), listaPOIsDisp.end(), padre1->cromosoma[i]), listaPOIsDisp.end());
+    }
+    
+    hijo1->cromosoma.push_back(padre1->cromosoma[i]);
+  }
+
+
+  vector<string> tourFin;
+  bool flagAdd = false;
+  numHotelesVistos = -1;
+  for (size_t i=0; i<padre2->cromosoma.size(); i++){
+    if (padre2->cromosoma[i].find("H") == 0){
+      numHotelesVistos++;
+      if (numHotelesVistos == posHP1+1) {
+        flagAdd = true;
+      }
+    } else {
+      if (!flagAdd) {
+        if (find(listaPOIsDispPadres.begin(), listaPOIsDispPadres.end(), padre2->cromosoma[i]) == listaPOIsDispPadres.end()) {
+          listaPOIsDispPadres.push_back(padre2->cromosoma[i]);
+          listaPOIsDisp.erase(remove(listaPOIsDisp.begin(), listaPOIsDisp.end(), padre2->cromosoma[i]), listaPOIsDisp.end());
+        }
+      }
+    }
+    if (flagAdd) {
+      tourFin.push_back(padre2->cromosoma[i]);
+      listaPOIsDisp.erase(remove(listaPOIsDisp.begin(), listaPOIsDisp.end(), padre2->cromosoma[i]), listaPOIsDisp.end());
+    }
+  }
+
+  vector<string> TripCrossPoint;
+  TripCrossPoint.push_back(listaHotelesP1[posHP1]);
+
+  //Poblar con POIs de padres
+  for (size_t i=0; i<listaPOIsDispPadres.size(); i++){
+    TripCrossPoint.push_back(listaPOIsDispPadres[i]);
+    TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
+    if (!checkTripFeasibility(TripCrossPoint,posHP1)){
+      TripCrossPoint.pop_back();
+    }
+    TripCrossPoint.pop_back();
+  }
+  
+  //Poblar con POIs no visitados
+  for (size_t i=0; i<listaPOIsDisp.size(); i++){
+    TripCrossPoint.push_back(listaPOIsDisp[i]);
+    TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
+    if (!checkTripFeasibility(TripCrossPoint,posHP1)){
+      TripCrossPoint.pop_back();
+    }
+    TripCrossPoint.pop_back();
+  }
+  TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
+
+  /*
+  for (size_t i=0; i<TripCrossPoint.size(); i++){
+    cout << "TripCrossPoint[" << i << "]= " << TripCrossPoint[i] << endl;
+  }
+  */
+  //Añadir al final el trip (POIs de dicho trip)
+  hijo1->cromosoma.insert(hijo1->cromosoma.end(), TripCrossPoint.begin()+1, TripCrossPoint.end()-1);
+
+  /*
+  for (size_t i=0; i<tourFin.size(); i++){
+    cout << "tourFin[" << i << "]= " << tourFin[i] << endl;
+  }
+  */
+
+  //Añadir al final el resto del tour del otro padre
+  hijo1->cromosoma.insert(hijo1->cromosoma.end(), tourFin.begin(), tourFin.end());
+
+  /*
+  for (size_t i=0; i<hijo1->cromosoma.size(); i++){
+    cout << "hijo1->cromosoma[" << i << "]= " << hijo1->cromosoma[i] << endl;
+  }
+  */
+
+  /*
+  //Borrar POIs duplicados
+  vector<string> tourAux;
+  for (size_t i=0; i<hijo1->cromosoma.size(); i++){
+    if (find(tourAux.begin(), tourAux.end(), hijo1->cromosoma[i]) == tourAux.end()) {
+      tourAux.push_back(hijo1->cromosoma[i]);
+    }
+  }
+  hijo1->cromosoma = tourAux;
+  */
+}
+
 void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
   vector<string> listaHotelesP1 = getListaHoteles(padre1);
   vector<string> listaHotelesP2 = getListaHoteles(padre2);
@@ -956,118 +1062,17 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 
   //Cruzamiento factible
   if (posHP1 != -1) {
-    hijo1->cromosoma.clear();
-    vector<string> listaPOIsDisp;
-    vector<string> listaPOIsDispPadres;
-    for (int i=0; i<N; i++){
-      listaPOIsDisp.push_back(to_string(i));
-    }
-
-    int numHotelesVistos = -1;
-    for (size_t i=0; i<padre1->cromosoma.size(); i++){
-      if (numHotelesVistos == posHP1) {
-        break;
-      }
-
-      if (padre1->cromosoma[i].find("H") == 0){
-        numHotelesVistos++;
-      } else {
-        listaPOIsDisp.erase(remove(listaPOIsDisp.begin(), listaPOIsDisp.end(), padre1->cromosoma[i]), listaPOIsDisp.end());
-      }
-      
-      hijo1->cromosoma.push_back(padre1->cromosoma[i]);
-    }
-
-
-    vector<string> tourFin;
-    bool flagAdd = false;
-    numHotelesVistos = -1;
-    for (size_t i=0; i<padre2->cromosoma.size(); i++){
-      if (padre2->cromosoma[i].find("H") == 0){
-        numHotelesVistos++;
-        if (numHotelesVistos == posHP1+1) {
-          flagAdd = true;
-        }
-      } else {
-        if (!flagAdd) {
-          if (find(listaPOIsDispPadres.begin(), listaPOIsDispPadres.end(), padre2->cromosoma[i]) == listaPOIsDispPadres.end()) {
-            listaPOIsDispPadres.push_back(padre2->cromosoma[i]);
-            listaPOIsDisp.erase(remove(listaPOIsDisp.begin(), listaPOIsDisp.end(), padre2->cromosoma[i]), listaPOIsDisp.end());
-          }
-        }
-      }
-      if (flagAdd) {
-        tourFin.push_back(padre2->cromosoma[i]);
-        listaPOIsDisp.erase(remove(listaPOIsDisp.begin(), listaPOIsDisp.end(), padre2->cromosoma[i]), listaPOIsDisp.end());
-      }
-    }
-
-    vector<string> TripCrossPoint;
-    TripCrossPoint.push_back(listaHotelesP1[posHP1]);
-
-    //Poblar con POIs de padres
-    for (size_t i=0; i<listaPOIsDispPadres.size(); i++){
-      TripCrossPoint.push_back(listaPOIsDispPadres[i]);
-      TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
-      if (!checkTripFeasibility(TripCrossPoint,posHP1)){
-        TripCrossPoint.pop_back();
-      }
-      TripCrossPoint.pop_back();
-    }
-    
-    //Poblar con POIs no visitados
-    for (size_t i=0; i<listaPOIsDisp.size(); i++){
-      TripCrossPoint.push_back(listaPOIsDisp[i]);
-      TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
-      if (!checkTripFeasibility(TripCrossPoint,posHP1)){
-        TripCrossPoint.pop_back();
-      }
-      TripCrossPoint.pop_back();
-    }
-    TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
-
-    /*
-    for (size_t i=0; i<TripCrossPoint.size(); i++){
-      cout << "TripCrossPoint[" << i << "]= " << TripCrossPoint[i] << endl;
-    }
-    */
-    //Añadir al final el trip (POIs de dicho trip)
-    hijo1->cromosoma.insert(hijo1->cromosoma.end(), TripCrossPoint.begin()+1, TripCrossPoint.end()-1);
-
-    /*
-    for (size_t i=0; i<tourFin.size(); i++){
-      cout << "tourFin[" << i << "]= " << tourFin[i] << endl;
-    }
-    */
-
-    //Añadir al final el resto del tour del otro padre
-    hijo1->cromosoma.insert(hijo1->cromosoma.end(), tourFin.begin(), tourFin.end());
-
-    /*
-    for (size_t i=0; i<hijo1->cromosoma.size(); i++){
-      cout << "hijo1->cromosoma[" << i << "]= " << hijo1->cromosoma[i] << endl;
-    }
-    */
-
-    /*
-    //Borrar POIs duplicados
-    vector<string> tourAux;
-    for (size_t i=0; i<hijo1->cromosoma.size(); i++){
-      if (find(tourAux.begin(), tourAux.end(), hijo1->cromosoma[i]) == tourAux.end()) {
-        tourAux.push_back(hijo1->cromosoma[i]);
-      }
-    }
-    hijo1->cromosoma = tourAux;
-    */
+    doCrossover(padre1, padre2, hijo1, posHP1);
     cruzamientos++;
-  }
-
-  if (posHP1==-1){
+  } else {
     *hijo1 = *padre1;
   }
 
-  *hijo2 = *padre2;
-  if (posHP2==-1){
+  //Cruzamiento factible
+  if (posHP2 != -1) {
+    doCrossover(padre2, padre1, hijo2, posHP2);
+    cruzamientos++;
+  } else {
     *hijo2 = *padre2;
   }
 
