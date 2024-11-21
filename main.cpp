@@ -902,6 +902,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   cout << "Comenzamos" << endl;
   cout << "tam: " << listaHotelesP1.size() << endl;
 
+  /*
   for (size_t i=0; i<listaHotelesP1.size(); i++){
     cout << "hotel1 iesimo" << listaHotelesP1[i] << endl;
   }
@@ -913,6 +914,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   }
 
   cout << "//////////////////////////////" << endl;
+  */
   for (size_t i=1; i<listaHotelesP1.size()-2; i++){
     //Padre 1 forma la primera parte del tour del futuro hijo, padre 2 termina el tour
 
