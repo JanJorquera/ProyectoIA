@@ -3,7 +3,7 @@ comp = g++
 prog  = OPHS
 
 #El problema
-config = ./Instancias/100-35-2-3.ophs
+config = ./Instancias/100-80-12-6.ophs
 results = results.txt
 
 cr = 1				#Tasa de cruzamiento
