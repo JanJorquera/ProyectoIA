@@ -866,10 +866,10 @@ bool checkRepeatedHotels(vector<string> listaHotelesP1, vector<string> listaHote
 void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
   for (int i=0; i<padre1->cromosoma.size(); i++){
     if (padre1->cromosoma[i].find("H") == 0){
-      cout << "hotel iesimo" << listaHoteles[i] << endl;
+      cout << "hotel iesimo" << padre1->cromosoma[i] << endl;
     }
   }
-  
+
   vector<string> listaHotelesP1 = getListaHoteles(padre1);
   vector<string> listaHotelesP2 = getListaHoteles(padre2);
   vector<string> listaHotelesP1Aux1(listaHotelesP1);
