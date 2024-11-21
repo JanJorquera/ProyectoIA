@@ -899,7 +899,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   int posHP1 = -1;
   int posHP2 = -1;
 
-  cout << "Comenzamos" << endl;
+  // cout << "Comenzamos" << endl;
   cout << "tam: " << listaHotelesP1.size() << endl;
 
   /*
@@ -1037,6 +1037,9 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     //Añadir al final el resto del tour del otro padre
     hijo1->cromosoma.insert(hijo1->cromosoma.end(), tourFin.begin(), tourFin.end());
 
+    for (size_t i=0; i<hijo1->cromosoma.size(); i++){
+      cout << "hijo1->cromosoma[" << i << "]= " << hijo1->cromosoma[i] << endl;
+    }
 
     /*
     //Borrar POIs duplicados
