@@ -1038,9 +1038,12 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     hijo1->cromosoma = tourAux;
     cruzamientos++;
   }
+
   if (posHP1==-1){
     *hijo1 = *padre1;
   }
+
+  *hijo2 = *padre2;
   if (posHP2==-1){
     *hijo2 = *padre2;
   }
