@@ -869,8 +869,8 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 
   vector<string> listaHotelesP1 = getListaHoteles(padre1);
   vector<string> listaHotelesP2 = getListaHoteles(padre2);
-  vector<string> listaHotelesP1Aux1(padre1->cromosoma);
-  vector<string> listaHotelesP2Aux1(padre2->cromosoma);
+  vector<string> listaHotelesP1Aux1(listaHotelesP1);
+  vector<string> listaHotelesP2Aux1(listaHotelesP2);
   vector<string> tripAuxiliar;
 
   listaHotelesP1Aux1.erase(listaHotelesP1Aux1.begin());
