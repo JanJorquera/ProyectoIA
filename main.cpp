@@ -1020,6 +1020,9 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     }
     TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
 
+    for (size_t i=0; i<TripCrossPoint.size(); i++){
+      cout << "TripCrossPoint[" << i << "]= " TripCrossPoint[i] << endl;
+    }
     //Añadir al final el trip (POIs de dicho trip)
     hijo1->cromosoma.insert(hijo1->cromosoma.end(), TripCrossPoint.begin()+1, TripCrossPoint.end()-1);
 
