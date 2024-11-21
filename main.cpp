@@ -1052,14 +1052,6 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     }
   }
 
-  /*
-  if (posHP1!=-1){
-    cout << "Cruzamiento comienza" << endl;
-  } else {
-    cout << "No entra al cruzamiento" << endl;
-  }
-  */
-
   //Cruzamiento factible
   if (posHP1 != -1) {
     doCrossover(padre1, padre2, hijo1, posHP1, listaHotelesP1, listaHotelesP2);
@@ -1075,14 +1067,6 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   } else {
     *hijo2 = *padre2;
   }
-
-  /*
-  if (posHP1!=-1){
-    cout << "Cruzamiento superado" << endl;
-  } else {
-    cout << "Nunca entra al final" << endl;
-  }
-  */
 }
 
 void cruzar_individuos(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
