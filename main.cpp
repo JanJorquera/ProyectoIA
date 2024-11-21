@@ -863,9 +863,6 @@ bool checkRepeatedHotels(vector<string> listaHotelesP1, vector<string> listaHote
 }
 
 void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
-  *hijo1 = *padre1;
-  *hijo2 = *padre2;
-
   vector<string> listaHotelesP1 = getListaHoteles(padre1);
   vector<string> listaHotelesP2 = getListaHoteles(padre2);
   vector<string> listaHotelesP1Aux1(listaHotelesP1);
@@ -1003,6 +1000,13 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     hijo1->cromosoma = tourAux;
     cruzamientos++;
   }
+  if (posHP1==-1){
+    *hijo1 = *padre1;
+  }
+  if (posHP2==-1){
+    *hijo2 = *padre2;
+  }
+
   if (posHP1!=-1){
     cout << "Cruzamiento superado" << endl;
   } else {
