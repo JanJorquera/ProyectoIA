@@ -942,7 +942,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     for (size_t i=0; i<padre2->cromosoma.size(); i++){
       if (padre2->cromosoma[i].find("H") == 0){
         numHotelesVistos++;
-        if numHotelesVistos == posHP1+1 {
+        if (numHotelesVistos == posHP1+1) {
           flagAdd = true;
         }
       } else {
@@ -966,7 +966,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     for (size_t i=0; i<listaPOIsDispPadres.size(); i++){
       TripCrossPoint.push_back(listaPOIsDispPadres[i]);
       TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
-      if !(checkTripFeasibility(TripCrossPoint,posHP1)){
+      if (!checkTripFeasibility(TripCrossPoint,posHP1)){
         TripCrossPoint.pop_back();
       }
       TripCrossPoint.pop_back();
@@ -976,7 +976,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     for (size_t i=0; i<listaPOIsDisp.size(); i++){
       TripCrossPoint.push_back(listaPOIsDisp[i]);
       TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
-      if !(checkTripFeasibility(TripCrossPoint,posHP1)){
+      if (!checkTripFeasibility(TripCrossPoint,posHP1)){
         TripCrossPoint.pop_back();
       }
       TripCrossPoint.pop_back();
