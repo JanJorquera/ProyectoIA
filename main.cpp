@@ -856,7 +856,6 @@ bool checkRepeatedHotels(vector<string> listaHotelesP1, vector<string> listaHote
 
   for (const string& elemento : listaHotelesP1) {
       if (conjunto.find(elemento) != conjunto.end()) {
-          std::cout << elemento << " está en ambos vectores.\n";
           return true;
       }
   }
@@ -910,6 +909,12 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     listaHotelesP1Aux2.erase(listaHotelesP1Aux2.end() - 1);
 
     tripAuxiliar.clear();
+  }
+
+  if (posHP1!=-1){
+    cout << "Cruzamiento comienza" << endl;
+  } else {
+    cout << "No entra al cruzamiento" << endl;
   }
 
   //Cruzamiento factible
@@ -997,6 +1002,11 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     }
     hijo1->cromosoma = tourAux;
     cruzamientos++;
+  }
+  if (posHP1!=-1){
+    cout << "Cruzamiento superado" << endl;
+  } else {
+    cout << "Nunca entra al final" << endl;
   }
 }
 
