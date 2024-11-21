@@ -900,7 +900,10 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   int posHP2 = -1;
   cout << "Comenzamos" << endl;
   for (size_t i=1; i<listaHotelesP1.size()-2; i++){
+
+    cout << "i al inicio" << i << endl;
     //Padre 1 forma la primera parte del tour del futuro hijo, padre 2 termina el tour
+
     tripAuxiliar.push_back(listaHotelesP1[i]);
     tripAuxiliar.push_back(listaHotelesP2[i+1]);
     if (posHP1 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux1, listaHotelesP2Aux1)){
@@ -927,7 +930,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
       break;
     }
 
-    cout << i << endl;
+    cout << "i al final" << i << endl;
   }
 
   if (posHP1!=-1){
