@@ -953,6 +953,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 
   //Cruzamiento factible
   if (posHP1 != -1) {
+    hijo1->cromosoma.clear();
     vector<string> listaPOIsDisp;
     vector<string> listaPOIsDispPadres;
     for (int i=0; i<N; i++){
