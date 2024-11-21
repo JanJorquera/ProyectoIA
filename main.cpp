@@ -843,7 +843,7 @@ void mutar_conjunto(conjunto & in, conjunto & out, float mr) {
 
 vector<string> getListaHoteles(individuo * individual){
   vector<string> listaHoteles;
-  for (int i=0; i<individual->cromosoma){
+  for (int i=0; i<individual->cromosoma.size(); i++){
     if (individual->cromosoma[i].find("H") == 0){
       listaHoteles.push_back(individual->cromosoma[i]);
     }
@@ -866,7 +866,7 @@ bool checkRepeatedHotels(vector<string> listaHotelesP1, vector<string> listaHote
 void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
   *hijo1 = *padre1;
   *hijo2 = *padre2;
-  
+
   vector<string> listaHotelesP1 = getListaHoteles(padre1);
   vector<string> listaHotelesP2 = getListaHoteles(padre2);
   vector<string> listaHotelesP1Aux1(padre1);
