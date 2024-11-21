@@ -958,7 +958,6 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
   }
   */
 
-  /*
   //Borrar POIs duplicados
   vector<string> tourAux;
   for (size_t i=0; i<hijo1->cromosoma.size(); i++){
@@ -967,7 +966,6 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
     }
   }
   hijo1->cromosoma = tourAux;
-  */
 }
 
 void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
