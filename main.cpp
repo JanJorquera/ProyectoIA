@@ -1,7 +1,7 @@
 #include "includes.h"
 #include "globales.h"
 
-bool debug = true;
+bool debug = false;
 bool debugGenerateFeasibleSequences = false;
 
 // Parámetros del problema
