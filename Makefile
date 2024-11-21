@@ -6,7 +6,7 @@ prog  = OPHS
 config = ./Instancias/100-240-15-10.ophs
 results = results.txt
 
-cr = 0.3				#Tasa de cruzamiento
+cr = 0				#Tasa de cruzamiento
 mr = 0.01				#Tasa de mutación
 ps = 50					#Population size
 max_evals=1e+4			#Maximo de iteraciones
