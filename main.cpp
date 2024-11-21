@@ -899,6 +899,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   int posHP1 = -1;
   int posHP2 = -1;
   cout << "Comenzamos" << endl;
+  cout << "tam: " << listaHotelesP1.size() << endl;
   for (size_t i=1; i<listaHotelesP1.size()-2; i++){
 
     cout << "i al inicio" << i << endl;
