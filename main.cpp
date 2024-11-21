@@ -1035,6 +1035,8 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     //Añadir al final el resto del tour del otro padre
     hijo1->cromosoma.insert(hijo1->cromosoma.end(), tourFin.begin(), tourFin.end());
 
+
+    /*
     //Borrar POIs duplicados
     vector<string> tourAux;
     for (size_t i=0; i<hijo1->cromosoma.size(); i++){
@@ -1043,6 +1045,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
       }
     }
     hijo1->cromosoma = tourAux;
+    */
     cruzamientos++;
   }
 
