@@ -898,6 +898,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 
   int posHP1 = -1;
   int posHP2 = -1;
+  cout << "Comenzamos" << endl;
   for (size_t i=1; i<listaHotelesP1.size()-2; i++){
     //Padre 1 forma la primera parte del tour del futuro hijo, padre 2 termina el tour
     tripAuxiliar.push_back(listaHotelesP1[i]);
@@ -925,6 +926,8 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     if (posHP1 != -1 && posHP2 != -1) {
       break;
     }
+
+    cout << i << endl;
   }
 
   if (posHP1!=-1){
