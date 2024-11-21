@@ -881,7 +881,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   vector<string> listaHotelesP1Aux2(listaHotelesP1Aux1);
   vector<string> listaHotelesP2Aux2(listaHotelesP2Aux1);
 
-  if listaHotelesP1.size()<=3{
+  if (listaHotelesP1.size()<=3){
     return;
   }
 
@@ -891,7 +891,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     //Padre 1 forma la primera parte del tour del futuro hijo, padre 2 termina el tour
     tripAuxiliar.push_back(listaHotelesP1[i]);
     tripAuxiliar.push_back(listaHotelesP2[i+1]);
-    if posHP1 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux1, listaHotelesP2Aux1){
+    if (posHP1 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux1, listaHotelesP2Aux1)){
       posHP1 = static_cast<int>(i);
     }
     listaHotelesP1Aux1.erase(listaHotelesP1Aux1.begin());
@@ -903,7 +903,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     //Padre 2 forma la primera parte del tour del futuro hijo, padre 1 termina el tour
     tripAuxiliar.push_back(listaHotelesP2[i]);
     tripAuxiliar.push_back(listaHotelesP1[i+1]);
-    if posHP2 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux2, listaHotelesP2Aux2){
+    if (posHP2 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux2, listaHotelesP2Aux2)){
       posHP2 = static_cast<int>(i);
     }
     listaHotelesP2Aux2.erase(listaHotelesP2Aux2.begin());
@@ -913,7 +913,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   }
 
   //Cruzamiento factible
-  if posHP1 != -1 {
+  if (posHP1 != -1) {
     vector<string> listaPOIsDisp;
     vector<string> listaPOIsDispPadres;
     for (int i=0; i<N; i++){
