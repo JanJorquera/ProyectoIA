@@ -909,6 +909,9 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
   hijo1->cromosoma = tourAux;
 }
 
+//Funcion que determina si es factible realizar un cruzamiento en un punto (trip pivote)
+//dados 2 padres. En caso de ser factible, invoca a doCrossover para la realizacion del cruce,
+//en caso contrario, no realiza el cruce y retorna a los padres.
 void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
   vector<string> listaHotelesP1 = getListaHoteles(padre1);
   vector<string> listaHotelesP2 = getListaHoteles(padre2);
@@ -930,6 +933,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     return;
   }
 
+
   /*
   for (size_t i=0; i<listaHotelesP1.size(); i++){
     cout << "hotel1 iesimo" << listaHotelesP1[i] << endl;
@@ -943,32 +947,19 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   getchar();
   */
 
+
   int posHP1 = -1;
   int posHP2 = -1;
 
-  /*
-  cout << "Comenzamos" << endl;
-  cout << "tam: " << listaHotelesP1.size() << endl;
-
-  
-  for (size_t i=0; i<listaHotelesP1.size(); i++){
-    cout << "hotel1 iesimo" << listaHotelesP1[i] << endl;
-  }
-
-  cout << "--------------------------------" << endl;
-
-  for (size_t i=0; i<listaHotelesP2.size(); i++){
-    cout << "hotel1 iesimo" << listaHotelesP2[i] << endl;
-  }
-
-  cout << "//////////////////////////////" << endl;
-  */
+  //Itera recorriendo la secuencia de hoteles hasta encontrar un trip pivote. En caso de no
+  //Encontrarlo, simplemente no se realiza el cruzamiento.
   for (size_t i=1; i<listaHotelesP1.size()-2; i++){
     //Padre 1 forma la primera parte del tour del futuro hijo, padre 2 termina el tour
 
     tripAuxiliar.push_back(listaHotelesP1[i]);
     tripAuxiliar.push_back(listaHotelesP2[i+1]);
     if (posHP1 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux1, listaHotelesP2Aux1)){
+      //Almacena la posicion del hotel en caso de que sea factible hacer el cruce en dicho trip.
       posHP1 = static_cast<int>(i);
     }
     listaHotelesP1Aux1.erase(listaHotelesP1Aux1.begin());
@@ -981,6 +972,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     tripAuxiliar.push_back(listaHotelesP2[i]);
     tripAuxiliar.push_back(listaHotelesP1[i+1]);
     if (posHP2 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux2, listaHotelesP2Aux2)){
+      //Almacena la posicion del hotel en caso de que sea factible hacer el cruce en dicho trip.
       posHP2 = static_cast<int>(i);
     }
     listaHotelesP2Aux2.erase(listaHotelesP2Aux2.begin());
@@ -995,6 +987,8 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 
   //Cruzamiento factible
   if (posHP1 != -1) {
+    //Invoca funcion que realiza el cruzamiento, considerando la posicion del hotel que comienza
+    //dicho nuevo trip.
     doCrossover(padre1, padre2, hijo1, posHP1, listaHotelesP1, listaHotelesP2);
     cruzamientos++;
   } else {
@@ -1004,6 +998,8 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 
   //Cruzamiento factible
   if (posHP2 != -1) {
+    //Invoca funcion que realiza el cruzamiento, considerando la posicion del hotel que comienza
+    //dicho nuevo trip.
     doCrossover(padre2, padre1, hijo2, posHP2, listaHotelesP2, listaHotelesP1);
     cruzamientos++;
   } else {
@@ -1025,7 +1021,7 @@ void cruzar_individuos(individuo * padre1, individuo * padre2, individuo * hijo1
 }
 
 //Funcion para cruzar la poblacion. Para ello itera sobre todos los padres, y genera nuevos 
-//individuos apoyandose de la funcion cruzar individuos definida arriba.
+//individuos apoyandose de la funcion cruzar_individuos definida arriba.
 void cruzar_conjunto(conjunto & in, conjunto & out, int n){
   individuo * padre1;
   individuo * padre2;
@@ -1134,7 +1130,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           cantHotelesQuitadosTrip++;
           Trip.pop_back();
         } else {
-          //En caso contrario, se incorpora dicho hotel al tour.
+          //En caso contrario, se incorpora dicho hotel al tour (es factible su incorporacion)
           if (debugGenerateFeasibleSequences) {
             auxiliaryString << i << endl;
             auxiliaryString << "numHotel: " << numHotel << endl;
