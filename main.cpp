@@ -666,6 +666,8 @@ void InsertOrDeletePOI(individuo *hijo){
 
     int numHotelesVistos = -1;
     vector<double> tripCost;
+    //Determinar el costo utilizado hasta el momento en cada trip. Para ello se itera 
+    //por el cromosoma del individuo
     for (int i=0; i<hijo->cromosoma.size(); i++){
       if (hijo->cromosoma[i].find("H") == 0){
         if (numHotelesVistos != -1){
@@ -700,6 +702,8 @@ void InsertOrDeletePOI(individuo *hijo){
     int auxTrip;
     bool isPOIinserted = false;
     bool flagTripFound;
+
+    //Itera hasta insertar un POI en cualquiera de los trips
     for (int j=0; j<D; j++){
       if (isPOIinserted){
         break;
@@ -711,6 +715,10 @@ void InsertOrDeletePOI(individuo *hijo){
 
       numHotelesVistos = -1;
       flagTripFound = false;
+
+      //Iterar en un determinado trip buscando la primera posicion en la que el POI pueda
+      //ser insertado. En caso de encontrarla, setea la flag isPOIinserted. En caso de que no exista,
+      //simplemente no se inserta.
       for (int i=0; i<hijo->cromosoma.size(); i++){
         if (hijo->cromosoma[i].find("H") == 0){
           if (flagTripFound){
@@ -746,7 +754,7 @@ void InsertOrDeletePOI(individuo *hijo){
   return;
 }
 
-//Funcion para mutar a un individuo. Se apoya de las 2 funciones definadas arriba.
+//Funcion para mutar a un individuo. Se apoya de las funciones definadas arriba.
 //solo se realiza la mutacion cuando el numero aleatorio es menor a la tasa de mutacion (mr)
 void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
   *hijo = *padre;
@@ -952,10 +960,12 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   int posHP2 = -1;
 
   //Itera recorriendo la secuencia de hoteles hasta encontrar un trip pivote. En caso de no
-  //Encontrarlo, simplemente no se realiza el cruzamiento.
+  //encontrarlo, simplemente no se realiza el cruzamiento.
   for (size_t i=1; i<listaHotelesP1.size()-2; i++){
-    //Padre 1 forma la primera parte del tour del futuro hijo, padre 2 termina el tour
 
+    //Probar realizar cruce en que
+    //Padre 1 forma la primera parte del tour del futuro hijo hasta llegar a trip pivote
+    //padre 2 termina el tour
     tripAuxiliar.push_back(listaHotelesP1[i]);
     tripAuxiliar.push_back(listaHotelesP2[i+1]);
     if (posHP1 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux1, listaHotelesP2Aux1)){
@@ -968,7 +978,9 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     tripAuxiliar.clear();
 
 
-    //Padre 2 forma la primera parte del tour del futuro hijo, padre 1 termina el tour
+    //Probar realizar cruce en que
+    //Padre 2 forma la primera parte del tour del futuro hijo hasta llegar a trip pivote
+    //padre 1 termina el tour
     tripAuxiliar.push_back(listaHotelesP2[i]);
     tripAuxiliar.push_back(listaHotelesP1[i+1]);
     if (posHP2 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux2, listaHotelesP2Aux2)){
