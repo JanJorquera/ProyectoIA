@@ -14,7 +14,7 @@ Para Ejecutar use:
 make exe
 
 Linea de ejecucion:
-./OPHS ruta_instancia/nombre_instancia archivo_resultados operador_seleccion elitismo_opcional tasa_cruzamiento tasa_mutacion tamano_poblacion maximo_evaluaciones semilla tamano_torneo
+./OPHS ruta_instancia/nombre_instancia operador_seleccion elitismo_opcional tasa_cruzamiento tasa_mutacion tamano_poblacion maximo_evaluaciones semilla tamano_torneo
 
 operador_seleccion:
 1: ROULETTE, 2: TOURNAMENT

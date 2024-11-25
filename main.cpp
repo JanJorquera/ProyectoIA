@@ -14,7 +14,6 @@ vector<vector<double>> coord;
 double Tmax;
 
 static void control_c (int signo) {
-  //escribir_en_archivo_resultados(&optimo);
   exit (1);
 }
 
@@ -22,28 +21,26 @@ static void control_c (int signo) {
 int Leer_entradas(int argc, char **argv) {
   //archivo con la instancia del problema
   archivo_configuracion = argv[1];
-  //archivo donde escribir los resultados de la ejecucion
-  archivo_resultados = argv[2];
   
   //PARAMETROS
-  so = atoi(argv[3]); //selection operator 
-  eo = atoi(argv[4]); //elitism operator
-  cr = atof(argv[5]); //crossover rate
-  mr = atof(argv[6]); //mutation rate
-  ps = atoi(argv[7]); //population size
+  so = atoi(argv[2]); //selection operator 
+  eo = atoi(argv[3]); //elitism operator
+  cr = atof(argv[4]); //crossover rate
+  mr = atof(argv[5]); //mutation rate
+  ps = atoi(argv[6]); //population size
   if(debug) {
     printf("so: %d, eo: %d, mr: %.2f, cr: %.2f, ps: %d\n", so, eo, mr, cr, ps);
     getchar();
   }
   //BUDGET
-  max_iter = (int)(atof(argv[8]));
+  max_iter = (int)(atof(argv[7]));
   maximo_evaluaciones = max_iter;
   //SEMILLA
-  semilla = atoi (argv[9]);
+  semilla = atoi (argv[8]);
   //KTOURNAMENT
   if (so == 2){
     try {
-      kTournament = atoi (argv[10]);
+      kTournament = atoi (argv[9]);
     } catch (const exception& e) {
       cerr << "Error en tamaño de torneo" << endl;
       exit(1);
@@ -52,6 +49,9 @@ int Leer_entradas(int argc, char **argv) {
   return 1;
 }
 
+//Funcion para obtener la posicion de un vertice en los arreglos de memoria.
+//En los arreglos, las primeras H celdas corresponden a los hoteles.
+//Las siguientes N corresponden a POIs.
 int getPos(string vertex){
   if (vertex.find("H") == 0) {
     return stoi(vertex.substr(1));
@@ -59,6 +59,7 @@ int getPos(string vertex){
   return HP1+stoi(vertex);
 }
 
+//Funcion para calcular el costo de un trip, dada su composicion de hoteles y POIs.
 double calculateTripCost(vector<string> trip){
   double costo = 0;
   for (int i=0; i<trip.size()-1; i++){
@@ -67,6 +68,8 @@ double calculateTripCost(vector<string> trip){
   return costo;
 }
 
+//Funcion para calcular el costo del trip numTrip de un tour.
+//Se utiliza principalmente en la salida para mostrar al individuo optimo y sus costos por trip.
 double findTrip(int numTrip, individuo &individuoPoblacion){
   int numHotelesVistos = -1;
   vector<string> trip;
@@ -90,9 +93,8 @@ double findTrip(int numTrip, individuo &individuoPoblacion){
   return calculateTripCost(trip);
 }
 
+//Funcion para mostrar la salida en el formato especificado.
 void salir(void) {
-  // escribir_en_archivo_resultados(&optimo);
-  //salida sin error
   ostringstream resultado;
   for (size_t i = 0; i < optimo.cromosoma.size(); ++i) {
     resultado << optimo.cromosoma[i];
@@ -222,7 +224,7 @@ float float_rand (float a, float b) {
   return retorno;
 }
 
-
+//Funcion para calcular las distancias entre cada par de vertices.
 void calculateDistances() {
   for (size_t i = 0; i < coord.size(); ++i) {
     for (size_t j = 0; j < coord.size(); ++j) {
@@ -241,6 +243,7 @@ void calculateDistances() {
   }
 }
 
+//Funcion para chequear si un trip es factible, es decir que no exceda su presupuesto (BUDGET)
 bool checkTripFeasibility(vector<string> Trip, int numTrip){
   double costo = 0;
   int posInicio = getPos(Trip[0]);
@@ -261,6 +264,8 @@ bool checkTripFeasibility(vector<string> Trip, int numTrip){
   return true;
 }
 
+//Funcion para almacenar un individuo como optimo en caso de que su funcion de aptitud
+//entregue un mejor valor que el optimo ya encontrado.
 void guardar_optimo_encontrado (int aptitud_optimo, individuo temp) {
   //recuerda el optimo encontrado
   optimo = temp;
@@ -279,6 +284,8 @@ void guardar_optimo_encontrado (int aptitud_optimo, individuo temp) {
   return;
 }
 
+//Funcion para guardar el optimo dentro de la poblacion en caso de que suponga una mejora
+//respecto al optimo ya encontrado.
 void guardar_optimo(conjunto & c_temp) {
   sort(c_temp.conj.begin(), c_temp.conj.end());
   if(c_temp.conj.front().aptitud > optimo.aptitud){
@@ -286,7 +293,6 @@ void guardar_optimo(conjunto & c_temp) {
     iteracion_opt = iteracion;
     evaluacion_opt = evaluaciones;
     Fin_opt = time(NULL);
-    //cout<<iteracion<<" "<< optimo.aptitud<<endl;
   }
   //Si se cumplen XX evaluaciones sin cambio se acaba
   if((evaluaciones - evaluacion_opt)>1000000){
@@ -301,14 +307,11 @@ void calcular_aptitud(individuo * temp) {
     return;  
   }
   float apt=0;
+
   //calcular adaptabilidad del tour
-  //vector<double> aux;
   for(int i=0; i<temp->cromosoma.size(); i++){
-    //cout << "S[" << temp->cromosoma[i] << "] = " << S[getPos(temp->cromosoma[i])] << endl;
     apt += S[getPos(temp->cromosoma[i])];
-    //aux.push_back(S[getPos(temp->cromosoma[i])]);
   }
-  //cout << "------------------------" << endl;
   
   temp->aptitud = apt;
 
@@ -331,6 +334,8 @@ void calcular_aptitud(individuo * temp) {
 }
 
 //Seleccion de individuos//
+//Operador de ruleta implementado de forma opcional, como complemento.
+//Para efectos del proyecto, se trabaja con torneo de tamaño k,
 individuo * roulette_wheel (conjunto & c_temp) {
   int i = 0;
   float rand;
@@ -369,6 +374,8 @@ individuo * roulette_wheel (conjunto & c_temp) {
   return i_temp;
 }
 
+//Operador de seleccion torneo tamaño k. Selecciona k individuos aleatorios dentro de una
+//poblacion, y retorna aquel que tenga mayor aptitud de los k individuos.
 individuo * ktournament (conjunto & c_temp) {
   individuo * i_temp = nullptr;
   for (int i = 0; i < kTournament; i++) {
@@ -380,6 +387,8 @@ individuo * ktournament (conjunto & c_temp) {
   return i_temp;
 }
 
+//Funcion para seleccionar un individuo en la poblacion.
+//Puede utilizar Torneo tamaño k o Ruleta, este ultimo implementado como complemento.
 individuo * seleccionar_individuo (conjunto & c_temp) {
   individuo * i_temp;
   switch(so) {
@@ -396,6 +405,8 @@ individuo * seleccionar_individuo (conjunto & c_temp) {
    }
 }
 
+//Funcion para seleccionar en la poblacion aquellos individuos que seran los padres
+//de la proxima generacion. Se apoya de la funcion seleccionar_individuo, definida arriba.
 void seleccionar_conjunto(conjunto & in, conjunto & out, int n) {
   individuo * p_i_temp;
   for(int i=0; i<n; i++){
@@ -409,12 +420,13 @@ void seleccionar_conjunto(conjunto & in, conjunto & out, int n) {
 
 
 //Mutación
+//Operador de mutacion que reemplaza un hotel por otro hotel no visitado, con la finalidad
+//de favorecer diversificacion en la poblacion.
 void replaceHotel(individuo *hijo){
   vector<string> listaHotelesTour;
   vector<string> listaPois;
   int pos = int_rand(1,D);
 
-  // cout << "tamaño hijo: " << hijo->cromosoma.size() << endl; 
   for (int i=0; i<hijo->cromosoma.size(); i++){
     if (hijo->cromosoma[i].find("H") == 0){
       listaHotelesTour.push_back(hijo->cromosoma[i]);
@@ -448,15 +460,17 @@ void replaceHotel(individuo *hijo){
   size_t sizeAux;
   vector<string> tripPrevHotel;
   vector<string> tripPostHotel;
+
+  //Recorrer la lista de hoteles del individuo para ver si alguno de ellos se puede reemplazar
+  //por algun hotel no visitado, de tal forma que su reemplazo mantenga la factibilidad
+  //de los 2 trips en los que pertenece el hotel que se desea reemplazar.
   for (int i=1; i<listaHotelesTour.size()-1; i++){
     if (flagHotelSwap){
       break;
     }
     listaHotelesDAux = listaHotelesD;
     sizeAux = listaHotelesDAux.size();
-    // cout << "sizeAux: " << sizeAux << endl;
     for (size_t j=0; j<sizeAux; j++){
-      // cout << "j: " << j << endl;
       posHotel = int_rand(0,listaHotelesDAux.size());
       if (t[getPos(listaHotelesTour[i-1])][getPos(listaHotelesDAux[posHotel])] <= T[i-1] && t[getPos(listaHotelesDAux[posHotel])][getPos(listaHotelesTour[i+1])] <= T[i]){
         flagHotelSwap = true;
@@ -467,11 +481,14 @@ void replaceHotel(individuo *hijo){
     }
   }
 
+  //Es factible el reemplazo del hotel, se realiza la mutacion.
   if (flagHotelSwap){
     int numHotelesVistos = -1;
     bool flagInsertPrevTrip = true;
     bool flagInsertPostTrip = true;
     
+    //Recorrer el cromosoma del padre para identificar POIs disponibles para ser
+    //añadidos en los 2 nuevos trips que tendra el individuo mutado.
     for (int i=0; i<hijo->cromosoma.size(); i++){
       if (hijo->cromosoma[i].find("H") == 0){
         numHotelesVistos++;
@@ -522,6 +539,8 @@ void replaceHotel(individuo *hijo){
     int posPOItoAdd, posPOI;
     string POItoAdd;
     vector<string> tripAuxiliary;
+
+    //Insertar POIs en los nuevos trips modificados en el individuo.
     while (isFeasibleAddPoiInBothTrips){
       if (listaPoisDisponible.size() == 0){
         break;
@@ -594,7 +613,10 @@ void replaceHotel(individuo *hijo){
   return;
 }
 
+//Operador de mutacion para insertar o eliminar un POI para favorecer la diversificacion.
 void InsertOrDeletePOI(individuo *hijo){
+  //Distribucion de probabilidad que favorece la insercion de POIs cuando el trip
+  //ocupa "poco" del presupuesto maximo.
   auto calculateProbability = [](double ratio) {
     return exp(-10.00 * (1 - ratio));
   };
@@ -724,9 +746,11 @@ void InsertOrDeletePOI(individuo *hijo){
   return;
 }
 
+//Funcion para mutar a un individuo. Se apoya de las 2 funciones definadas arriba.
+//solo se realiza la mutacion cuando el numero aleatorio es menor a la tasa de mutacion (mr)
 void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
-  // cout << "tamaño padre: " << padre->cromosoma.size() << endl;
   *hijo = *padre;
+
   /*cout << "tamaño: " << hijo->cromosoma.size() << endl;
   for (int i=0; i<hijo->cromosoma.size(); i++){
     cout << "hijo->cromosoma[" << i << "]: " << hijo->cromosoma[i] << endl;
@@ -739,6 +763,8 @@ void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
   return;
 }
 
+//Funcion para aplicar mutacion en la poblacion. Se apoya de la funcion definida arriba para
+//mutar un individuo.
 void mutar_conjunto(conjunto & in, conjunto & out, float mr) {
   individuo * p_seleccionado;
   for (vector<individuo>::iterator p = in.conj.begin (); p != in.conj.end (); p++){
@@ -751,6 +777,7 @@ void mutar_conjunto(conjunto & in, conjunto & out, float mr) {
   return;
 }
 
+//Funcion para obtener la lista de hoteles del tour de un individuo.
 vector<string> getListaHoteles(individuo * individual){
   vector<string> listaHoteles;
   int countDebug = 0;
@@ -763,6 +790,7 @@ vector<string> getListaHoteles(individuo * individual){
   return listaHoteles;
 }
 
+//Funcion para chequear si 2 listas de Hoteles tienen hoteles repetidos.
 bool checkRepeatedHotels(vector<string> listaHotelesP1, vector<string> listaHotelesP2){
   unordered_set<string> conjunto(listaHotelesP2.begin(), listaHotelesP2.end());
 
@@ -774,6 +802,9 @@ bool checkRepeatedHotels(vector<string> listaHotelesP1, vector<string> listaHote
   return false;
 }
 
+
+//Cruzamiento
+//Funcion que realiza el cruzamiento entre 2 padres.
 void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int posHP1, vector<string> listaHotelesP1, vector<string> listaHotelesP2){
   hijo1->cromosoma.clear();
   vector<string> listaPOIsDisp;
@@ -1244,7 +1275,10 @@ void crear_poblacion_inicial(conjunto &poblacion, int size){
 
 
 
-
+//Funcion principal, aplica un Algoritmo Genetico para la resolucion de OPHS. Primero lee las
+//entradas e instancias, para luego generar la poblacion inicial, y luego entrar al loop principal
+//donde aplica seleccion, luego cruzamiento, mutacion y finalmente elitismo opcional. Retorna
+//(imprime) el mejor individuo encontrado en la poblacion.
 int main(int argc, char *argv[]) {
   //lectura de parametros
   if(!Leer_entradas(argc,argv)){
@@ -1273,7 +1307,6 @@ int main(int argc, char *argv[]) {
   srand48 (semilla);
 
   //creacion de poblacion inicial aleatoria
-  // inicializar_archivo_convergencia();
   conjunto poblacion ((char*)"poblacion");
   crear_poblacion_inicial(poblacion, ps);
 
@@ -1286,8 +1319,6 @@ int main(int argc, char *argv[]) {
   //contador de mutaciones
   mutaciones=0;
   cruzamientos=0;
-  //int evaluaciones_ant = 0;
-  //int prom_it;
   for (iteracion = 0; iteracion < max_iter; iteracion++) {
     time_t ini_it=time(NULL);
     conjunto seleccionados ((char*)"seleccionados");

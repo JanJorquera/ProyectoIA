@@ -4,7 +4,6 @@ prog  = OPHS
 
 #El problema
 config = ./Instancias/10-24-1-2.ophs
-results = results.txt
 
 cr = 0.3				#Tasa de cruzamiento
 mr = 0.1				#Tasa de mutación
@@ -13,13 +12,13 @@ max_evals=1e+4			#Maximo de iteraciones
 eo = 1					#Se aplica o no elitismo
 so = 2					#Operador de selección
 semilla = 2				#Manejar aleatoriedad
-kTournament = 5			#Parametro condicional: Tamaño para k tournament
+kTournament = 5			#Tamaño para k tournament
 
 comp:$(prog)
 
 exe:$(prog)
 	#valgrind --leak-check=full --show-reachable=yes 
-	./$(prog) $(config) $(results) ${so} ${eo} $(cr) $(mr) $(ps) $(max_evals) $(semilla) ${kTournament}
+	./$(prog) $(config) ${so} ${eo} $(cr) $(mr) $(ps) $(max_evals) $(semilla) ${kTournament}
 
 $(prog): main.o
 	$(comp) main.o -o $(prog) $(flags)
