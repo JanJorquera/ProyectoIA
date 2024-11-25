@@ -812,7 +812,8 @@ bool checkRepeatedHotels(vector<string> listaHotelesP1, vector<string> listaHote
 
 
 //Cruzamiento
-//Funcion que realiza el cruzamiento entre 2 padres.
+//Funcion que realiza el cruzamiento entre 2 padres, dada la posicion del hotel del primer padre
+//que conformara la primera parte del tour.
 void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int posHP1, vector<string> listaHotelesP1, vector<string> listaHotelesP2){
   hijo1->cromosoma.clear();
   vector<string> listaPOIsDisp;
@@ -821,6 +822,7 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
     listaPOIsDisp.push_back(to_string(i));
   }
 
+  //Obtener la lista de POIs no usados.
   int numHotelesVistos = -1;
   for (size_t i=0; i<padre1->cromosoma.size(); i++){
     if (numHotelesVistos == posHP1) {
@@ -837,6 +839,8 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
   }
 
 
+  //Almacenar la parte final del tour del hijo que se generara, la cual se hereda directamente
+  //desde el padre2 desde su cromosoma que inicia en el hotel posHP1+1
   vector<string> tourFin;
   bool flagAdd = false;
   numHotelesVistos = -1;
@@ -863,7 +867,7 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
   vector<string> TripCrossPoint;
   TripCrossPoint.push_back(listaHotelesP1[posHP1]);
 
-  //Poblar con POIs de padres
+  //Generar el trip pivote, poblando con POIs de padres
   for (size_t i=0; i<listaPOIsDispPadres.size(); i++){
     TripCrossPoint.push_back(listaPOIsDispPadres[i]);
     TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
@@ -873,7 +877,7 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
     TripCrossPoint.pop_back();
   }
   
-  //Poblar con POIs no visitados
+  //Poblar con POIs no visitados para intentar completar lo maximo posible dicho trip.
   for (size_t i=0; i<listaPOIsDisp.size(); i++){
     TripCrossPoint.push_back(listaPOIsDisp[i]);
     TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
@@ -884,28 +888,11 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
   }
   TripCrossPoint.push_back(listaHotelesP2[posHP1+1]);
 
-  /*
-  for (size_t i=0; i<TripCrossPoint.size(); i++){
-    cout << "TripCrossPoint[" << i << "]= " << TripCrossPoint[i] << endl;
-  }
-  */
   //Añadir al final el trip (POIs de dicho trip)
   hijo1->cromosoma.insert(hijo1->cromosoma.end(), TripCrossPoint.begin()+1, TripCrossPoint.end()-1);
 
-  /*
-  for (size_t i=0; i<tourFin.size(); i++){
-    cout << "tourFin[" << i << "]= " << tourFin[i] << endl;
-  }
-  */
-
   //Añadir al final el resto del tour del otro padre
   hijo1->cromosoma.insert(hijo1->cromosoma.end(), tourFin.begin(), tourFin.end());
-
-  /*
-  for (size_t i=0; i<hijo1->cromosoma.size(); i++){
-    cout << "hijo1->cromosoma[" << i << "]= " << hijo1->cromosoma[i] << endl;
-  }
-  */
 
   //Borrar POIs duplicados
   vector<string> tourAux;
