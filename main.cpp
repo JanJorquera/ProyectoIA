@@ -998,6 +998,7 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     doCrossover(padre1, padre2, hijo1, posHP1, listaHotelesP1, listaHotelesP2);
     cruzamientos++;
   } else {
+    //En caso de que no sea factible, simplemente retorna el padre
     *hijo1 = *padre1;
   }
 
@@ -1006,10 +1007,14 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     doCrossover(padre2, padre1, hijo2, posHP2, listaHotelesP2, listaHotelesP1);
     cruzamientos++;
   } else {
+    //En caso de que no sea factible, simplemente retorna el padre
     *hijo2 = *padre2;
   }
 }
 
+//Funcion para cruzar 2 padres. Invoca a la funcion onepointcrossover definida arriba en caso
+//de que el numero generado aleatoriamente sea menor a la taza de cruzamiento (cr)
+//en caso contrario, solo retorna a los padres.
 void cruzar_individuos(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
   if(float_rand(0.00, 1.00)<cr){
     onepointcrossover(padre1,padre2,hijo1,hijo2);
@@ -1019,6 +1024,8 @@ void cruzar_individuos(individuo * padre1, individuo * padre2, individuo * hijo1
   }
 }
 
+//Funcion para cruzar la poblacion. Para ello itera sobre todos los padres, y genera nuevos 
+//individuos apoyandose de la funcion cruzar individuos definida arriba.
 void cruzar_conjunto(conjunto & in, conjunto & out, int n){
   individuo * padre1;
   individuo * padre2;
@@ -1039,12 +1046,11 @@ void cruzar_conjunto(conjunto & in, conjunto & out, int n){
       out.conj.push_back(hijo2);
     }
   }
-
- //out = in;
  return;
 }
 
-
+//Poblacion inicial
+//Funcion auxiliar que genera una secuencia factible de hoteles de forma aleatoria.
 void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<string> &Tour){
   // Constantes para setear valor en caso de reset.
   const int iI = 0;
@@ -1069,6 +1075,8 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
   bool tripFound;
   bool flagAvoid = false;
   ostringstream auxiliaryString;
+
+  //Mientras el tour no se haya completado, se sigue añadiendo Hoteles al tour.
   while (!tourFound) {
     if (i==D){
       tourFound = true;
@@ -1078,6 +1086,8 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
       cantHotelesQuitadosTrip = cantHotelesQuitadosTour;
       Trip.clear();
       Trip.push_back(Hinicio);
+      //Mientras no se haya encontrado un Hotel de termino para el hotel de inicio (hotel de termino)
+      //del anterior trip, se sigue probando con nuevos hoteles no visitados.
       while(!tripFound){
         if (HotelesDisponiblesTrip.size()==0){
           i=iI;
@@ -1103,7 +1113,8 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
         Htermino = HotelesDisponiblesTrip[numHotel];
 
         Trip.push_back(Htermino);
-        
+        //Si no es factible la incorporacion de dicho hotel, se remueve de la lista de posibles candidatos
+        //para probar con nuevos hoteles que si puedan completar el trip
         if (!checkTripFeasibility(Trip, i)){
           if (i==D-1){
             i=iI;
@@ -1123,6 +1134,7 @@ void generateFeasibleSequenceOfHotels(const vector<string> &Hoteles, vector<stri
           cantHotelesQuitadosTrip++;
           Trip.pop_back();
         } else {
+          //En caso contrario, se incorpora dicho hotel al tour.
           if (debugGenerateFeasibleSequences) {
             auxiliaryString << i << endl;
             auxiliaryString << "numHotel: " << numHotel << endl;
@@ -1274,6 +1286,7 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
 }
 
 //Funcion para crear la poblacion inicial. Itera hasta generar size individuos aleatorios.
+//Para ello se apoya de la funcion definida arriba: agregar_individuo_aleatorio
 void crear_poblacion_inicial(conjunto &poblacion, int size){
   for (int i=0; i<size; i++) {
     agregar_individuo_aleatorio(poblacion);
