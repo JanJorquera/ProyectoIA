@@ -3,12 +3,12 @@ comp = g++
 prog  = OPHS
 
 #El problema
-config = ./Instancias/100-240-15-10.ophs
+config = ./Instancias/10-24-1-2.ophs
 results = results.txt
 
 cr = 0.3				#Tasa de cruzamiento
 mr = 0.1				#Tasa de mutación
-ps = 50					#Population size
+ps = 10					#Population size
 max_evals=1e+4			#Maximo de iteraciones
 eo = 1					#Se aplica o no elitismo
 so = 2					#Operador de selección

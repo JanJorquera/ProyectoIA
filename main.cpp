@@ -2,6 +2,7 @@
 #include "globales.h"
 
 bool debug = false;
+bool debugOpt = false;
 bool debugGenerateFeasibleSequences = false;
 
 // Parámetros del problema
@@ -267,9 +268,12 @@ void guardar_optimo_encontrado (int aptitud_optimo, individuo temp) {
   evaluacion_opt = evaluaciones;
   optimo_encontrado = true;
   //muestra el individuo encontrado como optimo
-  if(debug)
+  if(debugOpt)
   {
-      cout<<endl<<"Aptitud: "<<aptitud_optimo;
+      cout<<"Aptitud: "<<aptitud_optimo << endl;
+      for (int i=0; i< optimo.cromosoma.size(); i++){
+        cout<<"optimo.cromosoma[" << i << "]= "<< optimo.cromosoma[i] << endl;
+      }
       getchar();
   }
   return;
@@ -277,7 +281,7 @@ void guardar_optimo_encontrado (int aptitud_optimo, individuo temp) {
 
 void guardar_optimo(conjunto & c_temp) {
   sort(c_temp.conj.begin(), c_temp.conj.end());
-  if(c_temp.conj.back().aptitud > optimo.aptitud){
+  if(c_temp.conj.front().aptitud > optimo.aptitud){
     optimo = c_temp.conj.front();
     iteracion_opt = iteracion;
     evaluacion_opt = evaluaciones;
@@ -297,17 +301,23 @@ void calcular_aptitud(individuo * temp) {
     return;  
   }
   float apt=0;
-  //calcular el costo del tour
-  for(int i=0; i<(Tinstancia-1); i++){
-    if (temp->cromosoma[i] == "") {
-      break;
-    }
+  //calcular adaptabilidad del tour
+  //vector<double> aux;
+  for(int i=0; i<temp->cromosoma.size(); i++){
+    //cout << "S[" << temp->cromosoma[i] << "] = " << S[getPos(temp->cromosoma[i])] << endl;
     apt += S[getPos(temp->cromosoma[i])];
+    //aux.push_back(S[getPos(temp->cromosoma[i])]);
   }
+  //cout << "------------------------" << endl;
   
   temp->aptitud = apt;
 
   if (optimo.aptitud == AMAX || apt > optimo.aptitud) {
+    /*
+    for (int i=0; i<aux.size(); i++){
+      cout << "aux[" << i << "] = " << aux[i] << endl;
+    }
+    */
     guardar_optimo_encontrado(apt, *temp);
   }
 
@@ -984,6 +994,8 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
   vector<string> listaHotelesP2Aux2(listaHotelesP2Aux1);
 
   if (listaHotelesP1.size()<=3){
+    *hijo1 = *padre1;
+    *hijo2 = *padre2;
     return;
   }
 
