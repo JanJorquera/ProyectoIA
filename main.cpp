@@ -721,101 +721,6 @@ void InsertOrDeletePOI(individuo *hijo){
     }
 
   }
-
-  /*
-  //Seleccionar un POI aleatorio
-  int pos = int_rand(0,N);
-  for (int i=0; i<hijo->cromosoma.size(); i++){
-    //Si esta en el tour, se elimina
-    if (hijo->cromosoma[i] == to_string(pos)){
-      hijo->cromosoma.erase(hijo->cromosoma.begin() + i);
-      return;
-    }
-  }
-
-  //Si no esta, se añade en el primer trip aleatorio cuya incorporación resulte en un trip factible. Si dicho trip no existe, simplemente no se muta
-  vector<int> trips;
-  int posTrip;
-  int cantTripsChequeados = 0;
-  for (int i=0; i<D; i++){
-    trips.push_back(i);
-  }
-
-  int numHotelesVistos = -1;
-  vector<double> tripCost;
-  for (int i=0; i<hijo->cromosoma.size(); i++){
-    if (hijo->cromosoma[i].find("H") == 0){
-      if (numHotelesVistos != -1){
-        tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
-        if (debug){
-          if (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])] == 0){
-            cout << "Desde " << hijo->cromosoma[i-1] << " a " << hijo->cromosoma[i] << endl;
-            cout << "Pues va desde: " << coord[getPos(hijo->cromosoma[i-1])][0] << "," << coord[getPos(hijo->cromosoma[i-1])][1] << " a " << coord[getPos(hijo->cromosoma[i])][0] << "," << coord[getPos(hijo->cromosoma[i])][1] << endl;
-            cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i-1]) << " y del 2 " << getPos(hijo->cromosoma[i]) << endl;
-            getchar();
-          }
-        }
-      }
-      if (i!=hijo->cromosoma.size()-1){
-        numHotelesVistos++;
-        tripCost.push_back(0.00);
-      }
-    } else {
-      tripCost[numHotelesVistos]+=t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])];
-      if (debug){
-        if (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])] == 0){
-          cout << "Desde " << hijo->cromosoma[i-1] << " a " << hijo->cromosoma[i] << endl;
-          cout << "Pues va desde: " << coord[getPos(hijo->cromosoma[i-1])][0] << "," << coord[getPos(hijo->cromosoma[i-1])][1] << " a " << coord[getPos(hijo->cromosoma[i])][0] << "," << coord[getPos(hijo->cromosoma[i])][1] << endl;
-          cout << "Posicion en getPos del 1: " << getPos(hijo->cromosoma[i-1]) << " y del 2 " << getPos(hijo->cromosoma[i]) << endl;
-          getchar();
-        }
-      }
-    }
-  }
-
-  double posNewCost;
-  int auxTrip;
-  bool isPOIinserted = false;
-  bool flagTripFound;
-  for (int j=0; j<D; j++){
-    if (isPOIinserted){
-      break;
-    }
-
-    auxTrip = int_rand(0,D-cantTripsChequeados);
-    posTrip = trips[auxTrip];
-    trips.erase(trips.begin()+auxTrip);
-
-    numHotelesVistos = -1;
-    flagTripFound = false;
-    for (int i=0; i<hijo->cromosoma.size(); i++){
-      if (hijo->cromosoma[i].find("H") == 0){
-        if (flagTripFound){
-          posNewCost = tripCost[posTrip] + (t[getPos(hijo->cromosoma[i-1])][getPos(to_string(pos))] + t[getPos(to_string(pos))][getPos(hijo->cromosoma[i])]) - (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])]);
-          if (posNewCost <= T[posTrip]){
-            hijo->cromosoma.insert(hijo->cromosoma.begin() + i, to_string(pos));
-            isPOIinserted = true;
-          }
-          break;
-        }
-
-        numHotelesVistos++;
-        if (numHotelesVistos == posTrip){
-          flagTripFound = true;
-          cantTripsChequeados++;
-        }
-      } else {
-        if (flagTripFound){
-          posNewCost = tripCost[posTrip] + (t[getPos(hijo->cromosoma[i-1])][getPos(to_string(pos))] + t[getPos(to_string(pos))][getPos(hijo->cromosoma[i])]) - (t[getPos(hijo->cromosoma[i-1])][getPos(hijo->cromosoma[i])]);
-          if (posNewCost <= T[posTrip]){
-            hijo->cromosoma.insert(hijo->cromosoma.begin() + i, to_string(pos));
-            isPOIinserted = true;
-            break;
-          }
-        }
-      }
-    }
-  }*/
   return;
 }
 
@@ -826,11 +731,6 @@ void mutar_individuo(individuo * padre, individuo * hijo, float mr) {
   for (int i=0; i<hijo->cromosoma.size(); i++){
     cout << "hijo->cromosoma[" << i << "]: " << hijo->cromosoma[i] << endl;
   }*/
-
-  /*
-  replaceHotel(hijo);
-  InsertOrDeletePOI(hijo);
-  */
 
   if (float_rand(0.00,1.00) <= mr){
     replaceHotel(hijo);
@@ -1327,66 +1227,6 @@ void agregar_individuo_aleatorio (conjunto & c_temp) {
     } 
     i_temp.cromosoma.push_back(HotelesTour[i+1]);
   }
-
-  /*
-  string Hinicio = "H0";
-  string Htermino;
-  set.erase(set.begin() + 0);
-  i_temp.cromosoma.push_back(Hinicio);
-  int cantHotelesQuitados = 1;
-  
-  
-  bool agregarPOI;
-  int trip = 0;
-
-  while (!solFactible) {
-    Trip.push_back(Hinicio);
-
-
-    if (trip==D-1){
-      Htermino = "H1";
-    } else {
-      Htermino = "H"+to_string(int_rand(1, (HP1 - cantHotelesQuitados)));
-    }
-    Trip.push_back(Htermino);
-    set.erase(set.begin() + getPos(Htermino));
-    cantHotelesQuitados++;
-
-    if (checkTripFeasibility(Trip, trip)){
-      i_temp.cromosoma.push_back(POI);
-    }
-
-    agregarPOI = true;
-    int POIpos;
-    string POI;
-    while (agregarPOI) {
-      if (set.size() == 0){
-        break;
-      }
-      POIpos = int_rand(HP1 - cantHotelesQuitados, set.size());
-      // cout << "POIpos: " << POIpos << endl;
-      POI = set[POIpos];
-      // cout << "set[POIpos]: " << set[POIpos] << endl;
-      set.erase(set.begin() + getPos(POI));
-      // POIs.erase(set.begin() + stoi(POI));
-      Trip.insert(Trip.end()-1,POI);
-      if (checkTripFeasibility(Trip, trip)){
-        i_temp.cromosoma.insert(Trip.end()-1,POI);
-      } else {
-        agregarPOI = false;
-      }
-    }
-
-    i_temp.cromosoma.push_back(Htermino);
-    Hinicio = Htermino;
-    if (trip == 0){
-      for (int i=0; i<Trip.size(); i++) {
-        cout << Trip[i] << endl;
-      }
-    }
-    Trip.clear();
-    trip++;
-  }*/
 
   //calculo de la aptitud del individuo
   calcular_aptitud(&i_temp);
