@@ -4,7 +4,7 @@
 bool debug = false;
 bool debugOpt = false;
 bool debugGenerateFeasibleSequences = false;
-bool debugTime = true;
+bool debugTime = false;
 
 // Parámetros del problema
 int N, HP1, D;
@@ -899,6 +899,7 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
   //Añadir al final el resto del tour del otro padre
   hijo1->cromosoma.insert(hijo1->cromosoma.end(), tourFin.begin(), tourFin.end());
 
+  
   //Borrar POIs duplicados
   vector<string> tourAux;
   for (size_t i=0; i<hijo1->cromosoma.size(); i++){
@@ -907,6 +908,7 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
     }
   }
   hijo1->cromosoma = tourAux;
+  
 }
 
 //Funcion que determina si es factible realizar un cruzamiento en un punto (trip pivote)
@@ -915,17 +917,12 @@ void doCrossover(individuo * padre1, individuo * padre2, individuo * hijo1, int 
 void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
   vector<string> listaHotelesP1 = getListaHoteles(padre1);
   vector<string> listaHotelesP2 = getListaHoteles(padre2);
-  vector<string> listaHotelesP1Aux1(listaHotelesP1);
-  vector<string> listaHotelesP2Aux1(listaHotelesP2);
   vector<string> tripAuxiliar;
 
-  listaHotelesP1Aux1.erase(listaHotelesP1Aux1.begin());
-  listaHotelesP2Aux1.erase(listaHotelesP2Aux1.begin());
-  listaHotelesP1Aux1.erase(listaHotelesP1Aux1.end() - 1);
-  listaHotelesP2Aux1.erase(listaHotelesP2Aux1.end() - 1);
-
-  vector<string> listaHotelesP1Aux2(listaHotelesP1Aux1);
-  vector<string> listaHotelesP2Aux2(listaHotelesP2Aux1);
+  vector<string> listaHotelesP1Aux1;
+  vector<string> listaHotelesP2Aux1(listaHotelesP2);
+  vector<string> listaHotelesP1Aux2(listaHotelesP1);
+  vector<string> listaHotelesP2Aux2;
 
   if (listaHotelesP1.size()<=3){
     *hijo1 = *padre1;
@@ -933,7 +930,11 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     return;
   }
 
+  listaHotelesP2Aux1.pop_back();
+  listaHotelesP2Aux1.erase(listaHotelesP2Aux1.begin());
 
+  listaHotelesP1Aux2.pop_back();
+  listaHotelesP1Aux2.erase(listaHotelesP1Aux2.begin());
   /*
   for (size_t i=0; i<listaHotelesP1.size(); i++){
     cout << "hotel1 iesimo" << listaHotelesP1[i] << endl;
@@ -960,13 +961,13 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     //padre 2 termina el tour
     tripAuxiliar.push_back(listaHotelesP1[i]);
     tripAuxiliar.push_back(listaHotelesP2[i+1]);
+
+    listaHotelesP1Aux1.push_back(listaHotelesP1[i]);
+    listaHotelesP2Aux1.erase(listaHotelesP2Aux1.begin());
     if (posHP1 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux1, listaHotelesP2Aux1)){
       //Almacena la posicion del hotel en caso de que sea factible hacer el cruce en dicho trip.
       posHP1 = static_cast<int>(i);
     }
-    listaHotelesP1Aux1.erase(listaHotelesP1Aux1.begin());
-    listaHotelesP2Aux1.erase(listaHotelesP2Aux1.end() - 1);
-
     tripAuxiliar.clear();
 
 
@@ -975,13 +976,13 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
     //padre 1 termina el tour
     tripAuxiliar.push_back(listaHotelesP2[i]);
     tripAuxiliar.push_back(listaHotelesP1[i+1]);
+
+    listaHotelesP2Aux2.push_back(listaHotelesP2[i]);
+    listaHotelesP1Aux2.erase(listaHotelesP1Aux2.begin());
     if (posHP2 == -1 && checkTripFeasibility(tripAuxiliar, i) && !checkRepeatedHotels(listaHotelesP1Aux2, listaHotelesP2Aux2)){
       //Almacena la posicion del hotel en caso de que sea factible hacer el cruce en dicho trip.
       posHP2 = static_cast<int>(i);
     }
-    listaHotelesP2Aux2.erase(listaHotelesP2Aux2.begin());
-    listaHotelesP1Aux2.erase(listaHotelesP1Aux2.end() - 1);
-
     tripAuxiliar.clear();
 
     if (posHP1 != -1 && posHP2 != -1) {
@@ -1018,6 +1019,8 @@ void onepointcrossover(individuo * padre1, individuo * padre2, individuo * hijo1
 void cruzar_individuos(individuo * padre1, individuo * padre2, individuo * hijo1, individuo * hijo2){
   if(float_rand(0.00, 1.00)<cr){
     onepointcrossover(padre1,padre2,hijo1,hijo2);
+    calcular_aptitud(hijo1);
+    calcular_aptitud(hijo2);
   } else {
     *hijo1 = *padre1;
     *hijo2 = *padre2;
@@ -1046,7 +1049,7 @@ void cruzar_conjunto(conjunto & in, conjunto & out, int n){
       out.conj.push_back(hijo2);
     }
   }
- return;
+  return;
 }
 
 //Poblacion inicial
