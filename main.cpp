@@ -4,6 +4,7 @@
 bool debug = false;
 bool debugOpt = false;
 bool debugGenerateFeasibleSequences = false;
+bool debugTime = true;
 
 // Parámetros del problema
 int N, HP1, D;
@@ -119,6 +120,10 @@ void salir(void) {
 
   cout << resultadoTrip.str() << endl;
 
+  if (debugTime) {
+    Fin = time(0);
+    cout << "Tiempo de ejecucion es: " << difftime(Fin, Inicio) << endl; 
+  }
   exit(0);
 }
 
@@ -1317,7 +1322,7 @@ int main(int argc, char *argv[]) {
   evaluaciones = 0;
 
   //medicion de tiempo
-  Inicio=time(NULL);
+  Inicio=time(0);
 
   //semilla aleatoria
   srand48 (semilla);
