@@ -4,7 +4,7 @@
 bool debug = false;
 bool debugOpt = false;
 bool debugGenerateFeasibleSequences = false;
-bool debugTime = false;
+bool debugTime = true;
 
 // Parámetros del problema
 int N, HP1, D;
