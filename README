@@ -21,4 +21,4 @@ operador_seleccion:
 
 
 Ejemplo:
-./OPHS Instancias/100-240-15-10.ophs results.txt 2 1 0.3 0.1 50 1e+4 2 5
+./OPHS Instancias/100-240-15-10.ophs 2 0 0.6 0.01 30 1e+4 27112024 5
