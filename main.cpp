@@ -121,8 +121,9 @@ void salir(void) {
   cout << resultadoTrip.str() << endl;
 
   if (debugTime) {
-    Fin = time(0);
-    cout << "Tiempo de ejecucion es: " << difftime(Fin, Inicio) << endl; 
+    Fin = clock();
+    double tiempo_total = double(Fin - Inicio) / CLOCKS_PER_SEC;
+    cout << "Tiempo de ejecucion es: " <<  tiempo_total << " segundos " << endl; 
   }
   exit(0);
 }
@@ -297,7 +298,6 @@ void guardar_optimo(conjunto & c_temp) {
     optimo = c_temp.conj.front();
     iteracion_opt = iteracion;
     evaluacion_opt = evaluaciones;
-    Fin_opt = time(NULL);
   }
   //Si se cumplen XX evaluaciones sin cambio se acaba
   if((evaluaciones - evaluacion_opt)>1000000){
@@ -1322,7 +1322,7 @@ int main(int argc, char *argv[]) {
   evaluaciones = 0;
 
   //medicion de tiempo
-  Inicio=time(0);
+  Inicio=clock();
 
   //semilla aleatoria
   srand48 (semilla);

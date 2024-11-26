@@ -128,7 +128,7 @@ ostream &operator<<(ostream &output, conjunto & c ) {
 
 
 #ifndef externo
-time_t Inicio, Fin, Fin_opt;
+clock_t Inicio, Fin;
 string archivo_configuracion;
 string archivo_resultados;
 

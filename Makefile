@@ -3,7 +3,7 @@ comp = g++
 prog  = OPHS
 
 #El problema
-config = ./Instancias/100-240-15-10.ophs
+config = ./Instancias/10-24-1-2.ophs
 
 cr = 0.6				#Tasa de cruzamiento
 mr = 0.01				#Tasa de mutación
