@@ -5,13 +5,13 @@ prog  = OPHS
 #El problema
 config = ./Instancias/10-24-1-2.ophs
 
-cr = 0.3				#Tasa de cruzamiento
-mr = 0.1				#Tasa de mutación
-ps = 10					#Population size
+cr = 0.6				#Tasa de cruzamiento
+mr = 0.01				#Tasa de mutación
+ps = 30					#Population size
 max_evals=1e+4			#Maximo de iteraciones
-eo = 1					#Se aplica o no elitismo
+eo = 0					#Se aplica o no elitismo
 so = 2					#Operador de selección
-semilla = 2				#Manejar aleatoriedad
+semilla = 27112024		#Manejar aleatoriedad
 kTournament = 5			#Tamaño para k tournament
 
 comp:$(prog)
